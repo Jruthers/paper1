@@ -1,4 +1,4 @@
-%% SWE RCP4.5 only
+%% SWE RCP4.5 only 'test'
 clear all
 cd /Volumes/'JR SSD'/MATLAB/TVCdaily/h0
 % cd h0
