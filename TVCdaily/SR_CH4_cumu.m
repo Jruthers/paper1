@@ -4,7 +4,8 @@
 % into a new variable with matlab timestamps (SWE2100)
 clear all
 % cd D:\MATLAB\TVCdaily\h0
-cd /Volumes/'JR SSD'/MATLAB/TVCdaily/h0
+cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
+
 % SWE2100 = extractvar('H2OSNO','rcp45');
 CaseList=dir('CORDEX_Default_CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -260,7 +261,7 @@ legend([p1 p2 p3 p4], {'Default 2016-2046', 'Default 2066-2096', 'Sturm 2016-204
 % into a new variable with matlab timestamps (SWE2100)
 clear all
 % cd D:\MATLAB\TVCdaily\h0
-cd /Volumes/'JR SSD'/MATLAB/TVCdaily/h0
+cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
 % SWE2100 = extractvar('H2OSNO','rcp85');
 CaseList=dir('CORDEX_Default_CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -510,7 +511,7 @@ title('RCP 8.5')
 % into a new variable with matlab timestamps (SWE2100)
 clear all
 % cd D:\MATLAB\TVCdaily\h0
-cd /Volumes/'JR SSD'/MATLAB/TVCdaily/h0
+cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
 % SWE2100 = extractvar('H2OSNO','rcp45');
 CaseList=dir('CORDEX_Default_CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -763,7 +764,7 @@ xlabel('Days since 1^{st} Sep')
 % into a new variable with matlab timestamps (SWE2100)
 clear all
 % cd D:\MATLAB\TVCdaily\h0
-cd /Volumes/'JR SSD'/MATLAB/TVCdaily/h0
+cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
 % SWE2100 = extractvar('H2OSNO','rcp85');
 CaseList=dir('CORDEX_Default_CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 

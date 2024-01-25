@@ -1,6 +1,6 @@
 %% SWE RCP4.5 only
 clear all
-% cd /Volumes/'JR SSD'/MATLAB/TVCdaily/h0
+% cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
 cd D:/MATLAB/TVCdaily/h0
 SWE2100=extractvar('H2OSNO', 'rcp45');
 %% 1. Assign each month/day a julian day
