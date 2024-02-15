@@ -1,4 +1,5 @@
 clear all
+cd /Volumes/JR_SSD/MATLAB/'AlexBodata TVC'/Adjusted_daily/
 % addpath('mbcn-na-cordex_daily-CA-HPC/'); % adds the directory with all the files in
 FilesList=dir('mbcn.CA-TVC.NAM-*rcp45*.csv'); % makes a list of all ensemble member files
 
@@ -70,8 +71,9 @@ perc251990 = prctile(Precip20162046(:,1:12),25);
 perc752060 = prctile(Precip20662096(:,1:12),75);
 perc252060 = prctile(Precip20662096(:,1:12),25);
 hold on
+figure(Position=[500 500 750 600])
 tiledlayout(2,2, "TileSpacing","compact")
-nexttile
+nexttile(3)
 % create more increments between 1-12
 m12=[1:0.2:12];
 % m121=[1:0.4:12]
@@ -96,13 +98,10 @@ f = fill(int_meanX2060, int_meanY2060, 'red', "FaceAlpha", 0.2, "LineStyle", "no
 xlim([1 12])
 ylim([0 80])
 xtickangle(0)
-leg = legend([int1990 int2060], {'median 2016-2046', 'median 2066-2096'}, Location="northwest");
 set(gca, 'XTickLabel', []);
-set(gca, 'xtick',1:1:24, 'XTickLabels',[])
+set(gca, 'xtick',1:1:24, 'XTickLabels',{'Jan', 'Feb', 'Mar', 'Apr ', 'May ', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'})
 ylabel("Precipitation (mm w.e.)")
 set(gca, "FontSize",10);
-set(leg, "box", "off")
-title("RCP4.5")
 rcp45precip = gcf;
 %% rcp45 temp plot
 Tmedian1990 = median(Temps20162046(:,1:12));
@@ -112,7 +111,7 @@ Tperc251990 = prctile(Temps20162046(:,1:12),25);
 Tperc752060 = prctile(Temps20662096(:,1:12),75);
 Tperc252060 = prctile(Temps20662096(:,1:12),25);
 
-nexttile(3)
+nexttile(1)
 % create more increments between 1-12
 m12=[1:.2:12];
 % m121=[1:0.4:12]
@@ -137,30 +136,31 @@ int_meanY2060 = [int_T_25_2060, fliplr(int_T_75_2060)];
 int_meanX2060 = [m12, fliplr(m12(1:end))];
 f = fill(int_meanX2060, int_meanY2060, 'red', "FaceAlpha", 0.2, "LineStyle", "none");
 xlim([1 12])
-ylim([-30 20])
+ylim([-30 30])
 yline(0, '--')
-% leg = legend([int1990 int2060], {'median 2016 - 2046', 'median 2066 - 2096'}, Location="northwest")
+leg = legend([int1990 int2060], {'median 2016-2046', 'median 2066-2096'}, Location="northwest");
+set(leg, "box", "off")
 set(gca, "FontSize",10);
-set(gca, 'XTickLabel', []);
-set(gca, 'xtick',1:1:24, 'XTickLabels',{'Jan', 'Feb', 'Mar', 'Apr ', 'May ', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'})
+set(gca, 'xtick',1:1:24, 'XTickLabels',[])
 ylabel("Air Temperature (^{o}C)")
 xtickangle(0)
+title("RCP 4.5")
 % set(leg, "box", "off")
 rcp45temp=gcf;
 %% Precip Ks test
 years1990 = Precip20162046;
 years2060 = Precip20662096;
 
-precipresults45 = table('Size', [12, 3], 'VariableTypes', {'string', 'logical', 'double'}, ...
-    'VariableNames', {'Month', 'h', 'p'});
+precipresults45 = table('Size', [12, 4], 'VariableTypes', {'string', 'logical', 'double', 'double'}, ...
+    'VariableNames', {'Month', 'h', 'p', 'D'});
 
 for month = 1:12
     data1990 = years1990(:, month);
     data2060 = years2060(:, month);
     
-    [h, p] = kstest2(data1990, data2060);
+    [h, p, ksstat] = kstest2(data1990, data2060);
     
-    precipresults45(month, :) = {month, h, p};
+    precipresults45(month, :) = {num2str(month), h, p, ksstat};
 end
 
 disp(precipresults45);
@@ -169,16 +169,16 @@ disp(precipresults45);
 years1990 = Temps20162046;
 years2060 = Temps20662096;
 
-tempresults45 = table('Size', [12, 3], 'VariableTypes', {'string', 'logical', 'double'}, ...
-    'VariableNames', {'Month', 'h', 'p'});
+tempresults45 = table('Size', [12, 4], 'VariableTypes', {'string', 'logical', 'double', 'double'}, ...
+    'VariableNames', {'Month', 'h', 'p', 'D'});
 
 for month = 1:12
     data1990 = years1990(:, month);
     data2060 = years2060(:, month);
     
-    [h, p] = kstest2(data1990, data2060);
+    [h, p, ksstat] = kstest2(data1990, data2060);
     
-    tempresults45(month, :) = {month, h, p};
+    tempresults45(month, :) = {month, h, p, ksstat};
 end
 
 disp(tempresults45);
@@ -257,7 +257,7 @@ perc251990 = prctile(Precip20162046(:,1:12),25);
 perc752060 = prctile(Precip20662096(:,1:12),75);
 perc252060 = prctile(Precip20662096(:,1:12),25);
 
-nexttile(2)
+nexttile(4)
 % create more increments between 1-12
 m12=[1:0.2:12];
 % m121=[1:0.4:12]
@@ -282,12 +282,10 @@ f = fill(int_meanX2060, int_meanY2060, 'red', "FaceAlpha", 0.2, "LineStyle", "no
 xlim([1 12])
 xtickangle(0)
 % leg = legend([int1990 int2060], {'median 2016-2046', 'median 2066-2096'}, Location="northwest")
-set(gca, 'XTickLabel', []);
-set(gca, 'xtick',1:1:24, 'XTickLabels',[])
+set(gca, 'xtick',1:1:24, 'XTickLabels',{'Jan', 'Feb', 'Mar', 'Apr ', 'May ', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'})
 % ylabel("Precipitation (mm w.e.)")
 set(gca, "FontSize",10);
 % set(leg, "box", "off")
-title("RCP8.5")
 rcp85precip = gcf;
 %% rcp85 temp plot
 Tmedian1990 = median(Temps20162046(:,1:12));
@@ -296,7 +294,7 @@ Tperc751990 = prctile(Temps20162046(:,1:12),75);
 Tperc251990 = prctile(Temps20162046(:,1:12),25);
 Tperc752060 = prctile(Temps20662096(:,1:12),75);
 Tperc252060 = prctile(Temps20662096(:,1:12),25);
-nexttile(4)
+nexttile(2)
 % create more increments between 1-12
 m12=[1:.2:12];
 % m121=[1:0.4:12]
@@ -321,35 +319,40 @@ int_meanY2060 = [int_T_25_2060, fliplr(int_T_75_2060)];
 int_meanX2060 = [m12, fliplr(m12(1:end))];
 f = fill(int_meanX2060, int_meanY2060, 'red', "FaceAlpha", 0.2, "LineStyle", "none");
 xlim([1 12])
-ylim([-30 20])
+ylim([-30 30])
 % title("RCP8.5")
 yline(0, '--')
 % leg = legend([int1990 int2060], {'median 2016 - 2046', 'median 2066 - 2096'}, Location="northwest")
 set(gca, "FontSize",10);
-set(gca, 'XTickLabel', []);
-set(gca, 'xtick',1:1:24, 'XTickLabels',{'Jan', 'Feb', 'Mar', 'Apr ', 'May ', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'})
-ylabel("Air Temperature (^{o}C)")
+set(gca, 'xtick',1:1:24, 'XTickLabels',[])
+% ylabel("Air Temperature (^{o}C)")
+title("RCP 8.5")
 xtickangle(0)
 % set(leg, "box", "off")
 rcp85temp=gcf;
+%% Annotations
+annotation('textbox', [0.45, 0.81, 0.1, 0.1], 'String', 'a', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.87, 0.81, 0.1, 0.1], 'String', 'b', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.45, 0.37, 0.1, 0.1], 'String', 'c', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.87, 0.37, 0.1, 0.1], 'String', 'd', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
 %% Save figure
-% cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'Alex and bo forcing data'/TVC/
-cd C:/Users/jadru/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'Alex and bo forcing data'/TVC/
+cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'Alex and bo forcing data'/TVC/
+% cd C:/Users/jadru/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'Alex and bo forcing data'/TVC/
 exportgraphics(gcf, "rcps_tiled.jpg", "Resolution",300)
 %% Precip Ks test
 years1990 = Precip20162046;
 years2060 = Precip20662096;
 
-precipresults85 = table('Size', [12, 3], 'VariableTypes', {'string', 'logical', 'double'}, ...
-    'VariableNames', {'Month', 'h', 'p'});
+precipresults85 = table('Size', [12, 4], 'VariableTypes', {'string', 'logical', 'double', 'double'}, ...
+    'VariableNames', {'Month', 'h', 'p', 'D'});
 
 for month = 1:12
     data1990 = years1990(:, month);
     data2060 = years2060(:, month);
     
-    [h, p] = kstest2(data1990, data2060);
+    [h, p, ksstat] = kstest2(data1990, data2060);
     
-    precipresults85(month, :) = {month, h, p};
+    precipresults85(month, :) = {month, h, p, ksstat};
 end
 
 disp(precipresults85);
@@ -358,16 +361,16 @@ disp(precipresults85);
 years1990 = Temps20162046;
 years2060 = Temps20662096;
 
-tempresults85 = table('Size', [12, 3], 'VariableTypes', {'string', 'logical', 'double'}, ...
-    'VariableNames', {'Month', 'h', 'p'});
+tempresults85 = table('Size', [12, 4], 'VariableTypes', {'string', 'logical', 'double', 'double'}, ...
+    'VariableNames', {'Month', 'h', 'p', 'D'});
 
 for month = 1:12
     data1990 = years1990(:, month);
     data2060 = years2060(:, month);
     
-    [h, p] = kstest2(data1990, data2060);
+    [h, p, ksstat] = kstest2(data1990, data2060);
     
-    tempresults85(month, :) = {month, h, p};
+    tempresults85(month, :) = {month, h, p, ksstat};
 end
 
 disp(tempresults85);
