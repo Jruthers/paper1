@@ -486,6 +486,6 @@ fig = gcf;
 leggy = findobj(fig,'Type', 'legend')
 set(leggy, "FontSize",8);
 %% Save figure
-% cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
-cd C:/Users/jadru/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
+cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
+% cd C:/Users/jadru/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
 exportgraphics(gcf, "SWE_GT_SL.jpg", "Resolution",300)

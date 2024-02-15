@@ -2,8 +2,8 @@
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-% cd /Volumes/'JR SSD'/MATLAB/TVCdaily/h0
-cd h0
+cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
+% cd h0
 CaseList=dir('CORDEX_Default_CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -19,7 +19,7 @@ TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
 SWE2100=[TIME_YM, SWE];
 %% Snow logic
 SWEnew=SWE2100(:,4:9);
-SWEnew(SWEnew<0.01)=NaN;
+SWEnew(SWEnew<5)=NaN;
 SWEnew(SWEnew>0)=1;
 totsnowon = nansum(SWEnew,2);
 % new variable showing only where all members show snow on
@@ -96,7 +96,7 @@ xticklabels(UNIQUE_YR(1:10:85,1))
 xlim([0 84])
 ylim([0 0.015])
 % title('RCP8.5')
-ylabeltext = ({'Methane flux', 'to atmosphere (gC/m^2/day)'});
+ylabeltext = ({'CH_4 flux', 'to atmosphere (gC/m^2/day)'});
 ylabel(ylabeltext)
 fontsize(15,'points')
 %% SWE RCP4.5 only
@@ -119,7 +119,7 @@ TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
 SWE2100=[TIME_YM, SWE];
 %% Snow logic
 SWEnew=SWE2100(:,4:9);
-SWEnew(SWEnew<0.01)=NaN;
+SWEnew(SWEnew<5)=NaN;
 SWEnew(SWEnew>0)=1;
 totsnowon = nansum(SWEnew,2);
 % new variable showing only where all members show snow on
@@ -213,7 +213,7 @@ TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
 SWE2100=[TIME_YM, SWE];
 %% Snow logic
 SWEnew=SWE2100(:,4:30);
-SWEnew(SWEnew<0.01)=NaN;
+SWEnew(SWEnew<5)=NaN;
 SWEnew(SWEnew>0)=1;
 totsnowon = nansum(SWEnew,2);
 % new variable showing only where all members show snow on
@@ -307,7 +307,7 @@ TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
 SWE2100=[TIME_YM, SWE];
 %% Snow logic
 SWEnew=SWE2100(:,4:30);
-SWEnew(SWEnew<0.01)=NaN;
+SWEnew(SWEnew<5)=NaN;
 SWEnew(SWEnew>0)=1;
 totsnowon = nansum(SWEnew,2);
 % new variable showing only where all members show snow on
@@ -379,13 +379,13 @@ xticks([1:10:85])
 xticklabels(UNIQUE_YR([1:10:85],1))
 xlim([0 84])
 ylim([0 0.015])
-title('RCP8.5')
-ylabeltext = ({'Methane flux', 'to atmosphere (gC/m^2/day)'});
-ylabel(ylabeltext)
+% title('RCP8.5')
+% ylabeltext = ({'CH_4 flux', 'to atmosphere (gC/m^2/day)'});
+% ylabel(ylabeltext)
 fontsize(15,'points')
 
 %% save plot
-set(gcf, 'Position', [100 200 1200 400]);
-% % cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
+set(gcf, 'Position', [100 200 1100 450]);
+cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
 % cd C:/Users/jadru/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/proposal
-% exportgraphics(gcf, "sturm_vs_default_ch4_rcp85.jpg", "Resolution",300)
+exportgraphics(gcf, "sturm_vs_default_1.jpg", "Resolution",300)

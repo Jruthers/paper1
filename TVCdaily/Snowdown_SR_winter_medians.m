@@ -2,8 +2,8 @@
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-% cd /Volumes/'JR SSD'/MATLAB/TVCdaily/h0
-cd h0
+cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
+% cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX_Default_CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -95,7 +95,7 @@ xticks(1:10:85)
 xticklabels(UNIQUE_YR(1:10:85,1))
 xlim([0 84])
 ylim([0 0.6])
-title('RCP8.5')
+title('RCP 8.5')
 ylabeltext = ({'CO_2 flux', 'to atmosphere (gC/m^2/day)'});
 ylabel(ylabeltext)
 fontsize(15,'points')
@@ -192,7 +192,7 @@ legend([default, sturm],"Default", "Sturm", Location="northeast", FontSize=7)
 xticks(1:10:85)
 xticklabels(UNIQUE_YR(1:10:85,1))
 ylim([0 0.6])
-title('RCP4.5')
+title('RCP 4.5')
 fontsize(15,'points')
 %% SWE RCP8.5 only
 % This section extacts SWE data from output files for RCP4.5 and places it
@@ -381,7 +381,7 @@ xticks([1:10:85])
 xticklabels(UNIQUE_YR([1:10:85],1))
 xlim([0 84])
 ylim([0 0.6])
-title('RCP8.5')
+title('RCP 8.5')
 fontsize(15,'points')
 
 %% save plot

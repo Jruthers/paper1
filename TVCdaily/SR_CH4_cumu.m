@@ -1,5 +1,4 @@
 %% Default Snowdown SR RCP 4.5
-
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
@@ -69,7 +68,7 @@ for m=1:12
             c=c+1;
 SRmedian1(c,1)=m;
 SRmedian1(c,2)=d;
-SRmedian1(c,3) = nanmedian(SR20162046(rows,4:end),'all');
+SRmedian1(c,3) = mean(SR20162046(rows,4:end),'all','omitnan');
         end
     end
 end
@@ -84,7 +83,7 @@ for m=1:12
             c=c+1;
 SRmedian2(c,1)=m;
 SRmedian2(c,2)=d;
-SRmedian2(c,3) = nanmedian(SR20662096(rows,4:end),'all');
+SRmedian2(c,3) = mean(SR20662096(rows,4:end),'all', 'omitnan');
         end
     end
 end
@@ -192,7 +191,7 @@ for m=1:12
             c=c+1;
 SRmedian1(c,1)=m;
 SRmedian1(c,2)=d;
-SRmedian1(c,3) = nanmedian(SR20162046(rows,4:end),'all');
+SRmedian1(c,3) = mean(SR20162046(rows,4:end),'all', 'omitnan');
         end
     end
 end
@@ -207,7 +206,7 @@ for m=1:12
             c=c+1;
 SRmedian2(c,1)=m;
 SRmedian2(c,2)=d;
-SRmedian2(c,3) = nanmedian(SR20662096(rows,4:end),'all');
+SRmedian2(c,3) = mean(SR20662096(rows,4:end),'all', 'omitnan');
         end
     end
 end
@@ -248,7 +247,7 @@ p4 = plot([1:304], (SRi_2096sum), 'r--');
 set(gca, 'xtick' ,[0:20:304]);
 hold on
 xlim([0 304])
-ylim([0 40])
+ylim([0 60])
 ylabeltext = ({"Cumulative CO_2 flux", "to the atmosphere (gC/m^2/day)"});
 ylabel(ylabeltext)
 % ylabel('Cumulative Soil Respiration (gC/m^2/day)')
@@ -325,7 +324,7 @@ for m=1:12
             c=c+1;
 SRmedian1(c,1)=m;
 SRmedian1(c,2)=d;
-SRmedian1(c,3) = nanmedian(SR20162046(rows,4:end),'all');
+SRmedian1(c,3) = mean(SR20162046(rows,4:end),'all', 'omitnan');
         end
     end
 end
@@ -340,7 +339,7 @@ for m=1:12
             c=c+1;
 SRmedian2(c,1)=m;
 SRmedian2(c,2)=d;
-SRmedian2(c,3) = nanmedian(SR20662096(rows,4:end),'all');
+SRmedian2(c,3) = mean(SR20662096(rows,4:end),'all', 'omitnan');
         end
     end
 end
@@ -447,7 +446,7 @@ for m=1:12
             c=c+1;
 SRmedian1(c,1)=m;
 SRmedian1(c,2)=d;
-SRmedian1(c,3) = nanmedian(SR20162046(rows,4:end),'all');
+SRmedian1(c,3) = mean(SR20162046(rows,4:end),'all', 'omitnan');
         end
     end
 end
@@ -462,7 +461,7 @@ for m=1:12
             c=c+1;
 SRmedian2(c,1)=m;
 SRmedian2(c,2)=d;
-SRmedian2(c,3) = nanmedian(SR20662096(rows,4:end),'all');
+SRmedian2(c,3) = mean(SR20662096(rows,4:end),'all', 'omitnan');
         end
     end
 end
@@ -502,7 +501,7 @@ hold on
 p4 = plot([1:304], (SRi_2096sum), 'r--');
 set(gca, 'xtick' ,[0:20:304]);
 hold on
-ylim([0 40])
+ylim([0 60])
 xlim([0 304])
 % xlabel('Days since 1^{st} Sep')
 title('RCP 8.5')
@@ -575,7 +574,7 @@ for m=1:12
             c=c+1;
 FCH4median1(c,1)=m;
 FCH4median1(c,2)=d;
-FCH4median1(c,3) = nanmedian(FCH420162046(rows,4:end),'all');
+FCH4median1(c,3) = mean(FCH420162046(rows,4:end),'all', 'omitnan');
         end
     end
 end
@@ -590,7 +589,7 @@ for m=1:12
             c=c+1;
 FCH4median2(c,1)=m;
 FCH4median2(c,2)=d;
-FCH4median2(c,3) = nanmedian(FCH420662096(rows,4:end),'all');
+FCH4median2(c,3) = mean(FCH420662096(rows,4:end),'all', 'omitnan');
         end
     end
 end
@@ -697,7 +696,7 @@ for m=1:12
             c=c+1;
 FCH4median1(c,1)=m;
 FCH4median1(c,2)=d;
-FCH4median1(c,3) = nanmedian(FCH420162046(rows,4:end),'all');
+FCH4median1(c,3) = mean(FCH420162046(rows,4:end),'all', 'omitnan');
         end
     end
 end
@@ -712,7 +711,7 @@ for m=1:12
             c=c+1;
 FCH4median2(c,1)=m;
 FCH4median2(c,2)=d;
-FCH4median2(c,3) = nanmedian(FCH420662096(rows,4:end),'all');
+FCH4median2(c,3) = mean(FCH420662096(rows,4:end),'all', 'omitnan');
         end
     end
 end
@@ -753,7 +752,7 @@ p4 = plot([1:304], (FCH4i_2096sum), 'r--');
 set(gca, 'xtick' ,[0:20:304]);
 hold on
 xlim([0 304])
-ylim([0 1])
+ylim([0 1.5])
 ylabeltext = ({"Cumulative CH_4 flux", "to the atmosphere (gC/m^2/day)"});
 ylabel(ylabeltext)
 % ylabel('Cumulative Soil Respiration (gC/m^2/day)')
@@ -828,7 +827,7 @@ for m=1:12
             c=c+1;
 FCH4median1(c,1)=m;
 FCH4median1(c,2)=d;
-FCH4median1(c,3) = nanmedian(FCH420162046(rows,4:end),'all');
+FCH4median1(c,3) = mean(FCH420162046(rows,4:end),'all', 'omitnan');
         end
     end
 end
@@ -843,7 +842,7 @@ for m=1:12
             c=c+1;
 FCH4median2(c,1)=m;
 FCH4median2(c,2)=d;
-FCH4median2(c,3) = nanmedian(FCH420662096(rows,4:end),'all');
+FCH4median2(c,3) = mean(FCH420662096(rows,4:end),'all', 'omitnan');
         end
     end
 end
@@ -950,7 +949,7 @@ for m=1:12
             c=c+1;
 FCH4median1(c,1)=m;
 FCH4median1(c,2)=d;
-FCH4median1(c,3) = nanmedian(FCH420162046(rows,4:end),'all');
+FCH4median1(c,3) = mean(FCH420162046(rows,4:end),'all', 'omitnan');
         end
     end
 end
@@ -965,7 +964,7 @@ for m=1:12
             c=c+1;
 FCH4median2(c,1)=m;
 FCH4median2(c,2)=d;
-FCH4median2(c,3) = nanmedian(FCH420662096(rows,4:end),'all');
+FCH4median2(c,3) = mean(FCH420662096(rows,4:end),'all', 'omitnan');
         end
     end
 end
@@ -1005,6 +1004,10 @@ hold on
 p4 = plot([1:304], (FCH4i_2096sum), 'r--');
 set(gca, 'xtick' ,[0:20:304]);
 hold on
-ylim([0 1])
+ylim([0 1.5])
 xlim([0 304])
 xlabel('Days since 1^{st} Sep')
+%% save plot
+set(gcf, 'Position', [100 200 600 450]);
+cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
+exportgraphics(gcf, "cumu.jpg", "Resolution",300)
