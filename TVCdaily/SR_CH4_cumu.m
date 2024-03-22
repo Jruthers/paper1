@@ -1,9 +1,10 @@
 %% Default Snowdown SR RCP 4.5
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
+close all
 clear all
-% cd D:\MATLAB\TVCdaily\h0
-cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
+cd D:\MATLAB\TVCdaily\h0
+% cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
 
 % SWE2100 = extractvar('H2OSNO','rcp45');
 CaseList=dir('CORDEX_Default_CORDEX*rcp45*');
@@ -118,14 +119,21 @@ NeworderSRMedian2cumu=cumsum(NeworderSRMedian2(:,3), 'omitnan');
 SRi_2046sum=NeworderSRMedian1cumu(:,1);   %interp1([1:12],SRmedian1,m12,'cubic');
 SRi_2096sum=NeworderSRMedian2cumu(:,1); 
 
-figure('Position', [100, 100, 600, 400]);
+figure('Position', [100, 100, 650, 450]);
 subplot(2,2,1)
-p1 = plot([1:304], (SRi_2046sum), 'black');
+
+ix=find(diff(SRi_2046sum)==0); % find rows where the difference between consectiuve vals =0
+ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
+ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
+p1 = plot([1:ix3], (SRi_2046sum(1:ix3,1)), 'black');
 hold on
-p2 = plot([1:304], (SRi_2096sum), 'red');
+ix=find(diff(SRi_2096sum)==0); % find rows where the difference between consectiuve vals =0
+ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
+ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
+p2 = plot([1:ix3], (SRi_2096sum(1:ix3,1)), 'red');
 set(gca, 'xtick' ,[0:20:304]);
 hold on
-xlim([0 304])
+xlim([0 300])
 %% Sturm Snowdown SR RCP 4.5
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
@@ -241,12 +249,18 @@ SRi_2046sum=NeworderSRMedian1cumu(:,1);   %interp1([1:12],SRmedian1,m12,'cubic')
 SRi_2096sum=NeworderSRMedian2cumu(:,1); 
 
 hold on
-p3 = plot([1:304], (SRi_2046sum), 'k--');
+ix=find(diff(SRi_2046sum)==0); % find rows where the difference between consectiuve vals =0
+ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
+ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
+p3 = plot([1:ix3], (SRi_2046sum(1:ix3,1)), 'k--');
 hold on
-p4 = plot([1:304], (SRi_2096sum), 'r--');
+ix=find(diff(SRi_2096sum)==0); % find rows where the difference between consectiuve vals =0
+ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
+ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
+p4 = plot([1:ix3], (SRi_2096sum(1:ix3,1)), 'r--');
 set(gca, 'xtick' ,[0:20:304]);
 hold on
-xlim([0 304])
+xlim([0 300])
 ylim([0 60])
 ylabeltext = ({"Cumulative CO_2 flux", "to the atmosphere (gC/m^2/day)"});
 ylabel(ylabeltext)
@@ -259,8 +273,8 @@ legend([p1 p2 p3 p4], {'Default 2016-2046', 'Default 2066-2096', 'Sturm 2016-204
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-% cd D:\MATLAB\TVCdaily\h0
-cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
+cd D:\MATLAB\TVCdaily\h0
+% cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
 % SWE2100 = extractvar('H2OSNO','rcp85');
 CaseList=dir('CORDEX_Default_CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -375,12 +389,18 @@ SRi_2046sum=NeworderSRMedian1cumu(:,1);   %interp1([1:12],SRmedian1,m12,'cubic')
 SRi_2096sum=NeworderSRMedian2cumu(:,1); 
 
 subplot(2,2,2)
-p1 = plot([1:304], (SRi_2046sum), 'black');
+ix=find(diff(SRi_2046sum)==0); % find rows where the difference between consectiuve vals =0
+ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
+ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
+p3 = plot([1:ix3], (SRi_2046sum(1:ix3,1)), 'k-');
 hold on
-p2 = plot([1:304], (SRi_2096sum), 'red');
+ix=find(diff(SRi_2096sum)==0); % find rows where the difference between consectiuve vals =0
+ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
+ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
+p4 = plot([1:ix3], (SRi_2096sum(1:ix3,1)), 'r-');
 set(gca, 'xtick' ,[0:20:304]);
 hold on
-xlim([0 304])
+xlim([0 300])
 %% Sturm Snowdown SR RCP 8.5
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
@@ -496,21 +516,27 @@ SRi_2046sum=NeworderSRMedian1cumu(:,1);   %interp1([1:12],SRmedian1,m12,'cubic')
 SRi_2096sum=NeworderSRMedian2cumu(:,1); 
 
 hold on
-p3 = plot([1:304], (SRi_2046sum), 'k--');
+ix=find(diff(SRi_2046sum)==0); % find rows where the difference between consectiuve vals =0
+ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
+ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
+p3 = plot([1:ix3], (SRi_2046sum(1:ix3,1)), 'k--');
 hold on
-p4 = plot([1:304], (SRi_2096sum), 'r--');
+ix=find(diff(SRi_2096sum)==0); % find rows where the difference between consectiuve vals =0
+ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
+ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
+p4 = plot([1:ix3], (SRi_2096sum(1:ix3,1)), 'r--');
 set(gca, 'xtick' ,[0:20:304]);
 hold on
 ylim([0 60])
-xlim([0 304])
+xlim([0 300])
 % xlabel('Days since 1^{st} Sep')
 title('RCP 8.5')
 %% Default Snowdown FCH4 RCP 4.5
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-% cd D:\MATLAB\TVCdaily\h0
-cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
+cd D:\MATLAB\TVCdaily\h0
+% cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
 % SWE2100 = extractvar('H2OSNO','rcp45');
 CaseList=dir('CORDEX_Default_CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -625,12 +651,18 @@ FCH4i_2046sum=NeworderFCH4Median1cumu(:,1);   %interp1([1:12],FCH4median1,m12,'c
 FCH4i_2096sum=NeworderFCH4Median2cumu(:,1); 
 
 subplot(2,2,3)
-p1 = plot([1:304], (FCH4i_2046sum), 'black');
+ix=find(diff(FCH4i_2046sum)==0); % find rows where the difference between consectiuve vals =0
+ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
+ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
+p3 = plot([1:ix3], (FCH4i_2046sum(1:ix3,1)), 'k-');
 hold on
-p2 = plot([1:304], (FCH4i_2096sum), 'red');
+ix=find(diff(FCH4i_2096sum)==0); % find rows where the difference between consectiuve vals =0
+ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
+ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
+p4 = plot([1:ix3], (FCH4i_2096sum(1:ix3,1)), 'r-');
 set(gca, 'xtick' ,[0:20:304]);
 hold on
-xlim([0 304])
+xlim([0 300])
 %% Sturm Snowdown FCH4 RCP 4.5
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
@@ -746,12 +778,18 @@ FCH4i_2046sum=NeworderFCH4Median1cumu(:,1);   %interp1([1:12],FCH4median1,m12,'c
 FCH4i_2096sum=NeworderFCH4Median2cumu(:,1); 
 
 hold on
-p3 = plot([1:304], (FCH4i_2046sum), 'k--');
+ix=find(diff(FCH4i_2046sum)==0); % find rows where the difference between consectiuve vals =0
+ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
+ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
+p3 = plot([1:ix3], (FCH4i_2046sum(1:ix3,1)), 'k--');
 hold on
-p4 = plot([1:304], (FCH4i_2096sum), 'r--');
+ix=find(diff(FCH4i_2096sum)==0); % find rows where the difference between consectiuve vals =0
+ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
+ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
+p4 = plot([1:ix3], (FCH4i_2096sum(1:ix3,1)), 'r--');
 set(gca, 'xtick' ,[0:20:304]);
 hold on
-xlim([0 304])
+xlim([0 300])
 ylim([0 1.5])
 ylabeltext = ({"Cumulative CH_4 flux", "to the atmosphere (gC/m^2/day)"});
 ylabel(ylabeltext)
@@ -762,8 +800,8 @@ xlabel('Days since 1^{st} Sep')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-% cd D:\MATLAB\TVCdaily\h0
-cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
+cd D:\MATLAB\TVCdaily\h0
+% cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
 % SWE2100 = extractvar('H2OSNO','rcp85');
 CaseList=dir('CORDEX_Default_CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -878,12 +916,18 @@ FCH4i_2046sum=NeworderFCH4Median1cumu(:,1);   %interp1([1:12],FCH4median1,m12,'c
 FCH4i_2096sum=NeworderFCH4Median2cumu(:,1); 
 
 subplot(2,2,4)
-p1 = plot([1:304], (FCH4i_2046sum), 'black');
+ix=find(diff(FCH4i_2046sum)==0); % find rows where the difference between consectiuve vals =0
+ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
+ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
+p3 = plot([1:ix3], (FCH4i_2046sum(1:ix3,1)), 'k-');
 hold on
-p2 = plot([1:304], (FCH4i_2096sum), 'red');
+ix=find(diff(FCH4i_2096sum)==0); % find rows where the difference between consectiuve vals =0
+ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
+ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
+p4 = plot([1:ix3], (FCH4i_2096sum(1:ix3,1)), 'r-');
 set(gca, 'xtick' ,[0:20:304]);
 hold on
-xlim([0 304])
+xlim([0 300])
 %% Sturm Snowdown FCH4 RCP 8.5
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
@@ -999,15 +1043,21 @@ FCH4i_2046sum=NeworderFCH4Median1cumu(:,1);   %interp1([1:12],FCH4median1,m12,'c
 FCH4i_2096sum=NeworderFCH4Median2cumu(:,1); 
 
 hold on
-p3 = plot([1:304], (FCH4i_2046sum), 'k--');
+ix=find(diff(FCH4i_2046sum)==0); % find rows where the difference between consectiuve vals =0
+ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
+ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
+p3 = plot([1:ix3], (FCH4i_2046sum(1:ix3,1)), 'k--');
 hold on
-p4 = plot([1:304], (FCH4i_2096sum), 'r--');
+ix=find(diff(FCH4i_2096sum)==0); % find rows where the difference between consectiuve vals =0
+ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
+ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
+p4 = plot([1:ix3], (FCH4i_2096sum(1:ix3,1)), 'r--');
 set(gca, 'xtick' ,[0:20:304]);
 hold on
 ylim([0 1.5])
-xlim([0 304])
+xlim([0 300])
 xlabel('Days since 1^{st} Sep')
 %% save plot
-set(gcf, 'Position', [100 200 600 450]);
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
-exportgraphics(gcf, "cumu.jpg", "Resolution",300)
+% set(gcf, 'Position', [100 200 600 450]);
+% cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
+% exportgraphics(gcf, "cumu.jpg", "Resolution",300)
