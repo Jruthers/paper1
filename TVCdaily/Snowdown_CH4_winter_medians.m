@@ -2,8 +2,8 @@
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-% cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
-cd D:\MATLAB\TVCdaily\h0
+cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/h0
+% cd D:\MATLAB\TVCdaily\h0
 % cd h0
 CaseList=dir('CORDEX_Default_CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -386,7 +386,7 @@ ylim([0 0.015])
 fontsize(15,'points')
 
 %% save plot
-% set(gcf, 'Position', [100 200 1100 450]);
-% cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
-% % cd C:/Users/jadru/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/proposal
-% exportgraphics(gcf, "sturm_vs_default_1.jpg", "Resolution",300)
+set(gcf, 'Position', [100 200 1100 450]);
+cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
+% cd C:/Users/jadru/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/proposal
+exportgraphics(gcf, "sturm_vs_default_1.jpg", "Resolution",300)

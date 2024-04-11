@@ -2,8 +2,7 @@
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-% cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
-cd h0
+cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/h0
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX_Default_CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -188,7 +187,7 @@ f = fill(SWEX, SWEY, 'red', "FaceAlpha", 0.2, "LineStyle", "none");
 hold on
 sturm = plot(medianSWE,'red');
 % plot options
-legend([default, sturm],"Default", "Sturm", Location="northeast", FontSize=7)
+legend([default, sturm],"Jordan", "Sturm", Location="northeast", FontSize=7)
 xticks(1:10:85)
 xticklabels(UNIQUE_YR(1:10:85,1))
 ylim([0 0.6])

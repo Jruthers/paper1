@@ -3,9 +3,9 @@
 % into a new variable with matlab timestamps (SWE2100)
 close all
 clear all
-cd D:\MATLAB\TVCdaily\h0
+% cd E:\MATLAB\TVCdaily\h0
 % cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
-
+cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/h0
 % SWE2100 = extractvar('H2OSNO','rcp45');
 CaseList=dir('CORDEX_Default_CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -262,18 +262,19 @@ set(gca, 'xtick' ,[0:20:304]);
 hold on
 xlim([0 300])
 ylim([0 60])
-ylabeltext = ({"Cumulative CO_2 flux", "to the atmosphere (gC/m^2/day)"});
+ylabeltext = ({"Cumulative CO_2 flux", "to the atmosphere (gC/m^2)"});
 ylabel(ylabeltext)
 % ylabel('Cumulative Soil Respiration (gC/m^2/day)')
 % xlabel('Days since 1^{st} Sep')
 title('RCP 4.5')
-legend([p1 p2 p3 p4], {'Default 2016-2046', 'Default 2066-2096', 'Sturm 2016-2046', 'Sturm 2066-2096'}, "Location", "southeast", 'FontSize', 7);
+legend([p1 p2 p3 p4], {'Jordan 2016-2046', 'Jordan 2066-2096', 'Sturm 2016-2046', 'Sturm 2066-2096'}, "Location", "southeast", 'FontSize', 7);
 %% Default Snowdown SR RCP 8.5
 
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd D:\MATLAB\TVCdaily\h0
+% cd E:\MATLAB\TVCdaily\h0
+cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/h0
 % cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
 % SWE2100 = extractvar('H2OSNO','rcp85');
 CaseList=dir('CORDEX_Default_CORDEX*rcp85*');
@@ -535,7 +536,8 @@ title('RCP 8.5')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd D:\MATLAB\TVCdaily\h0
+% cd E:\MATLAB\TVCdaily\h0
+cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/h0
 % cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
 % SWE2100 = extractvar('H2OSNO','rcp45');
 CaseList=dir('CORDEX_Default_CORDEX*rcp45*');
@@ -791,7 +793,7 @@ set(gca, 'xtick' ,[0:20:304]);
 hold on
 xlim([0 300])
 ylim([0 1.5])
-ylabeltext = ({"Cumulative CH_4 flux", "to the atmosphere (gC/m^2/day)"});
+ylabeltext = ({"Cumulative CH_4 flux", "to the atmosphere (gC/m^2)"});
 ylabel(ylabeltext)
 % ylabel('Cumulative Soil Respiration (gC/m^2/day)')
 xlabel('Days since 1^{st} Sep')
@@ -800,7 +802,8 @@ xlabel('Days since 1^{st} Sep')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd D:\MATLAB\TVCdaily\h0
+% cd E:\MATLAB\TVCdaily\h0
+cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/h0
 % cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
 % SWE2100 = extractvar('H2OSNO','rcp85');
 CaseList=dir('CORDEX_Default_CORDEX*rcp85*');
@@ -1058,6 +1061,7 @@ ylim([0 1.5])
 xlim([0 300])
 xlabel('Days since 1^{st} Sep')
 %% save plot
-% set(gcf, 'Position', [100 200 600 450]);
-% cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
-% exportgraphics(gcf, "cumu.jpg", "Resolution",300)
+set(gcf, 'Position', [100 200 600 450]);
+cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
+% cd C:/Users/jadru/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/          
+exportgraphics(gcf, "cumu.jpg", "Resolution",300)

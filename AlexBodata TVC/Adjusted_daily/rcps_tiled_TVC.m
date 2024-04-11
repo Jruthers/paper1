@@ -1,5 +1,5 @@
 clear all
-cd /Volumes/JR_SSD/MATLAB/'AlexBodata TVC'/Adjusted_daily/
+cd /Users/johnnyrutherford/Library/CloudStorage/OneDrive-NorthumbriaUniversity-ProductionAzureAD/Documents/MATLAB/'AlexBodata TVC'/Adjusted_daily/
 % addpath('mbcn-na-cordex_daily-CA-HPC/'); % adds the directory with all the files in
 FilesList=dir('mbcn.CA-TVC.NAM-*rcp45*.csv'); % makes a list of all ensemble member files
 
@@ -138,7 +138,7 @@ f = fill(int_meanX2060, int_meanY2060, 'red', "FaceAlpha", 0.2, "LineStyle", "no
 xlim([1 12])
 ylim([-30 30])
 yline(0, '--')
-leg = legend([int1990 int2060], {'median 2016-2046', 'median 2066-2096'}, Location="northwest");
+leg = legend([int1990 int2060], {'2016-2046', '2066-2096'}, Location="northwest");
 set(leg, "box", "off")
 set(gca, "FontSize",10);
 set(gca, 'xtick',1:1:24, 'XTickLabels',[])

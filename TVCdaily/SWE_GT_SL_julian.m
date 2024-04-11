@@ -1,6 +1,6 @@
 %% SWE RCP4.5 only
 clear all
-cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
+cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h0
 % cd D:/MATLAB/TVCdaily/h0
 SWE2100=extractvar('H2OSNO', 'rcp45');
 %% 1. Assign each month/day a julian day
@@ -39,25 +39,25 @@ clear SWEmedian1
 clear SWEmedian2
 SWEmedian1 = median(SWE20162046_Daily);
 SWEmedian2 = median(SWE20662096_Daily);
-SWE1perc25 = prctile(SWE20162046_Daily(:,1:end),25);
-SWE1perc75 = prctile(SWE20162046_Daily(:,1:end),75);
-SWE2perc25 = prctile(SWE20662096_Daily(:,1:end),25);
-SWE2perc75 = prctile(SWE20662096_Daily(:,1:end),75);
+% SWE1perc25 = prctile(SWE20162046_Daily(:,1:end),25);
+% SWE1perc75 = prctile(SWE20162046_Daily(:,1:end),75);
+% SWE2perc25 = prctile(SWE20662096_Daily(:,1:end),25);
+% SWE2perc75 = prctile(SWE20662096_Daily(:,1:end),75);
 
 m12=[1:366];
 SWEi_2046=SWEmedian1;
 SWEi_2096=SWEmedian2;
-SWEi_2046_25 = SWE1perc25;
-SWEi_2046_75 = SWE1perc75;
-SWEi_2096_25  = SWE2perc25;
-SWEi_2096_75 = SWE2perc75;
+% SWEi_2046_25 = SWE1perc25;
+% SWEi_2046_75 = SWE1perc75;
+% SWEi_2096_25  = SWE2perc25;
+% SWEi_2096_75 = SWE2perc75;
 
 %plot
 SWE_plot_2046 = plot(m12, SWEi_2046, 'black',"LineWidth", 1.5);
 hold on
 SWE_plot_2096 = plot(m12, SWEi_2096, 'red',"LineWidth", 1.5);
 
-%percentiles fill
+% percentiles fill
 % SWE_Y_fill_2046 = [SWEi_2046_25, fliplr(SWEi_2046_75)];
 % SWE_X_fill_2046 = [m12, fliplr(m12(1:end))];
 % f = fill(SWE_X_fill_2046, SWE_Y_fill_2046, 'black', "FaceAlpha", 0.2, "LineStyle", "none");
@@ -250,7 +250,7 @@ GT_plot_2096 = plot(m12, GTi_2096, 'r--',"LineWidth", 1.5);
 yline(0, "--")
 set(gca, 'xtick' ,[1,32,60,91,121,152,182,213,244,274,305,335],'xticklabel',{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'});
 hold on
-ylabel("^{o}C")
+% ylabel("^{o}C")
 title('10cm Soil Temperature', "FontWeight","normal")
 % xlim([1 366])
 % ylim([0 140])
@@ -301,7 +301,7 @@ GT_plot_2096 = plot(m12, GTi_2096, 'red',"LineWidth", 1.5);
 yline(0, "--")
 set(gca, 'xtick' ,[1,32,60,91,121,152,182,213,244,274,305,335],'xticklabel',{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'});
 hold on
-ylabel("^{o}C")
+% ylabel("^{o}C")
 title('10cm Soil Temperature', "FontWeight","normal")
 %legend([GT10_plot_2046 GT10_plot_2096], {'median 2016-2046', 'median 2066-2096'}, Location="northeast", FontSize=8) xticklabels([])
 xlim([1 366])
@@ -354,11 +354,12 @@ GT_plot_2096 = plot(m12, GTi_2096, 'r--',"LineWidth", 1.5);
 yline(0, "--")
 set(gca, 'xtick' ,[1,32,60,91,121,152,182,213,244,274,305,335],'xticklabel',{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'});
 hold on
-ylabel("^{o}C")
+% ylabel("^{o}C")
 title('10cm Soil Temperature', "FontWeight","normal")
 %legend([GT10_plot_2046 GT10_plot_2096], {'median 2016-2046', 'median 2066-2096'}, Location="northeast", FontSize=8) xticklabels([])
 % xlim([1 366])
 ylim([-20 15])
+yticklabels([])
 %% SOIl moisture rcp45
 clear all
 cd ../../h1
@@ -475,11 +476,12 @@ SL_plot_2096 = plot(m12, (SLi_2096), 'r',"LineWidth", 1.5);
 % plot options
 set(gca, 'xtick' ,[1,32,60,91,121,152,182,213,244,274,305,335],'xticklabel',{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'});
 hold on
-ylabel("Kg/m^2")
+% ylabel("Kg/m^2")
 title('Soil Moisture', "FontWeight","normal")
 %legend([GT10_plot_2046 GT10_plot_2096], {'median 2016-2046', 'median 2066-2096'}, Location="northeast", FontSize=8) xticklabels([])
 xlim([1 366])
 % ylim([0 140])
+yticklabels([])
 %% Set fontsizes
 fontsize(12, "points")
 fig = gcf;
