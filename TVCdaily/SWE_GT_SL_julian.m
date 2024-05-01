@@ -1,9 +1,23 @@
 %% SWE RCP4.5 only
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h0
-% cd D:/MATLAB/TVCdaily/h0
+if ismac
+        cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h0
+else
+if ispc
+
+unipath = 'C:\Users\w22026593\OneDrive - Northumbria University - Production Azure AD\Documents\MATLAB\TVCdaily\q10 1.5 psimin -2\h0';
+pcpath = 'C:\Users\jadru\OneDrive - Northumbria University - Production Azure AD\Documents\MATLAB\TVCdaily\q10 1.5 psimin -2\h0';
+if exist("unipath", "dir")
+    cd(unipath)
+else 
+    cd(pcpath)
+end 
+end
+end
+
 SWE2100=extractvar('H2OSNO', 'rcp45');
-%% 1. Assign each month/day a julian day
+
+% 1. Assign each month/day a julian day
 juliandays=[];
 for i=1:length(SWE2100)
 d=datetime(SWE2100(i,1),SWE2100(i,2),SWE2100(i,3));
@@ -12,7 +26,8 @@ juliandays=vertcat(juliandays,doy);
 end
 %paste the juliandays onto the end of SWE2100 variable
 SWE2100=[SWE2100,juliandays];
-%% 2. SWE 45 plot: Works, but with whitespace in middle of plot
+
+% 2. SWE 45 plot: Works, but with whitespace in middle of plot
 SWEplot = figure()
 SWEplot.Position=[100 20 800 1500]
 T = tiledlayout(3,2, "TileSpacing","compact");
@@ -67,7 +82,7 @@ SWE_plot_2096 = plot(m12, SWEi_2096, 'red',"LineWidth", 1.5);
 % f = fill(SWE_X_fill_2096, SWE_Y_fill_2096, 'red', "FaceAlpha", 0.2, "LineStyle", "none");
 
 %plot options
-legend([SWE_plot_2046 SWE_plot_2096], {'2016-2046', '2066-2096'}, Location="northeast", FontSize=7)
+legend([SWE_plot_2046 SWE_plot_2096], {'2016-2046', '2066-2096'}, Location="southwest", FontSize=7)
 set(gca, 'XTickLabel', []);
 % set(gca, 'xtick' ,[1,32,60,91,121,152,182,213,244,274,305,335],'xticklabel',[]);
 set(gca, 'xtick' ,[1,32,60,91,121,152,182,213,244,274,305,335],'xticklabel',{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'});
@@ -78,7 +93,8 @@ title('RCP 4.5', 'Snow Water Equivalent (SWE)');
 %% SWE RCP8.5 only
 clear all
 SWE2100=extractvar('H2OSNO', 'rcp85');
-%% 1. Assign each month/day a julian day
+
+% 1. Assign each month/day a julian day
 juliandays=[];
 for i=1:length(SWE2100)
 d=datetime(SWE2100(i,1),SWE2100(i,2),SWE2100(i,3));
@@ -87,7 +103,8 @@ juliandays=vertcat(juliandays,doy);
 end
 %paste the juliandays onto the end of SWE2100 variable
 SWE2100=[SWE2100,juliandays];
-%% 2. SWE 85 plot: Works, but with whitespace in middle of plot
+
+% 2. SWE 85 plot: Works, but with whitespace in middle of plot
 nexttile
 SWE20162046_Daily=nan(30*(width(SWE2100)-4),366);
 for d=1:366% cycle through each of the months 
@@ -157,7 +174,8 @@ GT102100=extractvar('TSOI_10CM', 'rcp45');
 GT2100=GT102100(:,1:3);
 GT = GT102100(:,4:end)-273.15;
 GT102100=[GT2100 GT];
-%% 1. Assign each month/day a julian day
+
+% 1. Assign each month/day a julian day
 juliandays=[];
 for i=1:length(GT102100)
 d=datetime(GT102100(i,1),GT102100(i,2),GT102100(i,3));
@@ -166,7 +184,8 @@ juliandays=vertcat(juliandays,doy);
 end
 %paste the juliandays onto the end of GT102100 variable
 GT102100=[GT102100,juliandays];
-%% 2. GT 45 plot: Works, but with whitespace in middle of plot
+
+% 2. GT 45 plot: Works, but with whitespace in middle of plot
 nexttile
 GT20162046_Daily=nan(30*(width(GT102100)-4),366);
 for d=1:366% cycle through each of the months 
@@ -204,13 +223,14 @@ xlim([1 366])
 ylim([-20 15])
 %% STURM GT10 rcp 4.5
 clearvars -except GT10_plot_20461 GT10_plot_20961
-cd ../sturm/h1
+cd ../../sturm/'Sturm old data'/h1
 clear all
 GT102100=extractvar('TSOI_10CM', 'rcp45');
 GT2100=GT102100(:,1:3);
 GT = GT102100(:,4:end)-273.15;
 GT102100=[GT2100 GT];
-%% 1. Assign each month/day a julian day
+
+% 1. Assign each month/day a julian day
 juliandays=[];
 for i=1:length(GT102100)
 d=datetime(GT102100(i,1),GT102100(i,2),GT102100(i,3));
@@ -219,7 +239,8 @@ juliandays=vertcat(juliandays,doy);
 end
 %paste the juliandays onto the end of GT102100 variable
 GT102100=[GT102100,juliandays];
-%% 2. GT 45 plot: Works, but with whitespace in middle of plot
+
+% 2. GT 45 plot: Works, but with whitespace in middle of plot
 hold on
 GT20162046_Daily=nan(30*(width(GT102100)-4),366);
 for d=1:366% cycle through each of the months 
@@ -256,12 +277,13 @@ title('10cm Soil Temperature', "FontWeight","normal")
 % ylim([0 140])
 %% SOIl temp rcp85
 clear all
-cd ../../h1
+cd ../../../'q10 1.5 psimin -2'/h1
 GT102100=extractvar('TSOI_10CM', 'rcp85');
 GT2100=GT102100(:,1:3);
 GT = GT102100(:,4:end)-273.15;
 GT102100=[GT2100 GT];
-%% 1. Assign each month/day a julian day
+
+% 1. Assign each month/day a julian day
 juliandays=[];
 for i=1:length(GT102100)
 d=datetime(GT102100(i,1),GT102100(i,2),GT102100(i,3));
@@ -270,7 +292,8 @@ juliandays=vertcat(juliandays,doy);
 end
 %paste the juliandays onto the end of GT102100 variable
 GT102100=[GT102100,juliandays];
-%% 2. GT 85 plot: Works, but with whitespace in middle of plot
+
+% 2. GT 85 plot: Works, but with whitespace in middle of plot
 nexttile
 GT20162046_Daily=nan(30*(width(GT102100)-4),366);
 for d=1:366% cycle through each of the months 
@@ -308,13 +331,14 @@ xlim([1 366])
 % ylim([0 140])
 %% STURM GT10 rcp 8.5
 clearvars -except GT10_plot_20461 GT10_plot_20961
-cd ../sturm/h1
+cd ../../sturm/'Sturm old data'/h1/
 clear all
 GT102100=extractvar('TSOI_10CM', 'rcp85');
 GT2100=GT102100(:,1:3);
 GT = GT102100(:,4:end)-273.15;
 GT102100=[GT2100 GT];
-%% 1. Assign each month/day a julian day
+
+% 1. Assign each month/day a julian day
 juliandays=[];
 for i=1:length(GT102100)
 d=datetime(GT102100(i,1),GT102100(i,2),GT102100(i,3));
@@ -323,7 +347,8 @@ juliandays=vertcat(juliandays,doy);
 end
 %paste the juliandays onto the end of GT102100 variable
 GT102100=[GT102100,juliandays];
-%% 2. GT 85 plot: Works, but with whitespace in middle of plot
+
+% 2. GT 85 plot: Works, but with whitespace in middle of plot
 hold on
 GT20162046_Daily=nan(30*(width(GT102100)-4),366);
 for d=1:366% cycle through each of the months 
@@ -360,9 +385,10 @@ title('10cm Soil Temperature', "FontWeight","normal")
 % xlim([1 366])
 ylim([-20 15])
 yticklabels([])
+
 %% SOIl moisture rcp45
 clear all
-cd ../../h1
+cd ../../../'q10 1.5 psimin -2'/h1/
 CaseList=dir('CORDEX_Default*rcp45*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(31025,length(CaseList));
@@ -378,7 +404,8 @@ variabletime=ncread(strcat(filepath,ncname.name),'time');
 TIME=double(variabletime+datenum('2016-01-01','yyyy-mm-dd'));
 TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
 SL2100=[TIME_YM SOILLIQ];
-%% 1. Assign each month/day a julian day
+
+% 1. Assign each month/day a julian day
 juliandays=[];
 for i=1:length(SL2100)
 d=datetime(SL2100(i,1),SL2100(i,2),SL2100(i,3));
@@ -387,7 +414,8 @@ juliandays=vertcat(juliandays,doy);
 end
 %paste the juliandays onto the end of SL2100 variable
 SL2100=[SL2100,juliandays];
-%%
+
+%
 SL20162046_Daily=nan(30*(width(SL2100)-4),366);
 for d=1:366% cycle through each of the months 
 indicestoget=find(SL2100(:,1) >= 2016 & SL2100(:,1) <= 2046-1 & SL2100(:,width(SL2100))==d); % filter out monthly data (m) where the year is greater than or equal to 1990 and less than or equal to 2020. relevant rows are stored in indicestoget
@@ -438,7 +466,8 @@ variabletime=ncread(strcat(filepath,ncname.name),'time');
 TIME=double(variabletime+datenum('2016-01-01','yyyy-mm-dd'));
 TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
 SL2100=[TIME_YM SOILLIQ];
-%% 1. Assign each month/day a julian day
+
+% 1. Assign each month/day a julian day
 juliandays=[];
 for i=1:length(SL2100)
 d=datetime(SL2100(i,1),SL2100(i,2),SL2100(i,3));
@@ -487,7 +516,15 @@ fontsize(12, "points")
 fig = gcf;
 leggy = findobj(fig,'Type', 'legend')
 set(leggy, "FontSize",8);
+%% letters
+annotation('textbox', [0.45 0.821244008502731 0.1 0.1], 'String', 'a', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.45 0.527681231451366, 0.1, 0.1], 'String', 'c', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.45, 0.24, 0.1, 0.1], 'String', 'e', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+
+annotation('textbox',  [0.876979166666667 0.821244008502731 0.1 0.1], 'String', 'b', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.876979166666667 0.527681231451366, 0.1, 0.1], 'String', 'd', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.876979166666667, 0.24, 0.1, 0.1], 'String', 'f', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
 %% Save figure
 cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
-% cd C:/Users/jadru/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
+% % cd C:/Users/jadru/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
 exportgraphics(gcf, "SWE_GT_SL.jpg", "Resolution",300)

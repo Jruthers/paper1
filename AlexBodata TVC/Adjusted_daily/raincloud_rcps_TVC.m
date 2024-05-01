@@ -45,8 +45,16 @@ filterpall=[reshape(filterp1,height(filterp1)*width(filterp1),1); reshape(filter
 
 filterp1(filterp1==0)=NaN;
 filterp2(filterp2==0)=NaN;
-h1=raincloud_plot(reshape(filtert1,height(filtert1)*width(filtert1),1),Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1),'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
-h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1),'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6, 'box_col_match', 1);
+
+Treshape1 = reshape(filtert1,height(filtert1)*width(filtert1),1)
+Treshape2 = reshape(filtert2,height(filtert2)*width(filtert2),1)
+Preshape1 = Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1)
+Preshape2 = Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1)
+
+h1=raincloud_plot(Treshape1,Preshape1,'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
+h2=raincloud_plot(Treshape2,Preshape2,'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6, 'box_col_match', 1);
+% h1=raincloud_plot(reshape(filtert1,height(filtert1)*width(filtert1),1),Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1),'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
+% h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1),'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6, 'box_col_match', 1);
 ylocations=[-0.4:0.05:0.25];
 % rainloc=0*ones(length(ylocations),1);
 % snowloc=2*ones(length(ylocations),1);
@@ -60,13 +68,10 @@ set(gca, 'XLim', [-25 25]);
 set(gca,'Xtick',[])
 hold on
 Aprlab = ylabel('Precipitation Frequency');
-Aprlab.Position(2) = 0.125;% change vertical position of ylabel
+Aprlab.Position(2) = -0.3;% change vertical position of ylabel
 Aprlab.Position(1) = -32;
 set(h1{1}, 'LineWidth', 1)
 set(h2{1}, 'LineWidth', 1)
-l1=legend('2016-2046','','2066-2096', 'box', 'off');
-l1.FontSize=7;
-legend('AutoUpdate','off')
 % h3=scatter(8.2,0.05,standardP*Precip_scalefactor,'ro','filled','MarkerEdgeColor','k');  % Extra
 % h4=text(13.2,0.05,strcat(string(standardP), 'mm'));% Extra
 % h4.FontSize=6.5;
@@ -194,9 +199,7 @@ ylocations=[-0.4:0.05:0.25];
 % plot(snowloc,ylocations,'k--','LineWidth',2)
 xline(0, '-', LineWidth=1, Alpha=1)
 xline(2, '--', LineWidth=1)
-%xlabel('Mean Monthly Temperature (^{o}C)')
 set(gca,'Ytick',[0,0.05,0.1,0.15,0.2,0.25,0.3])
-% legend("","1990-2020 precipitation", "", "2060-2090 precipitation","FontSize", 10, Location="southeast")
 title("May", "FontWeight", "normal")
 %set(gca, 'YLim', [-.35 0.25]);
 set(gca, 'XLim', [-25 25]);
@@ -309,9 +312,7 @@ ylocations=[-0.4:0.05:0.25];
 % plot(snowloc,ylocations,'k--','LineWidth',2)
 xline(0, '-', LineWidth=1, Alpha=1)
 xline(2, '--', LineWidth=1)
-% xlabel('Mean Monthly Temperature (^{o}C)')
 set(gca,'Ytick',[0,0.05,0.1,0.15,0.2,0.25,0.3])
-% legend("","1990-2020 precipitation", "", "2060-2090 precipitation","FontSize", 10, Location="southeast")
 title("September", "FontWeight", "normal")
 %set(gca, 'YLim', [-.5 0.25]);
 set(gca, 'XLim', [-25 25]);
@@ -419,7 +420,6 @@ h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_sc
 ylocations=[-0.4:0.05:0.25];
 xline(0, '-', LineWidth=1, Alpha=1)
 xline(2, '--', LineWidth=1)
-xlabel('Mean Monthly Temperature (^{o}C)')
 set(gca,'Ytick',[0,0.05,0.1,0.15,0.2,0.25,0.3])
 title("October", "FontWeight", "normal")
 %set(gca, 'YLim', [-.5 0.25]);
@@ -578,6 +578,8 @@ ylim([0 0.25])
 % h3=scatter(8.2,0.05,standardP*Precip_scalefactor,'ro','filled','MarkerEdgeColor','k');  % Extra
 % h4=text(13.2,0.05,strcat(string(standardP), 'mm'));% Extra
 % h4.FontSize=6.5;
+l1=legend('2016-2046','','2066-2096', 'box', 'off', Location='northwest');
+l1.FontSize=9;
 %% Apr total precip inset
 clear Apr
 clear May
@@ -689,8 +691,8 @@ filterpall=[reshape(filterp1,height(filterp1)*width(filterp1),1); reshape(filter
 % subplot(4,2,4)
 Precip_scalefactor=0.5;
 gap = 0.09;
-% sub6 = subplot('Position', [0.44 0.5 0.2 0.26 - gap])
-figure()
+sub6 = subplot('Position', [0.44 0.5 0.2 0.26 - gap])
+% figure()
 h1=raincloud_plot(reshape(filtert1,height(filtert1)*width(filtert1),1),Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1),'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
 h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1),'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6, 'box_col_match', 1);
 
@@ -698,9 +700,7 @@ h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_sc
 ylocations=[-0.4:0.05:0.25];
 xline(0, '-', LineWidth=1, Alpha=1)
 xline(2, '--', LineWidth=1)
-%xlabel('Mean Monthly Temperature (^{o}C)')
 set(gca,'Ytick',[0,0.05,0.1,0.15,0.2,0.25,0.3])
-% legend("","1990-2020 precipitation", "", "2060-2090 precipitation","FontSize", 10, Location="southeast")
 title("May", "FontWeight", "normal")
 %set(gca, 'YLim', [-.35 0.25]);
 set(gca, 'XLim', [-25 25]);
@@ -811,9 +811,7 @@ ylocations=[-0.4:0.05:0.25];
 % plot(snowloc,ylocations,'k--','LineWidth',2)
 xline(0, '-', LineWidth=1, Alpha=1)
 xline(2, '--', LineWidth=1)
-% xlabel('Mean Monthly Temperature (^{o}C)')
 set(gca,'Ytick',[0,0.05,0.1,0.15,0.2,0.25,0.3])
-% legend("","1990-2020 precipitation", "", "2060-2090 precipitation","FontSize", 10, Location="southeast")
 title("September", "FontWeight", "normal")
 %set(gca, 'YLim', [-.5 0.25]);
 set(gca, 'XLim', [-25 25]);
@@ -913,8 +911,8 @@ filterpall=[reshape(filterp1,height(filterp1)*width(filterp1),1); reshape(filter
 % subplot(4,2,8)
 Precip_scalefactor=0.5;
 gap = 0.09;
-figure()
-% sub8 = subplot('Position', [0.44 0.1 0.2 0.26 - gap])
+% figure()
+sub8 = subplot('Position', [0.44 0.1 0.2 0.26 - gap])
 h1=raincloud_plot(reshape(filtert1,height(filtert1)*width(filtert1),1),Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1),'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
 h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1),'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6,'box_col_match', 1);
 
@@ -922,7 +920,6 @@ h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_sc
 ylocations=[-0.4:0.05:0.25];
 xline(0, '-', LineWidth=1, Alpha=1)
 xline(2, '--', LineWidth=1)
-xlabel('Mean Monthly Temperature (^{o}C)')
 set(gca,'Ytick',[0,0.05,0.1,0.15,0.2,0.25,0.3])
 title("October", "FontWeight", "normal")
 %set(gca, 'YLim', [-.5 0.25]);
@@ -931,9 +928,9 @@ set(gca,'Xtick',[-25, -10, 0, 10, 25])
 set(h1{1}, 'LineWidth', 1)
 set(h2{1}, 'LineWidth', 1)
 ylim([0 0.25])
-% Octlab = ylabel('Frequency');
-% Octlab.Position(2) = 0.125; % change vertical position of ylabel
-% Octlab.Position(1) = -29;
+Octlab = xlabel('Mean Monthly Temperature (^{o}C)');
+Octlab.Position(2) = -0.05; % change vertical position of ylabel
+Octlab.Position(1) = -29;
 % exportgraphics(T,'Tiled2x2.jpg','Resolution',300)
 %% Oct total precip inset
 clear Months_new
@@ -1014,7 +1011,19 @@ set(insets, 'ylim', [0 120])
 % set(insets, 'FontSize', 11)
 all_text_objects = findall(gcf, 'Type', 'text');
 set(all_text_objects, 'FontSize', 13);
-set(subs, 'FontSize', 12)
+set(subs, 'FontSize', 12);
+
+%% Plot options
+annotation('textbox', [0.384375 0.77381231451366 0.1 0.1], 'String', 'a', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.384375 0.57681231451366, 0.1, 0.1], 'String', 'c', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.384375, 0.37, 0.1, 0.1], 'String', 'e', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.384375, 0.175, 0.1, 0.1], 'String', 'g', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+
+annotation('textbox',  [0.624479166666667 0.77381231451366 0.1 0.1], 'String', 'b', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.624479166666667 0.57081231451366, 0.1, 0.1], 'String', 'd', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.624479166666667, 0.37, 0.1, 0.1], 'String', 'f', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.624479166666667, 0.170, 0.1, 0.1], 'String', 'h', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
 %% Save figure
 % cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'Alex and bo forcing data'/TVC/
-% exportgraphics(gcf, "frequency_tiled.jpg", "Resolution",300)
+cd C:\Users\w22026593\'OneDrive - Northumbria University - Production Azure AD'\Documents\Figures\'Alex and bo forcing data'\TVC
+exportgraphics(gcf, "frequency_tiled.jpg", "Resolution",300)

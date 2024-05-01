@@ -3,33 +3,35 @@
 % into a new variable with matlab timestamps (SWE2100)
 close all
 clear all
-% cd E:\MATLAB\TVCdaily\h0
-% cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/h0
-% SWE2100 = extractvar('H2OSNO','rcp45');
-CaseList=dir('CORDEX_Default_CORDEX*rcp45*');
-internalfilestruct='/lnd/hist/'; 
-variable=nan(1020,length(CaseList));
-for i=1:length(CaseList)
+% change into the directory containing SWE data
+cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h0
+
+ % extract snow data
+CaseList=dir('CORDEX_Default_CORDEX*rcp45*'); % create a list of all ensemble members n=33
+internalfilestruct='/lnd/hist/'; % internal file structure of member folders
+variable=nan(1020,length(CaseList)); % prealocate variable size for speed
+for i=1:length(CaseList) % this loop reads all the SWE data and places it in the variable SWE
 filepath=strcat(CaseList(i).name,internalfilestruct);
 ncname=dir(strcat(filepath,"/*2016-01-01*.nc"));
 variable=ncread(strcat(filepath,ncname.name),'H2OSNO');
 SWE(:,i)=(variable);
 end
-variabletime=ncread(strcat(filepath,ncname.name),'time');
-TIME=double(variabletime+datenum('2016-01-01','yyyy-mm-dd'));
+variabletime=ncread(strcat(filepath,ncname.name),'time'); % extract time data
+TIME=double(variabletime+datenum('2016-01-01','yyyy-mm-dd'));% put time data in matlabtime format?
 TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
-SWE2100=[TIME_YM, SWE];
+SWE2100=[TIME_YM, SWE]; % new variable with yy-mm-dd and SWE data
 
 % Snow logic: create a SWE variable of 1s and 0s that can be applied to
-% other variables
+% other variables such as SR
 SWEnew=SWE2100(:,4:9);
 SWEnew(SWEnew<5)=NaN;
 SWEnew(SWEnew>0)=1;
 totsnowon = nansum(SWEnew,2);
+
 % new variable showing only where all members show snow on
 logical_index = all(SWEnew == 1, 2);
 SWEnew1 = SWEnew;
+
 % Replace the values in between these occurrences with NaN
 SWEnew1(~logical_index, :) = NaN;
 totsnowon2100=[TIME_YM totsnowon];
@@ -54,7 +56,8 @@ TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
 SR2100=[TIME_YM 24*3600*SR];
 SRwithsnow = SWEnew1.*SR2100(:,4:9);
 SRwithsnow = [TIME_YM SRwithsnow];
-%% Default RCP 4.5 cumulative
+
+% Default RCP 4.5 cumulative
 % Extract SR data for our two 30 year time periods and assemble the data
 % from sept to june in order to cover the snow down period, and accumulate.
 
@@ -122,6 +125,8 @@ SRi_2096sum=NeworderSRMedian2cumu(:,1);
 figure('Position', [100, 100, 650, 450]);
 subplot(2,2,1)
 
+% this script finds the date when accumulation stops and stops the plotting
+% there
 ix=find(diff(SRi_2046sum)==0); % find rows where the difference between consectiuve vals =0
 ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
 ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
@@ -131,6 +136,8 @@ ix=find(diff(SRi_2096sum)==0); % find rows where the difference between consecti
 ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
 ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
 p2 = plot([1:ix3], (SRi_2096sum(1:ix3,1)), 'red');
+
+%further plot options
 set(gca, 'xtick' ,[0:20:304]);
 hold on
 xlim([0 300])
@@ -138,7 +145,7 @@ xlim([0 300])
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except p1 p2
-cd ../sturm/h0
+cd ../../sturm/'q10 1.5 psimin -2'/h0
 % SWE2100 = extractvar('H2OSNO','rcp45');
 CaseList=dir('CORDEX_*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -187,7 +194,8 @@ TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
 SR2100=[TIME_YM 24*3600*SR];
 SRwithsnow = SWEnew1.*SR2100(:,4:9);
 SRwithsnow = [TIME_YM SRwithsnow];
-%% Sturm RCP 4.5 cumulative
+
+% Sturm RCP 4.5 cumulative
 indicestoget=find(SRwithsnow(:,1) >= 2016 & SRwithsnow(:,1) <= 2046);
 SR20162046=SRwithsnow(indicestoget,:);
 c=0;
@@ -267,14 +275,14 @@ ylabel(ylabeltext)
 % ylabel('Cumulative Soil Respiration (gC/m^2/day)')
 % xlabel('Days since 1^{st} Sep')
 title('RCP 4.5')
-legend([p1 p2 p3 p4], {'Jordan 2016-2046', 'Jordan 2066-2096', 'Sturm 2016-2046', 'Sturm 2066-2096'}, "Location", "southeast", 'FontSize', 7);
+legend([p1 p2 p3 p4], {'CORDEX-Jordan 2016-2046', 'CORDEX-Jordan 2066-2096', 'CORDEX-Sturm 2016-2046', 'CORDEX-Sturm 2066-2096'}, "Location", "southeast", 'FontSize', 7);
 %% Default Snowdown SR RCP 8.5
 
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
 % cd E:\MATLAB\TVCdaily\h0
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/h0
+cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h0
 % cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
 % SWE2100 = extractvar('H2OSNO','rcp85');
 CaseList=dir('CORDEX_Default_CORDEX*rcp85*');
@@ -324,7 +332,8 @@ TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
 SR2100=[TIME_YM 24*3600*SR];
 SRwithsnow = SWEnew1.*SR2100(:,4:30);
 SRwithsnow = [TIME_YM SRwithsnow];
-%% Default RCP 8.5 cumulative
+
+% Default RCP 8.5 cumulative
 % Extract SR data for our two 30 year time periods and assemble the data
 % from sept to june in order to cover the snow down period, and accumulate.
 
@@ -406,7 +415,7 @@ xlim([0 300])
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except p1 p2
-cd ../sturm/h0
+cd ../../sturm/'q10 1.5 psimin -2'/h0
 % SWE2100 = extractvar('H2OSNO','rcp85');
 CaseList=dir('CORDEX_*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -455,7 +464,8 @@ TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
 SR2100=[TIME_YM 24*3600*SR];
 SRwithsnow = SWEnew1.*SR2100(:,4:30);
 SRwithsnow = [TIME_YM SRwithsnow];
-%% Sturm RCP 8.5 cumulative
+
+% Sturm RCP 8.5 cumulative
 indicestoget=find(SRwithsnow(:,1) >= 2016 & SRwithsnow(:,1) <= 2046);
 SR20162046=SRwithsnow(indicestoget,:);
 c=0;
@@ -537,7 +547,7 @@ title('RCP 8.5')
 % into a new variable with matlab timestamps (SWE2100)
 clear all
 % cd E:\MATLAB\TVCdaily\h0
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/h0
+cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h0
 % cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
 % SWE2100 = extractvar('H2OSNO','rcp45');
 CaseList=dir('CORDEX_Default_CORDEX*rcp45*');
@@ -587,7 +597,8 @@ TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
 FCH42100=[TIME_YM 24*3600*1000*FCH4];
 FCH4withsnow = SWEnew1.*FCH42100(:,4:9);
 FCH4withsnow = [TIME_YM FCH4withsnow];
-%% Default RCP 4.5 cumulative
+
+% Default RCP 4.5 cumulative
 % Extract FCH4 data for our two 30 year time periods and assemble the data
 % from sept to june in order to cover the snow down period, and accumulate.
 
@@ -669,7 +680,7 @@ xlim([0 300])
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except p1 p2
-cd ../sturm/h0
+cd ../../sturm/'q10 1.5 psimin -2'/h0
 % SWE2100 = extractvar('H2OSNO','rcp45');
 CaseList=dir('CORDEX_*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -718,7 +729,8 @@ TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
 FCH42100=[TIME_YM 24*3600*1000*FCH4];
 FCH4withsnow = SWEnew1.*FCH42100(:,4:9);
 FCH4withsnow = [TIME_YM FCH4withsnow];
-%% Sturm RCP 4.5 cumulative
+
+% Sturm RCP 4.5 cumulative
 indicestoget=find(FCH4withsnow(:,1) >= 2016 & FCH4withsnow(:,1) <= 2046);
 FCH420162046=FCH4withsnow(indicestoget,:);
 c=0;
@@ -803,7 +815,7 @@ xlabel('Days since 1^{st} Sep')
 % into a new variable with matlab timestamps (SWE2100)
 clear all
 % cd E:\MATLAB\TVCdaily\h0
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/h0
+cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h0
 % cd /Volumes/'JR_SSD'/MATLAB/TVCdaily/h0
 % SWE2100 = extractvar('H2OSNO','rcp85');
 CaseList=dir('CORDEX_Default_CORDEX*rcp85*');
@@ -853,7 +865,8 @@ TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
 FCH42100=[TIME_YM 24*3600*1000*FCH4];
 FCH4withsnow = SWEnew1.*FCH42100(:,4:30);
 FCH4withsnow = [TIME_YM FCH4withsnow];
-%% Default RCP 8.5 cumulative
+
+% Default RCP 8.5 cumulative
 % Extract FCH4 data for our two 30 year time periods and assemble the data
 % from sept to june in order to cover the snow down period, and accumulate.
 
@@ -935,7 +948,7 @@ xlim([0 300])
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except p1 p2
-cd ../sturm/h0
+cd ../../sturm/'q10 1.5 psimin -2'/h0
 % SWE2100 = extractvar('H2OSNO','rcp85');
 CaseList=dir('CORDEX_*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -984,7 +997,8 @@ TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
 FCH42100=[TIME_YM 24*3600*1000*FCH4];
 FCH4withsnow = SWEnew1.*FCH42100(:,4:30);
 FCH4withsnow = [TIME_YM FCH4withsnow];
-%% Sturm RCP 8.5 cumulative
+
+% Sturm RCP 8.5 cumulative
 indicestoget=find(FCH4withsnow(:,1) >= 2016 & FCH4withsnow(:,1) <= 2046);
 FCH420162046=FCH4withsnow(indicestoget,:);
 c=0;
@@ -1060,8 +1074,17 @@ hold on
 ylim([0 1.5])
 xlim([0 300])
 xlabel('Days since 1^{st} Sep')
+%% plot options
+annotation('textbox', [0.430573933838182 0.869630549190156 0.0329015544041451 0.0536062378167641], 'String', 'a', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.875316859306496 0.869630549190156 0.0334196891191709 0.0536062378167641], 'String', 'b', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.436448784376245 0.396297215856823 0.0329015544041451 0.053606237816764], 'String', 'c', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.875316859306496 0.396297215856823 0.0334196891191711 0.0536062378167641], 'String', 'd', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
 %% save plot
-set(gcf, 'Position', [100 200 600 450]);
+set(gcf, 'Position', [100 200 800 600]);
+fontsize(15,'points')
+legendObj = findobj(gcf, 'Type', 'Legend');
+fs=8;
+set(legendObj, 'FontSize', fs);
 cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
 % cd C:/Users/jadru/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/          
 exportgraphics(gcf, "cumu.jpg", "Resolution",300)

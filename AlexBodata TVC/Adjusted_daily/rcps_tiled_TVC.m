@@ -139,7 +139,7 @@ xlim([1 12])
 ylim([-30 30])
 yline(0, '--')
 leg = legend([int1990 int2060], {'2016-2046', '2066-2096'}, Location="northwest");
-set(leg, "box", "off")
+% set(leg, "box", "off")
 set(gca, "FontSize",10);
 set(gca, 'xtick',1:1:24, 'XTickLabels',[])
 ylabel("Air Temperature (^{o}C)")
