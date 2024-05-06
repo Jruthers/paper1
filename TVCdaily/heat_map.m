@@ -1,6 +1,6 @@
 %% default rcp45 present 
 close all
-clear
+clearvars
 %change into the directory containing soil data and extract into new var
 cd C:\Users\w22026593\'OneDrive - Northumbria University - Production Azure AD'\Documents\MATLAB\TVCdaily\'q10 1.5 psimin -2'\h0
 % cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h1/

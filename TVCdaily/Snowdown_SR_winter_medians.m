@@ -1,7 +1,8 @@
 %% SR RCP4.5 only
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
-clear all
+close all
+clearvars
 cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h0/
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX_Default_CORDEX*rcp45*');
@@ -87,15 +88,14 @@ SWEperc75 = prctile(winterSR, 75,2);
 % winter85.Position=[100 20 800 400]
 tiledlayout(2,2, "TileSpacing","compact")
 nexttile
-% hold on
-% SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
-% SWEY = [SWEperc25', fliplr(SWEperc75')];
-% f = fill(SWEX, SWEY, 'blue', "FaceAlpha", 0.2, "LineStyle", "none");
+hold on
+SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
+SWEY = [SWEperc25', fliplr(SWEperc75')];
+f = fill(SWEX, SWEY, 'blue', "FaceAlpha", 0.2, "LineStyle", "none");
 hold on
 default = plot(medianSWE,'blue');
 box on
 xticks(1:10:85)
-xticklabels(UNIQUE_YR(1:10:85,1))
 xlim([0 84])
 ylim([0 0.6])
 ylabeltext = ({'CO_2 flux', 'to atmosphere (gC/m^2/day)'});
@@ -153,7 +153,7 @@ TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
 SR2100=[TIME_YM 24*3600*SR];
 SRwithsnow = SWEnew1.*SR2100(:,4:9);
 SRwithsnow = [TIME_YM SRwithsnow];
-Soilresp1 = SRwithsnow(:,4:30)
+Soilresp1 = SRwithsnow(:,4:9);
 % Isolate the winter period SR, here sept(9) to july(7) covers the winter
 % period. There will be some overlap but values will just be NANs and so will be excluded.
 UNIQUE_YR=unique(TIME_YM(:,1));
@@ -186,16 +186,17 @@ SWEperc75 = prctile(winterSR, 75,2);
 
 % plot
 hold on
-% SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
-% SWEY = [SWEperc25', fliplr(SWEperc75')];
-% f = fill(SWEX, SWEY, 'red', "FaceAlpha", 0.2, "LineStyle", "none");
+SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
+SWEY = [SWEperc25', fliplr(SWEperc75')];
+f = fill(SWEX, SWEY, 'red', "FaceAlpha", 0.2, "LineStyle", "none");
 hold on
 sturm = plot(medianSWE,'red');
 box on
 % plot options
 legend([default, sturm],"CORDEX-Jordan", "CORDEX-Sturm", Location="northwest", FontSize=7)
 xticks(1:10:85)
-xticklabels(UNIQUE_YR(1:10:85,1))
+xticklabels([])
+xlim([1 84])
 ylim([0 0.6])
 title('RCP 4.5')
 fontsize(15,'points')
@@ -287,14 +288,13 @@ nexttile
 % winter85 = figure()
 % winter85.Position=[100 20 800 400]
 hold on
-% SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
-% SWEY = [SWEperc25', fliplr(SWEperc75')];
-% f = fill(SWEX, SWEY, 'blue', "FaceAlpha", 0.2, "LineStyle", "none");
+SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
+SWEY = [SWEperc25', fliplr(SWEperc75')];
+f = fill(SWEX, SWEY, 'blue', "FaceAlpha", 0.2, "LineStyle", "none");
 hold on
 plot(medianSWE,'blue')
 box on
-xticks([1:10:85])
-xticklabels(UNIQUE_YR([1:10:85],1))
+xticks(1:10:85)
 ylim([0 0.6])
 fontsize(15,'points')
 %% SR RCP8.5 only
@@ -382,15 +382,15 @@ SWEperc75 = prctile(winterSR, 75,2);
 
 % plot options
 hold on
-% SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
-% SWEY = [SWEperc25', fliplr(SWEperc75')];
-% f = fill(SWEX, SWEY, 'red', "FaceAlpha", 0.2, "LineStyle", "none");
+SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
+SWEY = [SWEperc25', fliplr(SWEperc75')];
+f = fill(SWEX, SWEY, 'red', "FaceAlpha", 0.2, "LineStyle", "none");
 hold on
 plot(medianSWE,'red')
 box on
-xticks([1:10:85])
-xticklabels(UNIQUE_YR([1:10:85],1))
-xlim([0 84])
+xticks(1:10:85)
+xticklabels([])
+xlim([1 84])
 ylim([0 0.6])
 title('RCP 8.5')
 fontsize(15,'points')
@@ -491,9 +491,9 @@ SWEperc75 = prctile(winterFCH4, 75,2);
 % tiledlayout(1,2, "TileSpacing","compact")
 nexttile
 hold on
-% SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
-% SWEY = [SWEperc25', fliplr(SWEperc75')];
-% f = fill(SWEX, SWEY, 'blue', "FaceAlpha", 0.2, "LineStyle", "none");
+SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
+SWEY = [SWEperc25', fliplr(SWEperc75')];
+f = fill(SWEX, SWEY, 'blue', "FaceAlpha", 0.2, "LineStyle", "none");
 hold on
 default = plot(medianSWE,'blue');
 box on
@@ -590,9 +590,9 @@ SWEperc75 = prctile(winterFCH4, 75,2);
 
 % plot
 hold on
-% SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
-% SWEY = [SWEperc25', fliplr(SWEperc75')];
-% f = fill(SWEX, SWEY, 'red', "FaceAlpha", 0.2, "LineStyle", "none");
+SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
+SWEY = [SWEperc25', fliplr(SWEperc75')];
+f = fill(SWEX, SWEY, 'red', "FaceAlpha", 0.2, "LineStyle", "none");
 hold on
 sturm = plot(medianSWE,'red');
 box on
@@ -600,6 +600,7 @@ box on
 % legend([default, sturm],"Default", "Sturm", Location="northeast", FontSize=7)
 xticks(1:10:85)
 xticklabels(UNIQUE_YR(1:10:85,1))
+xlim([1 84])
 % title('RCP4.5')
 fontsize(15,'points')
 
@@ -691,9 +692,9 @@ nexttile
 % winter85 = figure()
 % winter85.Position=[100 20 800 400]
 hold on
-% SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
-% SWEY = [SWEperc25', fliplr(SWEperc75')];
-% f = fill(SWEX, SWEY, 'blue', "FaceAlpha", 0.2, "LineStyle", "none");
+SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
+SWEY = [SWEperc25', fliplr(SWEperc75')];
+f = fill(SWEX, SWEY, 'blue', "FaceAlpha", 0.2, "LineStyle", "none");
 hold on
 plot(medianSWE,'blue')
 box on
@@ -785,15 +786,15 @@ SWEperc75 = prctile(winterFCH4, 75,2);
 
 % plot options
 hold on
-% SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
-% SWEY = [SWEperc25', fliplr(SWEperc75')];
-% f = fill(SWEX, SWEY, 'red', "FaceAlpha", 0.2, "LineStyle", "none");
+SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
+SWEY = [SWEperc25', fliplr(SWEperc75')];
+f = fill(SWEX, SWEY, 'red', "FaceAlpha", 0.2, "LineStyle", "none");
 hold on
 plot(medianSWE,'red')
 box on
 xticks([1:10:85])
 xticklabels(UNIQUE_YR([1:10:85],1))
-xlim([0 84])
+xlim([1 84])
 ylim([0 0.015])
 % title('RCP8.5')
 % ylabeltext = ({'CH_4 flux', 'to atmosphere (gC/m^2/day)'});
