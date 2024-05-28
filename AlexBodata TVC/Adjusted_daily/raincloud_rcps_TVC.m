@@ -1,5 +1,8 @@
 %% ISOLATE RCP4.5
-clear all
+close all
+clearvars
+cd D:/MATLAB/'AlexBodata TVC'/Adjusted_daily/
+
 FilesList=dir('mbcn.CA-TVC.NAM-*rcp45*.csv'); % makes a list of all ensemble member files
 
 for j=1:length(FilesList)  % cycles through each  file in the filelist
@@ -227,7 +230,7 @@ end
 
 %inset
 hold on
-insetPosition = [.34 .55 .05 .1];
+insetPosition = [.34 .54 .05 .1];
 insetAxis2 = axes('Position', insetPosition) ;
 box on
 boxplot(May,{Months_new,Year_new}, "Symbol", '', "ColorGroup", Months_new)
@@ -712,6 +715,17 @@ ylim([0 0.25])
 % Maylab = ylabel('Frequency');
 % Maylab.Position(2) = 0.125; % change vertical position of ylabel
 % Maylab.Position(1) = -29;
+
+% JR h{1}, onl line 54, contains the information to make plot the area of the graph.
+temperatures=h2{1}. XData; % JR: temperature values
+freq=h2{1}. YData;                % JR: frequency
+areatotal=trapz(temperatures,freq); % This is equal to 1
+temperature_range=[0,20]; % over which range do you want to calculate probability ?
+xindex=find(temperatures > temperature_range(1) &  temperatures < temperature_range(2)); % find indices in the dataset
+areatotal_specific=trapz(temperatures(xindex),freq(xindex)); % This is the area under the graph encapusalted by this range.
+% So, we can say that in April, the probabilty of a temperature between -12
+% and -8 degrees is 0.21. 
+%JR
 %% total precip inset may
 clear Months_new
 clear Year_new
@@ -931,6 +945,17 @@ ylim([0 0.25])
 Octlab = xlabel('Mean Monthly Temperature (^{o}C)');
 Octlab.Position(2) = -0.05; % change vertical position of ylabel
 Octlab.Position(1) = -29;
+
+% JR h{1}, onl line 54, contains the information to make plot the area of the graph.
+temperatures=h2{1}. XData; % JR: temperature values
+freq=h2{1}. YData;                % JR: frequency
+areatotal=trapz(temperatures,freq); % This is equal to 1
+temperature_range=[0,20]; % over which range do you want to calculate probability ?
+xindex=find(temperatures > temperature_range(1) &  temperatures < temperature_range(2)); % find indices in the dataset
+areatotal_specific=trapz(temperatures(xindex),freq(xindex)); % This is the area under the graph encapusalted by this range.
+% So, we can say that in April, the probabilty of a temperature between -12
+% and -8 degrees is 0.21. 
+%JR
 % exportgraphics(T,'Tiled2x2.jpg','Resolution',300)
 %% Oct total precip inset
 clear Months_new
@@ -1014,15 +1039,15 @@ set(all_text_objects, 'FontSize', 13);
 set(subs, 'FontSize', 12);
 
 %% Plot options
-annotation('textbox', [0.384375 0.77381231451366 0.1 0.1], 'String', 'a', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
-annotation('textbox', [0.384375 0.57681231451366, 0.1, 0.1], 'String', 'c', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
-annotation('textbox', [0.384375, 0.37, 0.1, 0.1], 'String', 'e', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
-annotation('textbox', [0.384375, 0.175, 0.1, 0.1], 'String', 'g', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.382375 0.77381231451366 0.1 0.1], 'String', '(a)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.382375 0.57081231451366, 0.1, 0.1], 'String', '(c)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.382375, 0.37, 0.1, 0.1], 'String', '(e)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.382375, 0.174, 0.1, 0.1], 'String', '(g)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
 
-annotation('textbox',  [0.624479166666667 0.77381231451366 0.1 0.1], 'String', 'b', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
-annotation('textbox', [0.624479166666667 0.57081231451366, 0.1, 0.1], 'String', 'd', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
-annotation('textbox', [0.624479166666667, 0.37, 0.1, 0.1], 'String', 'f', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
-annotation('textbox', [0.624479166666667, 0.170, 0.1, 0.1], 'String', 'h', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.622479166666667 0.77381231451366 0.1 0.1], 'String', '(b)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.622479166666667 0.57081231451366, 0.1, 0.1], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.622479166666667, 0.37, 0.1, 0.1], 'String', '(f)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.622479166666667, 0.174, 0.1, 0.1], 'String', '(h)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
 %% Save figure
 % cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'Alex and bo forcing data'/TVC/
 cd C:\Users\w22026593\'OneDrive - Northumbria University - Production Azure AD'\Documents\Figures\'Alex and bo forcing data'\TVC

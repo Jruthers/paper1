@@ -3,9 +3,8 @@
 % into a new variable with matlab timestamps (SWE2100)
 close all
 clearvars
-cd /Volumes/JR_SSD/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h0/
-% cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h0/
-% cd D:\MATLAB\TVCdaily\h0
+% cd /Volumes/JR_SSD/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h0/
+navigateToDirectory('\1.5 -2\h0')
 CaseList=dir('CORDEX_Default_CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -98,7 +97,7 @@ default = plot(medianSWE,'blue');
 box on
 xticks(1:10:85)
 xlim([0 84])
-ylim([0 0.6])
+ylim([0 1])
 ylabeltext = ({'CO_2 flux', 'to atmosphere (gC/m^2/day)'});
 ylabel(ylabeltext)
 fontsize(15,'points')
@@ -106,7 +105,8 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except default
-cd ../../sturm/'q10 1.5 psimin -2'/h0
+% cd ../../sturm/'q10 1.5 psimin -2'/h0
+navigateToDirectory('\sturm\1.5 -2\h0')
 CaseList=dir('CORDEX_STURM_CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -190,22 +190,45 @@ hold on
 SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
 SWEY = [SWEperc25', fliplr(SWEperc75')];
 f = fill(SWEX, SWEY, 'red', "FaceAlpha", 0.2, "LineStyle", "none");
+
+%linear fit
 hold on
 sturm = plot(medianSWE,'red');
 box on
+x1=[1:84];
+p = polyfit(x1,medianSWE,1);
+x_fit = linspace(min(x1), max(x1), 84)';
+y_fit = polyval(p, x_fit);
+% Plot the linear fit
+hold on
+linear = plot(x_fit, y_fit, '-');
+
+yresid = medianSWE - y_fit;
+SSredid = sum(yresid.^2);
+SStotal = (length(medianSWE)-1) * var(medianSWE);
+rsq = 1 - SSredid/SStotal;
+
+slope = p(1);
+intercept = p(2);
+
+text(0.1, 0.5, ['y = ', num2str(slope), 'x + ', num2str(intercept)]);
+% text(text_position_x, text_position_y, ['R^2 = ', num2str(rsq)], 'FontSize', 12, 'FontWeight', 'bold');
+text(0.1, 0.5, ['R^2 = ', num2str(rsq)], 'FontSize', 12);
+
 % plot options
-legend([default, sturm],"CORDEX-Jordan", "CORDEX-Sturm", Location="northwest", FontSize=7)
+legend([default, sturm, linear],"CORDEX-Jordan", "CORDEX-Sturm", "Sturm Linear", Location="northwest", FontSize=7)
 xticks(1:10:85)
 xticklabels([])
 xlim([1 84])
-ylim([0 0.6])
+ylim([0 1])
 title('RCP 4.5')
 fontsize(15,'points')
 %% SR RCP8.5 only
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except Soilresp1
-cd ../../../'q10 1.5 psimin -2'/h0
+% cd ../../../'q10 1.5 psimin -2'/h0
+navigateToDirectory('\1.5 -2\h0')
 CaseList=dir('CORDEX_Default_CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -296,13 +319,14 @@ hold on
 plot(medianSWE,'blue')
 box on
 xticks(1:10:85)
-ylim([0 0.6])
+ylim([0 1])
 fontsize(15,'points')
 %% SR RCP8.5 only
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except Soilresp1
-cd ../../sturm/'q10 1.5 psimin -2'/h0
+% cd ../../sturm/'q10 1.5 psimin -2'/h0
+navigateToDirectory('\sturm\1.5 -2\h0')
 CaseList=dir('CORDEX_STURM_CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -389,10 +413,33 @@ f = fill(SWEX, SWEY, 'red', "FaceAlpha", 0.2, "LineStyle", "none");
 hold on
 plot(medianSWE,'red')
 box on
+x1=[1:84];
+p = polyfit(x1,medianSWE,1);
+x_fit = linspace(min(x1), max(x1), 84)';
+y_fit = polyval(p, x_fit);
+% Plot the linear fit
+hold on
+linear = plot(x_fit, y_fit, '-');
+
+yresid = medianSWE - y_fit;
+SSredid = sum(yresid.^2);
+SStotal = (length(medianSWE)-1) * var(medianSWE);
+rsq = 1 - SSredid/SStotal;
+
+slope = p(1);
+intercept = p(2);
+
+% Display the linear equation
+linear_equation = ['y = ', num2str(slope), 'x + ', num2str(intercept)];
+
+% text(text_position_x, text_position_y, ['R^2 = ', num2str(rsq)], 'FontSize', 12, 'FontWeight', 'bold');
+text(0.1, 0.5, ['R^2 = ', num2str(rsq)], 'FontSize', 12);
+text(0.1, 0.5, ['y = ', num2str(slope), 'x + ', num2str(intercept)]);
+
 xticks(1:10:85)
 xticklabels([])
 xlim([1 84])
-ylim([0 0.6])
+ylim([0 1])
 title('RCP 8.5')
 fontsize(15,'points')
 
@@ -405,7 +452,8 @@ kstest2(x1,x2)
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h0
+% cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h0
+navigateToDirectory('\1.5 -2\h0')
 % cd D:\MATLAB\TVCdaily\h0
 % cd h0
 CaseList=dir('CORDEX_Default_CORDEX*rcp45*');
@@ -501,7 +549,7 @@ box on
 xticks(1:10:85)
 xticklabels(UNIQUE_YR(1:10:85,1))
 xlim([0 84])
-ylim([0 0.015])
+ylim([0 0.02])
 % title('RCP8.5')
 ylabeltext = ({'CH_4 flux', 'to atmosphere (gC/m^2/day)'});
 ylabel(ylabeltext)
@@ -510,7 +558,8 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except default
-cd ../../sturm/'q10 1.5 psimin -2'/h0
+% cd ../../sturm/'q10 1.5 psimin -2'/h0
+navigateToDirectory('\sturm\1.5 -2\h0')
 CaseList=dir('CORDEX_STURM_CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -609,7 +658,8 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd ../../../'q10 1.5 psimin -2'/h0
+% cd ../../../'q10 1.5 psimin -2'/h0
+navigateToDirectory('\1.5 -2\h0')
 CaseList=dir('CORDEX_Default_CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -657,6 +707,7 @@ TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
 FCH42100=[TIME_YM 24*3600*1000*FCH4];
 FCH4withsnow = SWEnew1.*FCH42100(:,4:30);
 FCH4withsnow = [TIME_YM FCH4withsnow];
+FCH41 = FCH4withsnow(:,4:30);
 
 % Isolate the winter period FCH4, here sept(9) to july(7) covers the winter
 % period. There will be some overlap but values will just be NANs and so will be excluded.
@@ -705,8 +756,9 @@ fontsize(15,'points')
 %% FCH4 RCP8.5 only
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
-clear all
-cd ../../sturm/'q10 1.5 psimin -2'/h0
+clearvars -except FCH41
+% cd ../../sturm/'q10 1.5 psimin -2'/h0
+navigateToDirectory('\sturm\1.5 -2\h0')
 CaseList=dir('CORDEX_STURM_CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -736,7 +788,7 @@ totsnowon2100=[TIME_YM totsnowon];
 % FCH4 rcp8.5
 % create a variable containing FCH4 data to 2100 and apply snow logic to get
 % FCH4 only when snow is on the ground
-clearvars -except SWEnew1
+clearvars -except SWEnew1 FCH41
 cd ../h2
 CaseList=dir('CORDEX_STURM*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -754,6 +806,7 @@ TIME_YM=str2num(datestr(TIME,'yyyy mm dd'));
 FCH42100=[TIME_YM 24*3600*1000*FCH4];
 FCH4withsnow = SWEnew1.*FCH42100(:,4:30);
 FCH4withsnow = [TIME_YM FCH4withsnow];
+FCH42 = FCH4withsnow(:,4:30);
 
 % Isolate the winter period FCH4, here sept(9) to july(7) covers the winter
 % period. There will be some overlap but values will just be NANs and so will be excluded.
@@ -796,19 +849,24 @@ box on
 xticks([1:10:85])
 xticklabels(UNIQUE_YR([1:10:85],1))
 xlim([1 84])
-ylim([0 0.015])
+ylim([0 0.02])
 % title('RCP8.5')
 % ylabeltext = ({'CH_4 flux', 'to atmosphere (gC/m^2/day)'});
 % ylabel(ylabeltext)
 fontsize(15,'points')
 
+x1 = reshape(FCH41,[],1);
+x2 = reshape(FCH42, [],1);
+kstest2(x1,x2)
+[h,p,ks2stat] = kstest2(x1,x2)
 %% letters
 annotation('textbox', [0.452392115656364 0.862744983161598 0.0329015544041452 0.0536062378167641], 'String', 'a', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
 annotation('textbox', [0.88895322294286 0.862744983161598 0.0334196891191709 0.0536062378167641], 'String', 'b', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
 annotation('textbox', [0.452392115656364 0.418963882523489 0.0329015544041451 0.053606237816764], 'String', 'c', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
 annotation('textbox', [0.88895322294286 0.418963882523489 0.0334196891191711 0.053606237816764], 'String', 'd', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
 %% save plot
-set(gcf, 'Position', [100 200 1100 450]);
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
+set(gcf, 'Position', [271 310 1375 608]);
+% cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
 % cd C:/Users/jadru/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/proposal
+cd C:\Users\w22026593\'OneDrive - Northumbria University - Production Azure AD'\Documents\Figures\'CLM STURM'\
 exportgraphics(gcf, "sturm_vs_default_1.jpg", "Resolution",300)

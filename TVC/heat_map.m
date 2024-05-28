@@ -15,12 +15,12 @@ end
 end
 %% default rcp45 present 
 CaseList=dir('CORDEX_*rcp45*');
-internalfilestruct='\lnd\hist\'; 
+internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
 for l=1:25 %loops through 25 soil layers
 for i=1:length(CaseList) %loops through ensemble members
 filepath=strcat(CaseList(i).name,internalfilestruct);
-ncname=dir(strcat(filepath,"\*2016-01-01*.nc"));
+ncname=dir(strcat(filepath,"/*2016-01-01*.nc"));
 variable=ncread(strcat(filepath,ncname.name),'TSOI');
 variable = squeeze(variable); % if variable is 3D convert to 2D with squeeze
 GT10(:,i)=(variable(l,:));
@@ -76,7 +76,7 @@ hold on
 c2 = contour([1:366],(y(1:21)),(GTmedian1depth_P1(1:21,:)),[-0.75 -0.75], '--k', 'LineWidth', 2);
 
 %other plot options
-xlim([0 300])
+xlim([0 366])
 ylim([-11 0])
 title('2016-2046', 'FontWeight','normal');
 ytext = {'Soil Depth (m)'};
@@ -84,7 +84,8 @@ ylabel(ytext);
 
 %% default rcp45 future
 clearvars -except GTmedian1depth_P1
-cd D:/MATLAB/TVC/'1.5 -2'/h1/
+cd /Volumes/JR_SSD/MATLAB/TVC/'1.5 -2'/h1/
+% cd D:/MATLAB/TVC/'1.5 -2'/h1/
 % cd E:/MATLAB/TVCdaily/h1
 CaseList=dir('CORDEX_*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -143,7 +144,7 @@ hold on
 c1 = contour([1:366],(y(1:21)),(GTmedian1depth_F(1:21,:)),[0.75 0.75], '-k', 'LineWidth', 2);
 hold on
 c2 = contour([1:366],(y(1:21)),(GTmedian1depth_F(1:21,:)),[-0.75 -0.75], '--k', 'LineWidth', 2);
-xlim([0 300])
+xlim([0 366])
 ylim([-11 0])
 % x_low = c1(1, 2:end);
 % y_low = c1(2, 2:end);
@@ -157,7 +158,8 @@ title('2066-2096', 'FontWeight','normal')
 
 %% sturm rcp45 present 
 clearvars -except GTmedian1depth_P1
-cd D:/MATLAB/TVC/sturm/'1.5 -2'/h1
+cd /Volumes/JR_SSD/MATLAB/TVC/sturm/'1.5 -2'/h1/
+% cd D:/MATLAB/TVC/sturm/'1.5 -2'/h1
 % cd E:/MATLAB/TVCdaily/sturm/h1
 CaseList=dir('CORDEX_*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -215,7 +217,7 @@ hold on
 c1 = contour([1:366],(y(1:21)),(GTmedian1depth_P(1:21,:)),[0.75 0.75], '-k', 'LineWidth', 2);
 hold on
 c2 = contour([1:366],(y(1:21)),(GTmedian1depth_P(1:21,:)),[-0.75 -0.75], '--k', 'LineWidth', 2);
-xlim([0 300])
+xlim([0 366])
 ylim([-11 0])
 
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
@@ -224,7 +226,8 @@ xlabel('Julian Day')
 
 %% sturm rcp45 future
 clearvars -except GTmedian1depth_P1
-cd D:/MATLAB/TVC/sturm/'1.5 -2'/h1
+cd /Volumes/JR_SSD/MATLAB/TVC/sturm/'1.5 -2'/h1/
+% cd D:/MATLAB/TVC/sturm/'1.5 -2'/h1
 % cd E:/MATLAB/TVCdaily/sturm/h1
 CaseList=dir('CORDEX_*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -283,7 +286,7 @@ hold on
 c1 = contour([1:366],(y(1:21)),(GTmedian1depth_F(1:21,:)),[0.75 0.75], '-k', 'LineWidth', 2);
 hold on
 c2 = contour([1:366],(y(1:21)),(GTmedian1depth_F(1:21,:)),[-0.75 -0.75], '--k', 'LineWidth', 2);
-xlim([0 300])
+xlim([0 366])
 ylim([-11 0])
 
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
@@ -292,7 +295,8 @@ xlabel('Julian Day')
 
 %% default rcp85 present 
 clearvars -except GTmedian1depth_P1
-cd D:\MATLAB\TVC\'1.5 -2'\h1
+cd /Volumes/JR_SSD/MATLAB/TVC/'1.5 -2'/h1/
+% cd D:\MATLAB\TVC\'1.5 -2'\h1
 % cd E:/MATLAB/TVCdaily/h1
 CaseList=dir('CORDEX_*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -350,7 +354,7 @@ hold on
 c1 = contour([1:366],(y(1:21)),(GTmedian1depth_P2(1:21,:)),[0.75 0.75], '-k', 'LineWidth', 2);
 hold on
 c2 = contour([1:366],(y(1:21)),(GTmedian1depth_P2(1:21,:)),[-0.75 -0.75], '--k', 'LineWidth', 2);
-xlim([0 300])
+xlim([0 366])
 ylim([-11 0])
 
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
@@ -358,7 +362,8 @@ title('2016-2046', 'FontWeight','normal');
 % ylabel('Soil Depth (m)')
 %% default rcp85 future
 clearvars -except GTmedian1depth_P1
-cd D:\MATLAB\TVC\'1.5 -2'\h1
+cd /Volumes/JR_SSD/MATLAB/TVC/'1.5 -2'/h1/
+% cd D:\MATLAB\TVC\'1.5 -2'\h1
 % cd E:/MATLAB/TVCdaily/h1
 CaseList=dir('CORDEX_*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -417,14 +422,15 @@ hold on
 c1 = contour([1:366],(y(1:21)),(GTmedian1depth_F(1:21,:)),[0.75 0.75], '-k', 'LineWidth', 2);
 hold on
 c2 = contour([1:366],(y(1:21)),(GTmedian1depth_F(1:21,:)),[-0.75 -0.75], '--k', 'LineWidth', 2);
-xlim([0 300])
+xlim([0 366])
 ylim([-11 0])
 
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
 title('2066-2096', 'FontWeight','normal')
 %% sturm rcp85 present 
 clearvars -except GTmedian1depth_P1
-cd D:/MATLAB/TVC/sturm/'1.5 -2'/h1
+cd /Volumes/JR_SSD/MATLAB/TVC/sturm/'1.5 -2'/h1/
+% cd D:/MATLAB/TVC/sturm/'1.5 -2'/h1
 % cd E:/MATLAB/TVCdaily/sturm/h1
 CaseList=dir('CORDEX_*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -482,7 +488,7 @@ hold on
 c1 = contour([1:366],(y(1:21)),(GTmedian1depth_P(1:21,:)),[0.75 0.75], '-k', 'LineWidth', 2);
 hold on
 c2 = contour([1:366],(y(1:21)),(GTmedian1depth_P(1:21,:)),[-0.75 -0.75], '--k', 'LineWidth', 2);
-xlim([0 300])
+xlim([0 366])
 ylim([-11 0])
 
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
@@ -490,7 +496,8 @@ xlabel('Julian Day')
 
 %% Sturm rcp85 future
 clearvars -except GTmedian1depth_P1
-cd D:/MATLAB/TVC/sturm/'1.5 -2'/h1
+cd /Volumes/JR_SSD/MATLAB/TVC/sturm/'1.5 -2'/h1/
+% cd D:/MATLAB/TVC/sturm/'1.5 -2'/h1
 % cd E:/MATLAB/TVCdaily/sturm/h1
 CaseList=dir('CORDEX_*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -548,7 +555,7 @@ hold on
 c1 = contour([1:366],(y(1:21)),(GTmedian1depth_F(1:21,:)),[0.75 0.75], '-k', 'LineWidth', 2);
 hold on
 c2 = contour([1:366],(y(1:21)),(GTmedian1depth_F(1:21,:)),[-0.75 -0.75], '--k', 'LineWidth', 2);
-xlim([0 300])
+xlim([0 366])
 ylim([-11 0])
 
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);

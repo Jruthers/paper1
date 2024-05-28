@@ -1,5 +1,6 @@
 clear all
-cd /Users/johnnyrutherford/Library/CloudStorage/OneDrive-NorthumbriaUniversity-ProductionAzureAD/Documents/MATLAB/'AlexBodata TVC'/Adjusted_daily/
+cd D:/MATLAB/'AlexBodata TVC'/Adjusted_daily/
+% cd /Users/johnnyrutherford/Library/CloudStorage/OneDrive-NorthumbriaUniversity-ProductionAzureAD/Documents/MATLAB/'AlexBodata TVC'/Adjusted_daily/
 % addpath('mbcn-na-cordex_daily-CA-HPC/'); % adds the directory with all the files in
 FilesList=dir('mbcn.CA-TVC.NAM-*rcp45*.csv'); % makes a list of all ensemble member files
 
@@ -71,7 +72,6 @@ perc251990 = prctile(Precip20162046(:,1:12),25);
 perc752060 = prctile(Precip20662096(:,1:12),75);
 perc252060 = prctile(Precip20662096(:,1:12),25);
 hold on
-figure(Position=[500 500 750 600])
 tiledlayout(2,2, "TileSpacing","compact")
 nexttile(3)
 % create more increments between 1-12
@@ -331,13 +331,14 @@ xtickangle(0)
 % set(leg, "box", "off")
 rcp85temp=gcf;
 %% Annotations
-annotation('textbox', [0.45, 0.81, 0.1, 0.1], 'String', 'a', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
-annotation('textbox', [0.87, 0.81, 0.1, 0.1], 'String', 'b', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
-annotation('textbox', [0.45, 0.37, 0.1, 0.1], 'String', 'c', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
-annotation('textbox', [0.87, 0.37, 0.1, 0.1], 'String', 'd', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+set(gcf, 'Position', [271 310 800 608]);
+annotation('textbox', [0.44, 0.82, 0.1, 0.1], 'String', '(a)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.86, 0.82, 0.1, 0.1], 'String', '(b)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.44, 0.38, 0.1, 0.1], 'String', '(c)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.86, 0.38, 0.1, 0.1], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
 %% Save figure
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'Alex and bo forcing data'/TVC/
-% cd C:/Users/jadru/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'Alex and bo forcing data'/TVC/
+% cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'Alex and bo forcing data'/TVC/
+cd C:/Users/w22026593/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'Alex and bo forcing data'/TVC/
 exportgraphics(gcf, "rcps_tiled.jpg", "Resolution",300)
 %% Precip Ks test
 years1990 = Precip20162046;

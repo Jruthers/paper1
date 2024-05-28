@@ -4,9 +4,7 @@
 % into a new variable with matlab timestamps (SWE2100)
 close all
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h0
-
-% cd D:\MATLAB\TVCdaily\h0
+cd D:\MATLAB\TVC\'1.5 -2'\h0\
 CaseList=dir('CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -90,15 +88,14 @@ default = plot(medianSWE,'blue');
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except medianSWE
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 7.5 psimin -2'/h0
-
+cd D:\MATLAB\TVC\'7.5 -2'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp45*');
-internalfilestruct='/lnd/hist/'; 
+internalfilestruct='\lnd\hist\'; 
 variable=nan(1020,length(CaseList));
 for i=1:length(CaseList)
 filepath=strcat(CaseList(i).name,internalfilestruct);
-ncname=dir(strcat(filepath,"/*2016-01-01*.nc"));
+ncname=dir(strcat(filepath,"\*2016-01-01*.nc"));
 variable=ncread(strcat(filepath,ncname.name),'H2OSNO');
 SWE(:,i)=(variable);
 end
@@ -178,8 +175,8 @@ f = fill(SWEX, SWEY, 'blue', "FaceAlpha", 0.2, "LineStyle", "none");
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -20'/h0
-% cd D:\MATLAB\TVCdaily\h0
+cd D:\MATLAB\TVC\'1.5 -20'\h0\
+
 CaseList=dir('CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -257,8 +254,7 @@ default = plot(medianSWE1,'blue');
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except medianSWE1
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 7.5 psimin -20'/h0
-% cd D:\MATLAB\TVCdaily\h0
+cd D:\MATLAB\TVC\'7.5 -20'\h0\
 CaseList=dir('CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -339,8 +335,7 @@ f = fill(SWEX, SWEY, 'blue', "FaceAlpha", 0.2, "LineStyle", "none");
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/sturm/'q10 1.5 psimin -2'/h0
-% cd D:\MATLAB\TVCdaily\h0
+cd D:\MATLAB\TVC\sturm\'1.5 -2'\h0\
 CaseList=dir('CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -418,8 +413,8 @@ default = plot(medianSWE1,'r');
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except medianSWE1
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/sturm/'q10 7.5 psimin -2'/h0/
-% cd D:\MATLAB\TVCdaily\h0
+cd D:\MATLAB\TVC\sturm\'7.5 -2'\h0\
+cd D:\MATLAB\TVC\sturm\'7.5 -2'\h0\
 CaseList=dir('CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -499,8 +494,8 @@ f = fill(SWEX, SWEY, 'r', "FaceAlpha", 0.2, "LineStyle", "none");
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/sturm/'q10 1.5 psimin -20'/h0
-% cd D:\MATLAB\TVCdaily\h0
+cd D:\MATLAB\TVC\sturm\'1.5 -20'\h0\
+cd D:\MATLAB\TVC\sturm\'1.5 -20'\h0\
 CaseList=dir('CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -580,8 +575,8 @@ default = plot(medianSWE1,'red');
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except medianSWE1
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/sturm/'q10 7.5 psimin -20'/h0
-% cd D:\MATLAB\TVCdaily\h0
+cd D:\MATLAB\TVC\sturm\'7.5 -20'\h0\
+cd D:\MATLAB\TVC\sturm\'7.5 -20'\h0\
 CaseList=dir('CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -675,7 +670,7 @@ fprintf("fig1 finished")
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h0
+cd D:\MATLAB\TVC\'1.5 -2'\h0\
 
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp85*');
@@ -755,7 +750,7 @@ default = plot(medianSWE,'blue');
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except medianSWE
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 7.5 psimin -2'/h0
+cd D:\MATLAB\TVC\'7.5 -2'\h0\
 
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp85*');
@@ -839,7 +834,7 @@ f = fill(SWEX, SWEY, 'blue', "FaceAlpha", 0.2, "LineStyle", "none");
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -20'/h0
+cd D:\MATLAB\TVC\'1.5 -20'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -919,7 +914,7 @@ default = plot(medianSWE1,'blue');
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except medianSWE1
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 7.5 psimin -20'/h0
+cd D:\MATLAB\TVC\'7.5 -20'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -1003,7 +998,7 @@ f = fill(SWEX, SWEY, 'blue', "FaceAlpha", 0.2, "LineStyle", "none");
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/sturm/'q10 1.5 psimin -2'/h0
+cd D:\MATLAB\TVC\sturm\'1.5 -2'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -1082,7 +1077,7 @@ default = plot(medianSWE1,'r');
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except medianSWE1
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/sturm/'q10 7.5 psimin -2'/h0/
+cd D:\MATLAB\TVC\sturm\'7.5 -2'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -1163,7 +1158,7 @@ f = fill(SWEX, SWEY, 'r', "FaceAlpha", 0.2, "LineStyle", "none");
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/sturm/'q10 1.5 psimin -20'/h0
+cd D:\MATLAB\TVC\sturm\'1.5 -20'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -1244,7 +1239,7 @@ default = plot(medianSWE1,'red');
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except medianSWE1
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/sturm/'q10 7.5 psimin -20'/h0
+cd D:\MATLAB\TVC\sturm\'7.5 -20'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -1336,7 +1331,7 @@ fprintf("fig 2 finished")
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h0
+cd D:\MATLAB\TVC\'1.5 -2'\h0\
 
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp45*');
@@ -1424,7 +1419,7 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except medianSWE
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 7.5 psimin -2'/h0
+cd D:\MATLAB\TVC\'7.5 -2'\h0\
 
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp45*');
@@ -1517,7 +1512,7 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -20'/h0
+cd D:\MATLAB\TVC\'1.5 -20'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -1605,7 +1600,7 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except medianSWE1
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 7.5 psimin -20'/h0
+cd D:\MATLAB\TVC\'7.5 -20'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -1698,7 +1693,7 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/sturm/'q10 1.5 psimin -2'/h0
+cd D:\MATLAB\TVC\sturm\'1.5 -2'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -1782,7 +1777,7 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except medianSWE1
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/sturm/'q10 7.5 psimin -2'/h0/
+cd D:\MATLAB\TVC\sturm\'7.5 -2'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -1870,7 +1865,7 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/sturm/'q10 1.5 psimin -20'/h0
+cd D:\MATLAB\TVC\sturm\'1.5 -20'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -1956,7 +1951,7 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except medianSWE1
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/sturm/'q10 7.5 psimin -20'/h0
+cd D:\MATLAB\TVC\sturm\'7.5 -20'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -2048,7 +2043,7 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -2'/h0
+cd D:\MATLAB\TVC\'1.5 -2'\h0\
 
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp85*');
@@ -2132,7 +2127,7 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except medianSWE
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 7.5 psimin -2'/h0
+cd D:\MATLAB\TVC\'7.5 -2'\h0\
 
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp85*');
@@ -2221,7 +2216,7 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 1.5 psimin -20'/h0
+cd D:\MATLAB\TVC\'1.5 -20'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -2304,7 +2299,7 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except medianSWE1
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/'q10 7.5 psimin -20'/h0
+cd D:\MATLAB\TVC\'7.5 -20'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -2393,7 +2388,7 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/sturm/'q10 1.5 psimin -2'/h0
+cd D:\MATLAB\TVC\sturm\'1.5 -2'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -2475,7 +2470,7 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except medianSWE1
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/sturm/'q10 7.5 psimin -2'/h0/
+cd D:\MATLAB\TVC\sturm\'7.5 -2'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -2561,7 +2556,7 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clear all
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/sturm/'q10 1.5 psimin -20'/h0
+cd D:\MATLAB\TVC\sturm\'1.5 -20'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
@@ -2645,7 +2640,7 @@ fontsize(15,'points')
 % This section extacts SWE data from output files for RCP4.5 and places it
 % into a new variable with matlab timestamps (SWE2100)
 clearvars -except medianSWE1
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/MATLAB/TVCdaily/sturm/'q10 7.5 psimin -20'/h0
+cd D:\MATLAB\TVC\sturm\'7.5 -20'\h0\
 % cd D:\MATLAB\TVCdaily\h0
 CaseList=dir('CORDEX*rcp85*');
 internalfilestruct='/lnd/hist/'; 
