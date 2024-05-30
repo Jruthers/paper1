@@ -9,21 +9,41 @@ The gitrepo should contain 3 folders. Matlab is used to create all the figures a
 - Images
 
 ## CORDEX_TVC
-This folder contains matlab scripts for figures 1 & 2
+This folder contains matlab scripts for figures 1 & 2:
 
-<img src="Images/rcps_tiled.jpg" alt="Figure 1" width="500"/>
+<figure>
+  <img src="Images/rcps_tiled.jpg" alt="Figure 1" width="400"/>
+  <figcaption>Figure 1</figcaption>
+</figure>
 
-<img src="Images/frequency_plot_final.png" alt="Figure 2" width="500"/>
+<figure>
+  <img src="Images/frequency_plot_final.png" alt="Figure 2" width="400"/>
+  <figcaption>Figure 2</figcaption>
+</figure>
 
 ## CLM_TVC
-This folder contains matlab scripts for figures 3-6
+This folder contains matlab scripts for figures 3-6:
 
-<img src="Images/SWE_GT_SL.jpg" alt="Figure 3" width="500"/>
+<figure>
+  <img src="Images/SWE_GT_SL.jpg" alt="Figure 3" width="400"/>
+  <figcaption>Figure 3</figcaption>
+</figure>
 
-<img src="Images/heat_map.jpg" alt="Figure 4" width="500"/>
+<figure>
+  <img src="Images/heat_map.jpg" alt="Figure 4" width="400"/>
+  <figcaption>Figure 4</figcaption>
+</figure>
 
-<img src="Images/cumu.jpg" alt="Figure 5" width="500"/>
+<figure>
+  <img src="Images/cumu.jpg" alt="Figure 5" width="400"/>
+  <figcaption>Figure 5</figcaption>
+</figure>
 
-<img src="Images/param_combined.jpg" alt="Figure 6" width="500"/>
+<figure>
+  <img src="Images/param_combined.jpg" alt="Figure 6" width="400"/>
+  <figcaption>Figure 6</figcaption>
+</figure>
 
+## Images
+This folder contains image files for paper figures.
 
