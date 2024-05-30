@@ -1,6 +1,7 @@
 clear all
-cd D:/MATLAB/'AlexBodata TVC'/Adjusted_daily/
-% cd /Users/johnnyrutherford/Library/CloudStorage/OneDrive-NorthumbriaUniversity-ProductionAzureAD/Documents/MATLAB/'AlexBodata TVC'/Adjusted_daily/
+cd /Volumes/JR_SSD/MATLAB/CORDEX_TVC
+% cd D:/MATLAB/'AlexBodata TVC'/Adjusted_daily/
+
 % addpath('mbcn-na-cordex_daily-CA-HPC/'); % adds the directory with all the files in
 FilesList=dir('mbcn.CA-TVC.NAM-*rcp45*.csv'); % makes a list of all ensemble member files
 

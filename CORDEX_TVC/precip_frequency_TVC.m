@@ -1,7 +1,9 @@
 %% ISOLATE RCP4.5
 close all
 clearvars
-cd D:/MATLAB/'AlexBodata TVC'/Adjusted_daily/
+%cd D:/MATLAB/'AlexBodata TVC'/Adjusted_daily/
+
+cd /Volumes/JR_SSD/MATLAB/CORDEX_TVC
 
 FilesList=dir('mbcn.CA-TVC.NAM-*rcp45*.csv'); % makes a list of all ensemble member files
 
