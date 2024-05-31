@@ -9,40 +9,34 @@ The gitrepo contains 3 folders. Matlab is used to create all the figures and the
 - Images
 
 ## CORDEX_TVC
-This folder contains matlab scripts for figures 1 & 2:
+This folder contains matlab scripts for figures 1 & 2
 
-<figure>
-  <img src="Images/rcps_tiled.jpg" alt="Figure 1" width="400"/>
-  <figcaption>Figure 1</figcaption>
-</figure>
+**Figure 1: Air temperature and precipitation**
 
-<figure>
-  <img src="Images/frequency_plot_final.png" alt="Figure 2" width="400"/>
-  <figcaption>Figure 2</figcaption>
-</figure>
+<img src="Images/rcps_tiled.jpg" alt="Figure 1" width="500"/>
+
+**Figure 2: Precipitation frequency vs air temperature**
+
+<img src="Images/frequency_plot_final.png" alt="Figure 2" width="500"/>
 
 ## CLM_TVC
-This folder contains matlab scripts for figures 3-6:
+This folder contains matlab scripts for figures 3-6
 
-<figure>
-  <img src="Images/SWE_GT_SL.jpg" alt="Figure 3" width="400"/>
-  <figcaption>Figure 3</figcaption>
-</figure>
+**Figure 3: Snow water equivalent, soil temperature and soil moisture**
 
-<figure>
-  <img src="Images/heat_map.jpg" alt="Figure 4" width="400"/>
-  <figcaption>Figure 4</figcaption>
-</figure>
+<img src="Images/SWE_GT_SL.jpg" alt="Figure 3" width="500"/>
 
-<figure>
-  <img src="Images/cumu.jpg" alt="Figure 5" width="400"/>
-  <figcaption>Figure 5</figcaption>
-</figure>
+**Figure 4: Soil temperature and zero-curtain duration**
 
-<figure>
-  <img src="Images/param_combined.jpg" alt="Figure 6" width="400"/>
-  <figcaption>Figure 6</figcaption>
-</figure>
+<img src="Images/heat_map.jpg" alt="Figure 4" width="500"/>
+
+**Figure 5: Cumulative CO<sub>2</sub> and CH<sub>4</sub> flux**
+
+<img src="Images/cumu.jpg" alt="Figure 5" width="500"/>
+
+**Figure 6: Future winter CO<sub>2</sub> and CH<sub>4</sub> flux**
+
+<img src="Images/param_combined.jpg" alt="Figure 6" width="500"/>
 
 ## Images
 This folder contains image files for paper figures.
