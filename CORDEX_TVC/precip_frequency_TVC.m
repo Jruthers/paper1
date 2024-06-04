@@ -1,5 +1,5 @@
 %% ISOLATE RCP4.5
-%Makes use of a raincloud plot function created by www.tomrmarshall.com
+%this script makes use of a raincloud plot function created by www.tomrmarshall.com
 
 close all
 clearvars
@@ -231,34 +231,23 @@ filtertall=[reshape(filtert1,height(filtert1)*width(filtert1),1); reshape(filter
 filterpall=[reshape(filterp1,height(filterp1)*width(filterp1),1); reshape(filterp2,height(filterp2)*width(filterp2),1)];
 
 hold on
-% nexttile(3)
-% subplot('Position', [[0 0.75 0.1 0.1]])
+
 sub2 = subplot('Position', [0.2 0.5 0.2 0.26 - gap])
 h1=raincloud_plot(reshape(filtert1,height(filtert1)*width(filtert1),1),Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1),'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
 h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1),'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6, 'box_col_match', 1);
 
-%hold on
 ylocations=[-0.4:0.05:0.25];
-% rainloc=0*ones(length(ylocations),1);
-% snowloc=2*ones(length(ylocations),1);
-% hold on
-% plot(rainloc,ylocations,'k-','LineWidth',2)
-% hold on
-% plot(snowloc,ylocations,'k--','LineWidth',2)
+
 xline(0, '-', LineWidth=1, Alpha=1)
 xline(2, '--', LineWidth=1)
 set(gca,'Ytick',[0,0.05,0.1,0.15,0.2,0.25,0.3])
 title("May", "FontWeight", "normal")
-%set(gca, 'YLim', [-.35 0.25]);
 set(gca, 'XLim', [-25 25]);
-% set(gca,'Xtick',[-25, -10, 0, 10, 25])
 set(gca,'Xtick',[])
 set(h1{1}, 'LineWidth', 1)
 set(h2{1}, 'LineWidth', 1)
 ylim([0 0.25])
-% Maylab = ylabel('Precipitation Frequency');
-% Maylab.Position(2) = 0.125; % change vertical position of ylabel
-% Maylab.Position(1) = -32;
+
 %% total precip inset may
 clear Months_new
 clear Year_new
@@ -267,7 +256,7 @@ clear Alldata_new
 Year_new=[];
 May=[];
 Months_new=[];
-for m=5 % change this for the required month 4=april etc etc
+for m=5 % change this for the required month 4=april etc
 May=vertcat(May,[Preciptot20162046(:,m);Preciptot20662096(:,m)]);
 Year_new=vertcat(Year_new,[repmat([1990],length(Preciptot20162046(:,m)),1); repmat([2070],length(Preciptot20662096(:,m)),1)]);   
 Months_new=vertcat(Months_new,repmat([m],length(Preciptot20162046)*2,1));
@@ -333,8 +322,7 @@ end
 end
 hold off
 grid
-% h = findobj('LineStyle','--')
-% set(h, 'LineStyle','-');
+
 %% Raincloud sept
 filtert1=HPCmonthlyTmean(HPCmonthlyTime(:,1)>=2016 & HPCmonthlyTime(:,1)<2046 & HPCmonthlyTime(:,2)==9,:);
 filterp1=HPCmonthlyPtot(HPCmonthlyTime(:,1)>=2016 & HPCmonthlyTime(:,1)<2046 & HPCmonthlyTime(:,2)==9,:);
@@ -345,30 +333,18 @@ filterp2=HPCmonthlyPtot(HPCmonthlyTime(:,1)>=2066 & HPCmonthlyTime(:,1)<2096 & H
 filtertall=[reshape(filtert1,height(filtert1)*width(filtert1),1); reshape(filtert2,height(filtert2)*width(filtert2),1)];
 filterpall=[reshape(filterp1,height(filterp1)*width(filterp1),1); reshape(filterp2,height(filterp2)*width(filterp2),1)];
 
-% nexttile(5)
-% subplot(4,2,5)
+
 sub3 = subplot('Position', [0.2 0.3 0.2 0.26 - gap])
 h1=raincloud_plot(reshape(filtert1,height(filtert1)*width(filtert1),1),Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1),'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
 h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1),'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6,'box_col_match', 1);
 hold on
 ylocations=[-0.4:0.05:0.25];
-% rainloc=0*ones(length(ylocations),1);
-% snowloc=2*ones(length(ylocations),1);
-% hold on
-% plot(rainloc,ylocations,'k-','LineWidth',2)
-% hold on
-% plot(snowloc,ylocations,'k--','LineWidth',2)
 xline(0, '-', LineWidth=1, Alpha=1)
 xline(2, '--', LineWidth=1)
 set(gca,'Ytick',[0,0.05,0.1,0.15,0.2,0.25,0.3])
 title("September", "FontWeight", "normal")
-%set(gca, 'YLim', [-.5 0.25]);
 set(gca, 'XLim', [-25 25]);
-% set(gca,'Xtick',[-25, -10, 0, 10, 25])
 set(gca,'Xtick',[])
-% Septlab = ylabel('Precipitation Frequency');
-% Septlab.Position(2) = 0.125;% change vertical position of ylabel
-% Septlab.Position(1) = -32; 
 set(h1{1}, 'LineWidth', 1)
 set(h2{1}, 'LineWidth', 1)
 ylim([0 0.25])
@@ -446,8 +422,6 @@ end
 end
 hold off
 grid
-% h = findobj('LineStyle','--')
-% set(h, 'LineStyle','-');
 %% Raincloud Oct
 filtert1=HPCmonthlyTmean(HPCmonthlyTime(:,1)>=2016 & HPCmonthlyTime(:,1)<2046 & HPCmonthlyTime(:,2)==10,:);
 filterp1=HPCmonthlyPtot(HPCmonthlyTime(:,1)>=2016 & HPCmonthlyTime(:,1)<2046 & HPCmonthlyTime(:,2)==10,:);
@@ -458,29 +432,21 @@ filterp2=HPCmonthlyPtot(HPCmonthlyTime(:,1)>=2066 & HPCmonthlyTime(:,1)<2096 & H
 filtertall=[reshape(filtert1,height(filtert1)*width(filtert1),1); reshape(filtert2,height(filtert2)*width(filtert2),1)];
 filterpall=[reshape(filterp1,height(filterp1)*width(filterp1),1); reshape(filterp2,height(filterp2)*width(filterp2),1)];
 
-% nexttile(7)
-% subplot(4,2,7)
 sub4 = subplot('Position', [0.2 0.1 0.2 0.26 - gap])
 h1=raincloud_plot(reshape(filtert1,height(filtert1)*width(filtert1),1),Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1),'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
 h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1),'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6,'box_col_match', 1);
 
-%hold on
 ylocations=[-0.4:0.05:0.25];
 xline(0, '-', LineWidth=1, Alpha=1)
 xline(2, '--', LineWidth=1)
 set(gca,'Ytick',[0,0.05,0.1,0.15,0.2,0.25,0.3])
 title("October", "FontWeight", "normal")
-%set(gca, 'YLim', [-.5 0.25]);
 set(gca, 'XLim', [-25 25]);
 set(gca,'Xtick',[-25, -10, 0, 10, 25])
 set(h1{1}, 'LineWidth', 1)
 set(h2{1}, 'LineWidth', 1)
 ylim([0 0.25])
-% Octlab = ylabel('Precipitation Frequency');
-% Octlab.Position(2) = 0.125; % change vertical position of ylabel
-% Octlab.Position(1) = -32;
 rcp4 = gcf;
-% exportgraphics(T,'Tiled2x2.jpg','Resolution',300)
 %% Oct total precip inset
 clear Months_new
 clear Year_new
@@ -503,7 +469,6 @@ box on
 boxplot(Oct,{Months_new,Year_new}, "Symbol", '', "ColorGroup", Months_new)
 
 set(gca,'xticklabel',{[]})
-% set(gca, 'ylim', [0 60])
 clear out1
 clear out2
 clear out3
@@ -555,8 +520,6 @@ end
 end
 hold off
 grid
-% h = findobj('LineStyle','--')
-% set(h, 'LineStyle','-');
 %% ISOLATE RCP8.5
 clearvars -except rcp4 insetAxis1 insetAxis2 insetAxis3 insetAxis4 sub1 sub2 sub3 sub4
 FilesList=dir('mbcn.CA-TVC.NAM-*rcp85*.csv'); % makes a list of all ensemble member files
@@ -586,8 +549,6 @@ Precip_scalefactor=0.5;
 standardP=50;
 clear h1
 clear h2
-% nexttile(2)
-% subplot(4,2,2)
 gap = 0.09;
 sub5 = subplot('Position', [0.44 0.7 0.2 0.26 - gap])
 filtert1=HPCmonthlyTmean(HPCmonthlyTime(:,1)>=2016 & HPCmonthlyTime(:,1)<2046 & HPCmonthlyTime(:,2)==4,:);
@@ -604,28 +565,16 @@ filterp2(filterp2==0)=NaN;
 h1=raincloud_plot(reshape(filtert1,height(filtert1)*width(filtert1),1),Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1),'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
 h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1),'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6, 'box_col_match', 1);
 ylocations=[-0.4:0.05:0.25];
-% rainloc=0*ones(length(ylocations),1);
-% snowloc=2*ones(length(ylocations),1);
 xline(0, '-', LineWidth=1, Alpha=1)
 xline(2, '--', LineWidth=1)
 title("RCP 8.5", "April")
-%set(gca, 'YLim', [-.35 0.25]);
 set(gca,'Ytick',[0,0.05,0.1,0.15,0.2,0.25])
 set(gca, 'XLim', [-25 25]);
-% set(gca,'Xtick',[-25, -10, 0, 10, 25])
 set(gca,'Xtick',[])
 hold on
-% Aprlab = ylabel('Frequency');
-% Aprlab.Position(2) = 0.125;% change vertical position of ylabel
-% Aprlab.Position(1) = -29;
 set(h1{1}, 'LineWidth', 1)
 set(h2{1}, 'LineWidth', 1)
-% l1=legend('2016-2046','','2066-2096', 'box', 'off');
-% legend('AutoUpdate','off')
 ylim([0 0.25])
-% h3=scatter(8.2,0.05,standardP*Precip_scalefactor,'ro','filled','MarkerEdgeColor','k');  % Extra
-% h4=text(13.2,0.05,strcat(string(standardP), 'mm'));% Extra
-% h4.FontSize=6.5;
 l1=legend('2016-2046','','2066-2096', 'box', 'off', Location='northwest');
 l1.FontSize=9;
 %% Apr total precip inset
@@ -672,7 +621,6 @@ box on
 boxplot(Apr,{Months_new,Year_new}, "Symbol", '', "ColorGroup", Months_new)
 
 set(gca,'xticklabel',{[]})
-% set(gca,'yticklabel',{[0 10 20 30 40]})
 set(gca, 'ylim', [0 70])
 clear out1
 clear out2
@@ -735,42 +683,34 @@ filterp2=HPCmonthlyPtot(HPCmonthlyTime(:,1)>=2066 & HPCmonthlyTime(:,1)<2096 & H
 filtertall=[reshape(filtert1,height(filtert1)*width(filtert1),1); reshape(filtert2,height(filtert2)*width(filtert2),1)];
 filterpall=[reshape(filterp1,height(filterp1)*width(filterp1),1); reshape(filterp2,height(filterp2)*width(filterp2),1)];
 
-% nexttile(4)
-% subplot(4,2,4)
 Precip_scalefactor=0.5;
 gap = 0.09;
 sub6 = subplot('Position', [0.44 0.5 0.2 0.26 - gap])
-% figure()
 h1=raincloud_plot(reshape(filtert1,height(filtert1)*width(filtert1),1),Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1),'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
 h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1),'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6, 'box_col_match', 1);
 
-%hold on
 ylocations=[-0.4:0.05:0.25];
 xline(0, '-', LineWidth=1, Alpha=1)
 xline(2, '--', LineWidth=1)
 set(gca,'Ytick',[0,0.05,0.1,0.15,0.2,0.25,0.3])
 title("May", "FontWeight", "normal")
-%set(gca, 'YLim', [-.35 0.25]);
 set(gca, 'XLim', [-25 25]);
-% set(gca,'Xtick',[-25, -10, 0, 10, 25])
 set(gca,'Xtick',[])
 set(h1{1}, 'LineWidth', 1)
 set(h2{1}, 'LineWidth', 1)
 ylim([0 0.25])
-% Maylab = ylabel('Frequency');
-% Maylab.Position(2) = 0.125; % change vertical position of ylabel
-% Maylab.Position(1) = -29;
 
-% JR h{1}, onl line 54, contains the information to make plot the area of the graph.
-temperatures=h2{1}. XData; % JR: temperature values
-freq=h2{1}. YData;                % JR: frequency
+%% Calculate percentage area of the plot which falls within a certain temperature
+
+% h{1}, on line 54, contains the information to make plot the area of the graph.
+temperatures=h2{1}. XData; %  temperature values
+freq=h2{1}. YData;                % frequency
 areatotal=trapz(temperatures,freq); % This is equal to 1
-temperature_range=[0,20]; % over which range do you want to calculate probability ?
+temperature_range=[0,20]; % over which range do you want to calculate probability?
 xindex=find(temperatures > temperature_range(1) &  temperatures < temperature_range(2)); % find indices in the dataset
 areatotal_specific=trapz(temperatures(xindex),freq(xindex)); % This is the area under the graph encapusalted by this range.
 % So, we can say that in April, the probabilty of a temperature between -12
 % and -8 degrees is 0.21. 
-%JR
 %% total precip inset may
 clear Months_new
 clear Year_new
@@ -785,7 +725,6 @@ Year_new=vertcat(Year_new,[repmat([1990],length(Preciptot20162046(:,m)),1); repm
 Months_new=vertcat(Months_new,repmat([m],length(Preciptot20162046)*2,1));
 end
 
-%inset
 hold on
 insetPosition = [.46 .54 .05 .1];
 insetAxis6 = axes('Position', insetPosition) ;
@@ -855,30 +794,17 @@ filterp2=HPCmonthlyPtot(HPCmonthlyTime(:,1)>=2066 & HPCmonthlyTime(:,1)<2096 & H
 filtertall=[reshape(filtert1,height(filtert1)*width(filtert1),1); reshape(filtert2,height(filtert2)*width(filtert2),1)];
 filterpall=[reshape(filterp1,height(filterp1)*width(filterp1),1); reshape(filterp2,height(filterp2)*width(filterp2),1)];
 
-% nexttile(6)
-% subplot(4,2,6)
 sub7 = subplot('Position', [0.44 0.3 0.2 0.26 - gap])
 h1=raincloud_plot(reshape(filtert1,height(filtert1)*width(filtert1),1),Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1),'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
 h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1),'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6,'box_col_match', 1);
 hold on
 ylocations=[-0.4:0.05:0.25];
-% rainloc=0*ones(length(ylocations),1);
-% snowloc=2*ones(length(ylocations),1);
-% hold on
-% plot(rainloc,ylocations,'k-','LineWidth',2)
-% hold on
-% plot(snowloc,ylocations,'k--','LineWidth',2)
 xline(0, '-', LineWidth=1, Alpha=1)
 xline(2, '--', LineWidth=1)
 set(gca,'Ytick',[0,0.05,0.1,0.15,0.2,0.25,0.3])
 title("September", "FontWeight", "normal")
-%set(gca, 'YLim', [-.5 0.25]);
 set(gca, 'XLim', [-25 25]);
-% set(gca,'Xtick',[-25, -10, 0, 10, 25])
 set(gca,'Xtick',[])
-% Septlab = ylabel('Frequency');
-% Septlab.Position(2) = 0.125;% change vertical position of ylabel
-% Septlab.Position(1) = -29; 
 set(h1{1}, 'LineWidth', 1)
 set(h2{1}, 'LineWidth', 1)
 ylim([0 0.25])
@@ -966,11 +892,8 @@ filterp2=HPCmonthlyPtot(HPCmonthlyTime(:,1)>=2066 & HPCmonthlyTime(:,1)<2096 & H
 filtertall=[reshape(filtert1,height(filtert1)*width(filtert1),1); reshape(filtert2,height(filtert2)*width(filtert2),1)];
 filterpall=[reshape(filterp1,height(filterp1)*width(filterp1),1); reshape(filterp2,height(filterp2)*width(filterp2),1)];
 
-% nexttile(8)
-% subplot(4,2,8)
 Precip_scalefactor=0.5;
 gap = 0.09;
-% figure()
 sub8 = subplot('Position', [0.44 0.1 0.2 0.26 - gap])
 h1=raincloud_plot(reshape(filtert1,height(filtert1)*width(filtert1),1),Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1),'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
 h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1),'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6,'box_col_match', 1);
@@ -991,17 +914,14 @@ Octlab = xlabel('Mean Monthly Temperature (^{o}C)');
 Octlab.Position(2) = -0.05; % change vertical position of ylabel
 Octlab.Position(1) = -29;
 
-% JR h{1}, onl line 54, contains the information to make plot the area of the graph.
-temperatures=h2{1}. XData; % JR: temperature values
-freq=h2{1}. YData;                % JR: frequency
+%% Area under graph
+% h{1}, onl line 54, contains the information to make plot the area of the graph.
+temperatures=h2{1}. XData; %  temperature values
+freq=h2{1}. YData;                % frequency
 areatotal=trapz(temperatures,freq); % This is equal to 1
-temperature_range=[0,20]; % over which range do you want to calculate probability ?
+temperature_range=[0,20]; % over which range do you want to calculate probability?
 xindex=find(temperatures > temperature_range(1) &  temperatures < temperature_range(2)); % find indices in the dataset
 areatotal_specific=trapz(temperatures(xindex),freq(xindex)); % This is the area under the graph encapusalted by this range.
-% So, we can say that in April, the probabilty of a temperature between -12
-% and -8 degrees is 0.21. 
-%JR
-% exportgraphics(T,'Tiled2x2.jpg','Resolution',300)
 %% Oct total precip inset
 clear Months_new
 clear Year_new
@@ -1016,7 +936,6 @@ Year_new=vertcat(Year_new,[repmat([1990],length(Preciptot20162046(:,m)),1); repm
 Months_new=vertcat(Months_new,repmat([m],length(Preciptot20162046)*2,1));
 end
 
-%inset
 hold on
 insetPosition = [.57 .14 .05 .1];
 insetAxis8 = axes('Position', insetPosition) ;
