@@ -861,10 +861,10 @@ x2 = reshape(FCH42, [],1);
 kstest2(x1,x2)
 [h,p,ks2stat] = kstest2(x1,x2)
 %% letters
-annotation('textbox', [0.452392115656364 0.862744983161598 0.0329015544041452 0.0536062378167641], 'String', 'a', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
-annotation('textbox', [0.88895322294286 0.862744983161598 0.0334196891191709 0.0536062378167641], 'String', 'b', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
-annotation('textbox', [0.452392115656364 0.418963882523489 0.0329015544041451 0.053606237816764], 'String', 'c', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
-annotation('textbox', [0.88895322294286 0.418963882523489 0.0334196891191711 0.053606237816764], 'String', 'd', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'bold')
+annotation('textbox', [0.450392115656364 0.862744983161598 0.0329015544041452 0.0536062378167641], 'String', '(a)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.88095322294286 0.862744983161598 0.0334196891191709 0.0536062378167641], 'String', '(b)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.450392115656364 0.418963882523489 0.0329015544041451 0.053606237816764], 'String', '(c)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.88095322294286 0.418963882523489 0.0334196891191711 0.053606237816764], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
 %% save plot
 set(gcf, 'Position', [271 310 1375 608]);
 % cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/

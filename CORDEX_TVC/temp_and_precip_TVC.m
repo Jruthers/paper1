@@ -1,58 +1,105 @@
-clear all
-cd /Volumes/JR_SSD/MATLAB/CORDEX_TVC
-% cd D:/MATLAB/'AlexBodata TVC'/Adjusted_daily/
+%% Isolate RCP 4.5 data
+% Clear all variables from the workspace to start with a clean slate
+clearvars
 
-% addpath('mbcn-na-cordex_daily-CA-HPC/'); % adds the directory with all the files in
-FilesList=dir('mbcn.CA-TVC.NAM-*rcp45*.csv'); % makes a list of all ensemble member files
+% Change directory to where the data files are located
+% cd /Volumes/JR_SSD/MATLAB/CORDEX_TVC
+% Alternative directory for different system
+cd D:/MATLAB/'CORDEX_TVC'/
 
-for j=1:6 %length(FilesList)  % cycles through each  file in the filelist
-Output=readtable(FilesList(j).name); % read the csv file into MATLAB
-datestamp=datenum(num2str(table2array([Output(:,1),Output(:,2),Output(:,3)])));   % Get the time for the x axis
-[UniqueCombos UniqueRowStart RowsofEachUniqueCombo]=unique(Output(:,1:2),'rows');
-for i=1:max(RowsofEachUniqueCombo)
-rowsneeded=find(RowsofEachUniqueCombo==i);
-HPCmonthlyprecip(i,j)=mean(Output.pr(rowsneeded));
-HPCmonthlyTime(i,1)=mean(Output.year(rowsneeded));
-HPCmonthlyTime(i,2)=mean(Output.month(rowsneeded));
-HPCmonthlyTmin(i,j)=mean(Output.tn(rowsneeded));
-HPCmonthlyTmax(i,j)=mean(Output.tx(rowsneeded));
-HPCmonthlyTmean(i,j)=0.5*(HPCmonthlyTmin(i,j)+HPCmonthlyTmax(i,j));
-HPCmonthlyPtot(i,j)=sum(Output.pr(rowsneeded));
-end
-end
-HPCmonthlyprecip=HPCmonthlyprecip*60*60*24;
-HPCmonthlyPtot=HPCmonthlyPtot*60*60*24;
-HPCmonthlytotprecip=[HPCmonthlyTime HPCmonthlyPtot];
-HPCMonthlyP2090=[HPCmonthlyTime HPCmonthlyprecip];
-HPCMonthlyT2090=[HPCmonthlyTime HPCmonthlyTmean];
-%% create temps subsets
-for m=1:12 % cycle through each of the months 
-indicestoget=find(HPCMonthlyT2090(:,1) >= 2016 & HPCMonthlyT2090(:,1) <= 2046 & HPCMonthlyT2090(:,2)==m); % filter out monthly data (m) where the year is greater than or equal to 1990 and less than or equal to 2020. relevant rows are stored in indicestoget
-presentday=HPCMonthlyT2090(indicestoget,:); % extract specific rows
-dimens=size(presentday(:,3:end)); % find the dimensions (rows, columns) of the variable presentday
-dataout=reshape(presentday(:,3:end),dimens(1,1)*dimens(1,2),1); % reshape so that the temperature data is in one long column reflecting all daily values for this time period for each ensemble member
-Temps20162046(:,m)=dataout; % store in new variable
-end
+% Add the path to the directory containing necessary files (uncomment if needed)
+% addpath('mbcn-na-cordex_daily-CA-HPC/');
 
-% for 2060-2100
-clear Temps20662096
-for m=1:12
-indicestoget=find(HPCMonthlyT2090(:,1) >= 2066 & HPCMonthlyT2090(:,1) <= 2096 & HPCMonthlyT2090(:,2)==m);
-presentday=HPCMonthlyT2090(indicestoget,:);
-dimens=size(presentday(:,3:end));
-dataout=reshape(presentday(:,3:end),dimens(1,1)*dimens(1,2),1);
-Temps20662096(:,m)=dataout;
+% Create a list of all ensemble member files matching the specified pattern
+FilesList = dir('mbcn.CA-TVC.NAM-*rcp45*.csv');
+
+% Loop through each file in the file list
+for j = 1:6 % Use length(FilesList) to process all files
+    % Read the current CSV file into a table
+    Output = readtable(FilesList(j).name);
+    
+    % Create a datestamp from the year, month, and day columns
+    datestamp = datenum(num2str(table2array([Output(:,1),Output(:,2),Output(:,3)])));
+    
+    % Find unique combinations of year and month, and their row indices
+    [UniqueCombos, UniqueRowStart, RowsofEachUniqueCombo] = unique(Output(:,1:2), 'rows');
+    
+    % Loop through each unique year-month combination
+    for i = 1:max(RowsofEachUniqueCombo)
+        % Find rows corresponding to the current year-month combination
+        rowsneeded = find(RowsofEachUniqueCombo == i);
+        
+        % Calculate monthly statistics and store them
+        HPCmonthlyprecip(i, j) = mean(Output.pr(rowsneeded)); % Mean monthly precipitation
+        HPCmonthlyTime(i, 1) = mean(Output.year(rowsneeded)); % Year
+        HPCmonthlyTime(i, 2) = mean(Output.month(rowsneeded)); % Month
+        HPCmonthlyTmin(i, j) = mean(Output.tn(rowsneeded)); % Mean monthly minimum temperature
+        HPCmonthlyTmax(i, j) = mean(Output.tx(rowsneeded)); % Mean monthly maximum temperature
+        HPCmonthlyTmean(i, j) = 0.5 * (HPCmonthlyTmin(i, j) + HPCmonthlyTmax(i, j)); % Mean monthly temperature
+        HPCmonthlyPtot(i, j) = sum(Output.pr(rowsneeded)); % Total monthly precipitation
+    end
 end
 
-%% create precip subsets
+% Convert precipitation from rate to volume (assuming the data is in mm/s)
+HPCmonthlyprecip = HPCmonthlyprecip * 60 * 60 * 24; % Convert to mm/day
+HPCmonthlyPtot = HPCmonthlyPtot * 60 * 60 * 24; % Convert to total mm
+
+% Combine time and total precipitation into one matrix
+HPCmonthlytotprecip = [HPCmonthlyTime HPCmonthlyPtot];
+
+% Combine time and mean precipitation into one matrix
+HPCMonthlyP2090 = [HPCmonthlyTime HPCmonthlyprecip];
+
+% Combine time and mean temperature into one matrix
+HPCMonthlyT2090 = [HPCmonthlyTime HPCmonthlyTmean];
+
+%% Create temp subsets for 2016-2046 and 2066-2096
+% Loop through each month from January (1) to December (12)
+for m = 1:12
+    % Find rows where the year is between 2016 and 2046 and the month matches the current loop month
+    indicestoget = find(HPCMonthlyT2090(:,1) >= 2016 & HPCMonthlyT2090(:,1) <= 2046 & HPCMonthlyT2090(:,2) == m);
+    
+    % Extract the rows that match the criteria
+    presentday = HPCMonthlyT2090(indicestoget, :);
+    
+    % Get the dimensions of the temperature data (excluding the first two columns for year and month)
+    dimens = size(presentday(:, 3:end));
+    
+    % Reshape the temperature data into a single column
+    dataout = reshape(presentday(:, 3:end), dimens(1) * dimens(2), 1);
+    
+    % Store the reshaped temperature data in the output variable for the current month
+    Temps20162046(:, m) = dataout;
+end
+
+% Loop through each month again for the years 2066 to 2096
+for m = 1:12
+    % Find rows where the year is between 2066 and 2096 and the month matches the current loop month
+    indicestoget = find(HPCMonthlyT2090(:,1) >= 2066 & HPCMonthlyT2090(:,1) <= 2096 & HPCMonthlyT2090(:,2) == m);
+    
+    % Extract the rows that match the criteria
+    presentday = HPCMonthlyT2090(indicestoget, :);
+    
+    % Get the dimensions of the temperature data (excluding the first two columns for year and month)
+    dimens = size(presentday(:, 3:end));
+    
+    % Reshape the temperature data into a single column
+    dataout = reshape(presentday(:, 3:end), dimens(1) * dimens(2), 1);
+    
+    % Store the reshaped temperature data in the output variable for the current month
+    Temps20662096(:, m) = dataout;
+end
+
+%% Create precip subsets for 2016-2046 and 2066-2096
+% The above section is then repeated for the precipitation data.
 clear Precip20162046
 clearvars indicestoget presentday dimens dataout
 for m=1:12 
-indicestoget=find(HPCmonthlytotprecip(:,1) >= 2016 & HPCmonthlytotprecip(:,1) <= 2046 & HPCmonthlytotprecip(:,2)==m); % filter out monthly data (m) where the year is greater than or equal to 1990 and less than or equal to 2020. relevant rows are stored in indicestoget
-presentday=HPCmonthlytotprecip(indicestoget,:); % extract specific rows
-dimens=size(presentday(:,3:end)); % find the dimensions (rows, columns) of the variable presentday
-dataout=reshape(presentday(:,3:end),dimens(1,1)*dimens(1,2),1); % reshape so that the temperature data is in one long column reflecting all daily values for this time period for each ensemble member
-Precip20162046(:,m)=dataout; % store in new variable
+indicestoget=find(HPCmonthlytotprecip(:,1) >= 2016 & HPCmonthlytotprecip(:,1) <= 2046 & HPCmonthlytotprecip(:,2)==m);
+presentday=HPCmonthlytotprecip(indicestoget,:);
+dimens=size(presentday(:,3:end));
+dataout=reshape(presentday(:,3:end),dimens(1,1)*dimens(1,2),1);
+Precip20162046(:,m)=dataout; 
 end
 
 % for 2070-2100
@@ -65,37 +112,48 @@ dataout=reshape(presentday(:,3:end),dimens(1,1)*dimens(1,2),1);
 Precip20662096(:,m)=dataout;
 end
 
-%% rcp45 precip plot
+%% RCP 4.5 precip plot
+% Calculate median precipitation for 2016-2046 and 2066-2096
 medians1990 = median(Precip20162046(:,1:12));
 medians2060 = median(Precip20662096(:,1:12));
+
+% Calculate 25th and 75th percentiles for 2016-2046 and 2066-2096
 perc751990 = prctile(Precip20162046(:,1:12),75);
 perc251990 = prctile(Precip20162046(:,1:12),25);
 perc752060 = prctile(Precip20662096(:,1:12),75);
 perc252060 = prctile(Precip20662096(:,1:12),25);
-hold on
+
+% Create a tiled layout for plotting
 tiledlayout(2,2, "TileSpacing","compact")
 nexttile(3)
-% create more increments between 1-12
+
+% Interpolate data to create finer resolution for plotting
 m12=[1:0.2:12];
-% m121=[1:0.4:12]
 p12_1990=interp1([1:12],medians1990,m12,'cubic');
 p12_2060=interp1([1:12],medians2060,m12,'cubic');
 int_P_75_1990 = interp1([1:12], perc751990,m12,'cubic');
 int_P_25_1990 = interp1([1:12], perc251990,m12,'cubic');
 int_P_75_2060  = interp1([1:12], perc752060,m12,'cubic');
 int_P_25_2060 = interp1([1:12], perc252060,m12,'cubic');
+
+% Plot interpolated median precipitation
 int1990 = plot(m12, p12_1990, 'black');
 hold on
 int2060 = plot(m12, p12_2060, 'r');
-% 
+
+% Create x and y data for filling between percentiles
 int_meanX1990 = [1:length(int_P_25_1990), length(int_P_75_1990):-1:1];
 int_meanY1990 = [int_P_25_1990, fliplr(int_P_75_1990)];
 int_meanX1990 = [m12, fliplr(m12(1:end))];
-f = fill(int_meanX1990, int_meanY1990, 'black', "FaceAlpha", 0.2, "LineStyle", "none");
-hold on
 int_meanY2060 = [int_P_25_2060, fliplr(int_P_75_2060)];
 int_meanX2060 = [m12, fliplr(m12(1:end))];
+
+% Fill between percentiles
+f = fill(int_meanX1990, int_meanY1990, 'black', "FaceAlpha", 0.2, "LineStyle", "none");
+hold on
 f = fill(int_meanX2060, int_meanY2060, 'red', "FaceAlpha", 0.2, "LineStyle", "none");
+
+% Customize plot axes and labels
 xlim([1 12])
 ylim([0 80])
 xtickangle(0)
@@ -103,8 +161,11 @@ set(gca, 'XTickLabel', []);
 set(gca, 'xtick',1:1:24, 'XTickLabels',{'Jan', 'Feb', 'Mar', 'Apr ', 'May ', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'})
 ylabel("Precipitation (mm w.e.)")
 set(gca, "FontSize",10);
+
+% Save the figure handle for reference
 rcp45precip = gcf;
-%% rcp45 temp plot
+%% RCP 4.5 temp plot
+% The above section is then repeated using the temperature data
 Tmedian1990 = median(Temps20162046(:,1:12));
 Tmedian2060 = median(Temps20662096(:,1:12));
 Tperc751990 = prctile(Temps20162046(:,1:12),75);
@@ -148,7 +209,8 @@ xtickangle(0)
 title("RCP 4.5")
 % set(leg, "box", "off")
 rcp45temp=gcf;
-%% Precip Ks test
+%% RCP 4.5 Statistics
+%Precipitation
 years1990 = Precip20162046;
 years2060 = Precip20662096;
 
@@ -166,7 +228,7 @@ end
 
 disp(precipresults45);
 
-%% Temperature Ks test
+%Temperature
 years1990 = Temps20162046;
 years2060 = Temps20662096;
 
@@ -183,16 +245,16 @@ for month = 1:12
 end
 
 disp(tempresults45);
-%%
+
 clearvars -except rcp45temp rcp45precip tempresults45 precipresults45 Tmedian1990
-%% isolate 8.5
-% addpath('mbcn-na-cordex_daily-CA-HPC/'); % adds the directory with all the files in
-% Tmedian1990rcp45=Tmedian1990;
+%% Isolate RCP 8.5 data
+% Lines 1-245 are then repeated for RCP 8.5 as follows
+
 FilesList=dir('mbcn.CA-TVC.NAM-*rcp85*.csv'); % makes a list of all ensemble member files
 
-for j=1:27 %length(FilesList)  % cycles through each  file in the filelist
-Output=readtable(FilesList(j).name); % read the csv file into MATLAB
-datestamp=datenum(num2str(table2array([Output(:,1),Output(:,2),Output(:,3)])));   % Get the time for the x axis
+for j=1:27 
+Output=readtable(FilesList(j).name);
+datestamp=datenum(num2str(table2array([Output(:,1),Output(:,2),Output(:,3)])));
 [UniqueCombos UniqueRowStart RowsofEachUniqueCombo]=unique(Output(:,1:2),'rows');
 for i=1:max(RowsofEachUniqueCombo)
 rowsneeded=find(RowsofEachUniqueCombo==i);
@@ -210,13 +272,13 @@ HPCmonthlyPtot=HPCmonthlyPtot*60*60*24;
 HPCmonthlytotprecip=[HPCmonthlyTime HPCmonthlyPtot];
 HPCMonthlyP2090=[HPCmonthlyTime HPCmonthlyprecip];
 HPCMonthlyT2090=[HPCmonthlyTime HPCmonthlyTmean];
-%% create temps subsets
-for m=1:12 % cycle through each of the months 
-indicestoget=find(HPCMonthlyT2090(:,1) >= 2016 & HPCMonthlyT2090(:,1) <= 2046 & HPCMonthlyT2090(:,2)==m); % filter out monthly data (m) where the year is greater than or equal to 1990 and less than or equal to 2020. relevant rows are stored in indicestoget
-presentday=HPCMonthlyT2090(indicestoget,:); % extract specific rows
-dimens=size(presentday(:,3:end)); % find the dimensions (rows, columns) of the variable presentday
-dataout=reshape(presentday(:,3:end),dimens(1,1)*dimens(1,2),1); % reshape so that the temperature data is in one long column reflecting all daily values for this time period for each ensemble member
-Temps20162046(:,m)=dataout; % store in new variable
+%% Create temp subsets for 2016-2046 and 2066-2096
+for m=1:12
+indicestoget=find(HPCMonthlyT2090(:,1) >= 2016 & HPCMonthlyT2090(:,1) <= 2046 & HPCMonthlyT2090(:,2)==m);
+presentday=HPCMonthlyT2090(indicestoget,:); 
+dimens=size(presentday(:,3:end));
+dataout=reshape(presentday(:,3:end),dimens(1,1)*dimens(1,2),1);
+Temps20162046(:,m)=dataout;
 end
 
 % for 2060-2100
@@ -229,12 +291,12 @@ dataout=reshape(presentday(:,3:end),dimens(1,1)*dimens(1,2),1);
 Temps20662096(:,m)=dataout;
 end
 
-%% create precip subsets
-for m=1:12 % cycle through each of the months 
-indicestoget=find(HPCmonthlytotprecip(:,1) >= 2016 & HPCmonthlytotprecip(:,1) <= 2046 & HPCmonthlytotprecip(:,2)==m); % filter out monthly data (m) where the year is greater than or equal to 1990 and less than or equal to 2020. relevant rows are stored in indicestoget
-presentday=HPCmonthlytotprecip(indicestoget,:); % extract specific rows
-dimens=size(presentday(:,3:end)); % find the dimensions (rows, columns) of the variable presentday
-dataout=reshape(presentday(:,3:end),dimens(1,1)*dimens(1,2),1); % reshape so that the temperature data is in one long column reflecting all daily values for this time period for each ensemble member
+%% Create precip subsets for 2016-2046 and 2066-2096
+for m=1:12
+indicestoget=find(HPCmonthlytotprecip(:,1) >= 2016 & HPCmonthlytotprecip(:,1) <= 2046 & HPCmonthlytotprecip(:,2)==m); 
+presentday=HPCmonthlytotprecip(indicestoget,:);
+dimens=size(presentday(:,3:end)); 
+dataout=reshape(presentday(:,3:end),dimens(1,1)*dimens(1,2),1);
 Precip20162046(:,m)=dataout; % store in new variable
 end
 
@@ -249,7 +311,7 @@ Precip20662096(:,m)=dataout;
 end
 
 
-%% rcp85 precip plot
+%% RCP 8.5 precip plot
 
 medians1990 = median(Precip20162046(:,1:12));
 medians2060 = median(Precip20662096(:,1:12));
@@ -259,9 +321,8 @@ perc752060 = prctile(Precip20662096(:,1:12),75);
 perc252060 = prctile(Precip20662096(:,1:12),25);
 
 nexttile(4)
-% create more increments between 1-12
+
 m12=[1:0.2:12];
-% m121=[1:0.4:12]
 p12_1990=interp1([1:12],medians1990,m12,'cubic');
 p12_2060=interp1([1:12],medians2060,m12,'cubic');
 int_P_75_1990 = interp1([1:12], perc751990,m12,'cubic');
@@ -272,7 +333,6 @@ int1990 = plot(m12, p12_1990, 'black');
 hold on
 int2060 = plot(m12, p12_2060, 'r');
 
-% int_meanX1990 = [1:length(int_T_25_1990), length(int_T_75_1990):-1:1];
 int_meanY1990 = [int_P_25_1990, fliplr(int_P_75_1990)];
 int_meanX1990 = [m12, fliplr(m12(1:end))];
 f = fill(int_meanX1990, int_meanY1990, 'black', "FaceAlpha", 0.2, "LineStyle", "none");
@@ -288,7 +348,7 @@ set(gca, 'xtick',1:1:24, 'XTickLabels',{'Jan', 'Feb', 'Mar', 'Apr ', 'May ', 'Ju
 set(gca, "FontSize",10);
 % set(leg, "box", "off")
 rcp85precip = gcf;
-%% rcp85 temp plot
+%% RCP 8.5 temp plot
 Tmedian1990 = median(Temps20162046(:,1:12));
 Tmedian2060 = median(Temps20662096(:,1:12));
 Tperc751990 = prctile(Temps20162046(:,1:12),75);
@@ -331,17 +391,8 @@ title("RCP 8.5")
 xtickangle(0)
 % set(leg, "box", "off")
 rcp85temp=gcf;
-%% Annotations
-set(gcf, 'Position', [271 310 800 608]);
-annotation('textbox', [0.44, 0.82, 0.1, 0.1], 'String', '(a)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.86, 0.82, 0.1, 0.1], 'String', '(b)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.44, 0.38, 0.1, 0.1], 'String', '(c)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.86, 0.38, 0.1, 0.1], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-%% Save figure
-% cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'Alex and bo forcing data'/TVC/
-cd C:/Users/w22026593/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'Alex and bo forcing data'/TVC/
-exportgraphics(gcf, "rcps_tiled.jpg", "Resolution",300)
-%% Precip Ks test
+%% RCP 8.5 statistics
+% Precipitation
 years1990 = Precip20162046;
 years2060 = Precip20662096;
 
@@ -359,7 +410,7 @@ end
 
 disp(precipresults85);
 
-%% Temperature Ks test
+ % Temperature
 years1990 = Temps20162046;
 years2060 = Temps20662096;
 
@@ -376,3 +427,13 @@ for month = 1:12
 end
 
 disp(tempresults85);
+%% Annotations
+set(gcf, 'Position', [271 310 800 608]);
+annotation('textbox', [0.44, 0.82, 0.1, 0.1], 'String', '(a)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.86, 0.82, 0.1, 0.1], 'String', '(b)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.44, 0.38, 0.1, 0.1], 'String', '(c)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.86, 0.38, 0.1, 0.1], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+%% Save figure
+% cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'Alex and bo forcing data'/TVC/
+cd C:/Users/w22026593/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'Alex and bo forcing data'/TVC/
+exportgraphics(gcf, "rcps_tiled.jpg", "Resolution",300)
