@@ -1,18 +1,7 @@
 %% Change directory
 close all
 clearvars
-%change into the directory containing soil data and extract into new var
-clear all
-if ismac
-        cd /Volumes/JR_SSD/MATLAB/CLM_TVC/'1.5 -2'/h1
-else
-if ispc
-pcpath = 'D:\MATLAB\CLM_TVC\1.5 -2\h1'
-if exist("pcpath")
-    cd(pcpath)
-end 
-end
-end
+navigateToDirectory('/1.5 -2/h1')
 %% default rcp45 present 
 CaseList=dir('CORDEX_*rcp45*');
 internalfilestruct='/lnd/hist/'; 
@@ -84,9 +73,7 @@ ylabel(ytext);
 
 %% default rcp45 future
 clearvars -except GTmedian1depth_P1
-cd /Volumes/JR_SSD/MATLAB/CLM_TVC/'1.5 -2'/h1/
-% cd D:/MATLAB/CLM_TVC/'1.5 -2'/h1/
-% cd E:/MATLAB/CLM_TVCdaily/h1
+navigateToDirectory('/1.5 -2/h1')
 CaseList=dir('CORDEX_*rcp45*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -158,9 +145,7 @@ title('2066-2096', 'FontWeight','normal')
 
 %% sturm rcp45 present 
 clearvars -except GTmedian1depth_P1
-cd /Volumes/JR_SSD/MATLAB/CLM_TVC/sturm/'1.5 -2'/h1/
-% cd D:/MATLAB/CLM_TVC/sturm/'1.5 -2'/h1
-% cd E:/MATLAB/CLM_TVCdaily/sturm/h1
+navigateToDirectory('sturm/1.5 -2/h1')
 CaseList=dir('CORDEX_*rcp45*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -226,9 +211,7 @@ xlabel('Julian Day')
 
 %% sturm rcp45 future
 clearvars -except GTmedian1depth_P1
-cd /Volumes/JR_SSD/MATLAB/CLM_TVC/sturm/'1.5 -2'/h1/
-% cd D:/MATLAB/CLM_TVC/sturm/'1.5 -2'/h1
-% cd E:/MATLAB/CLM_TVCdaily/sturm/h1
+navigateToDirectory('sturm/1.5 -2/h1')
 CaseList=dir('CORDEX_*rcp45*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -295,7 +278,7 @@ xlabel('Julian Day')
 
 %% default rcp85 present 
 clearvars -except GTmedian1depth_P1
-cd /Volumes/JR_SSD/MATLAB/CLM_TVC/'1.5 -2'/h1/
+navigateToDirectory('/1.5 -2/h1')
 % cd D:\MATLAB\TVC\'1.5 -2'\h1
 % cd E:/MATLAB/CLM_TVCdaily/h1
 CaseList=dir('CORDEX_*rcp85*');
@@ -362,9 +345,7 @@ title('2016-2046', 'FontWeight','normal');
 % ylabel('Soil Depth (m)')
 %% default rcp85 future
 clearvars -except GTmedian1depth_P1
-cd /Volumes/JR_SSD/MATLAB/CLM_TVC/'1.5 -2'/h1/
-% cd D:\MATLAB\TVC\'1.5 -2'\h1
-% cd E:/MATLAB/CLM_TVCdaily/h1
+navigateToDirectory('/1.5 -2/h1')
 CaseList=dir('CORDEX_*rcp85*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));
@@ -429,7 +410,7 @@ clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
 title('2066-2096', 'FontWeight','normal')
 %% sturm rcp85 present 
 clearvars -except GTmedian1depth_P1
-cd /Volumes/JR_SSD/MATLAB/CLM_TVC/sturm/'1.5 -2'/h1/
+navigateToDirectory('sturm/1.5 -2/h1')
 % cd D:/MATLAB/CLM_TVC/sturm/'1.5 -2'/h1
 % cd E:/MATLAB/CLM_TVCdaily/sturm/h1
 CaseList=dir('CORDEX_*rcp85*');
@@ -496,9 +477,7 @@ xlabel('Julian Day')
 
 %% Sturm rcp85 future
 clearvars -except GTmedian1depth_P1
-cd /Volumes/JR_SSD/MATLAB/CLM_TVC/sturm/'1.5 -2'/h1/
-% cd D:/MATLAB/CLM_TVC/sturm/'1.5 -2'/h1
-% cd E:/MATLAB/CLM_TVCdaily/sturm/h1
+navigateToDirectory('sturm/1.5 -2/h1')
 CaseList=dir('CORDEX_*rcp85*');
 internalfilestruct='/lnd/hist/'; 
 variable=nan(1020,length(CaseList));

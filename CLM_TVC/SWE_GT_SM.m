@@ -1,20 +1,8 @@
 %% SWE RCP4.5 only
-clear all
-if ismac
-        cd /Volumes/JR_SSD/MATLAB/CLM_TVC/'1.5 -2'/h0
-else
-if ispc
+close all
+clearvars
 
-unipath = 'D:\MATLAB\TVCdaily\q10 1.5 psimin -2\h0';
-pcpath = 'D:\TVCdaily\q10 1.5 psimin -2\h0';
-if exist("unipath")
-    cd(unipath)
-else 
-    cd(pcpath)
-end 
-end
-end
-
+navigateToDirectory('/1.5 -2/h0')
 SWE2100=extractvar('H2OSNO', 'rcp45');
 
 % 1. Assign each month/day a julian day
@@ -29,7 +17,7 @@ SWE2100=[SWE2100,juliandays];
 
 % 2. SWE 45 plot: Works, but with whitespace in middle of plot
 SWEplot = figure()
-SWEplot.Position=[100 20 800 1500]
+SWEplot.Position=[120 20 900 1500]
 T = tiledlayout(3,2, "TileSpacing","compact");
 nexttile
 SWE20162046_Daily=nan(30*(width(SWE2100)-4),366);
@@ -397,7 +385,7 @@ filepath=strcat(CaseList(i).name,internalfilestruct);
 ncname=dir(strcat(filepath,"*h1.2016-0*.nc"));
 variable=ncread(strcat(filepath,ncname.name),'SOILLIQ');
 variable=squeeze(variable);
-variable=variable(1,:);
+variable=variable(2,:);
 SOILLIQ(:,i)=variable;
 end
 variabletime=ncread(strcat(filepath,ncname.name),'time');
@@ -459,7 +447,7 @@ filepath=strcat(CaseList(i).name,internalfilestruct);
 ncname=dir(strcat(filepath,"*h1.2016-0*.nc"));
 variable=ncread(strcat(filepath,ncname.name),'SOILLIQ');
 variable=squeeze(variable);
-variable=variable(1,:);
+variable=variable(2,:);
 SOILLIQ(:,i)=variable;
 end
 variabletime=ncread(strcat(filepath,ncname.name),'time');
@@ -517,14 +505,14 @@ fig = gcf;
 leggy = findobj(fig,'Type', 'legend')
 set(leggy, "FontSize",8);
 %% letters
-annotation('textbox', [0.45 0.821244008502731 0.1 0.1], 'String', '(a)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.45 0.527681231451366, 0.1, 0.1], 'String', '(c)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.45, 0.24, 0.1, 0.1], 'String', '(e)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.44 0.821244008502731 0.1 0.1], 'String', '(a)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.44 0.527681231451366, 0.1, 0.1], 'String', '(c)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.44, 0.235, 0.1, 0.1], 'String', '(e)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
 
-annotation('textbox',  [0.876979166666667 0.821244008502731 0.1 0.1], 'String', '(b)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.876979166666667 0.527681231451366, 0.1, 0.1], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.876979166666667, 0.24, 0.1, 0.1], 'String', '(f)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox',  [0.866979166666667 0.821244008502731 0.1 0.1], 'String', '(b)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.866979166666667 0.527681231451366, 0.1, 0.1], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.866979166666667, 0.235, 0.1, 0.1], 'String', '(f)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
 %% Save figure
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
-% cd C:/Users/jadru/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
+% cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
+cd C:/Users/w22026593/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
 exportgraphics(gcf, "SWE_GT_SL.jpg", "Resolution",300)

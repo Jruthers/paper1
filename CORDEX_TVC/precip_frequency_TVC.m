@@ -5,7 +5,7 @@ close all
 clearvars
 
 % Navigate to the directory containing the RCP4.5 data files
-cd E:/MATLAB/CORDEX_TVC/
+cd D:/MATLAB/CORDEX_TVC
 
 % Generate a list of all files related to the RCP4.5 scenario
 FilesList = dir('mbcn.CA-TVC.NAM-*rcp45*.csv');

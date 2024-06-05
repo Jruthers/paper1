@@ -45,7 +45,7 @@ HPCmonthlyprecip = HPCmonthlyprecip * 60 * 60 * 24; % Convert to mm/day
 HPCmonthlyPtot = HPCmonthlyPtot * 60 * 60 * 24; % Convert to total mm
 
 % Combine time and total precipitation into one matrix
-HPCmonthlytotprecip = [HPCmonthlyTime HPCmonthlyPtot];
+HPCMonthlyPtot2090 = [HPCmonthlyTime HPCmonthlyPtot];
 
 % Combine time and mean precipitation into one matrix
 HPCMonthlyP2090 = [HPCmonthlyTime HPCmonthlyprecip];
@@ -95,8 +95,8 @@ end
 clear Precip20162046
 clearvars indicestoget presentday dimens dataout
 for m=1:12 
-indicestoget=find(HPCmonthlytotprecip(:,1) >= 2016 & HPCmonthlytotprecip(:,1) <= 2046 & HPCmonthlytotprecip(:,2)==m);
-presentday=HPCmonthlytotprecip(indicestoget,:);
+indicestoget=find(HPCMonthlyPtot2090(:,1) >= 2016 & HPCMonthlyPtot2090(:,1) <= 2046 & HPCMonthlyPtot2090(:,2)==m);
+presentday=HPCMonthlyPtot2090(indicestoget,:);
 dimens=size(presentday(:,3:end));
 dataout=reshape(presentday(:,3:end),dimens(1,1)*dimens(1,2),1);
 Precip20162046(:,m)=dataout; 
@@ -105,8 +105,8 @@ end
 % for 2070-2100
 clear Precip20662096
 for m=1:12
-indicestoget=find(HPCmonthlytotprecip(:,1) >= 2066 & HPCmonthlytotprecip(:,1) <= 2096 & HPCmonthlytotprecip(:,2)==m);
-presentday=HPCmonthlytotprecip(indicestoget,:);
+indicestoget=find(HPCMonthlyPtot2090(:,1) >= 2066 & HPCMonthlyPtot2090(:,1) <= 2096 & HPCMonthlyPtot2090(:,2)==m);
+presentday=HPCMonthlyPtot2090(indicestoget,:);
 dimens=size(presentday(:,3:end));
 dataout=reshape(presentday(:,3:end),dimens(1,1)*dimens(1,2),1);
 Precip20662096(:,m)=dataout;
@@ -269,7 +269,7 @@ end
 end
 HPCmonthlyprecip=HPCmonthlyprecip*60*60*24;
 HPCmonthlyPtot=HPCmonthlyPtot*60*60*24;
-HPCmonthlytotprecip=[HPCmonthlyTime HPCmonthlyPtot];
+HPCMonthlyPtot2090=[HPCmonthlyTime HPCmonthlyPtot];
 HPCMonthlyP2090=[HPCmonthlyTime HPCmonthlyprecip];
 HPCMonthlyT2090=[HPCmonthlyTime HPCmonthlyTmean];
 %% Create temp subsets for 2016-2046 and 2066-2096
@@ -293,8 +293,8 @@ end
 
 %% Create precip subsets for 2016-2046 and 2066-2096
 for m=1:12
-indicestoget=find(HPCmonthlytotprecip(:,1) >= 2016 & HPCmonthlytotprecip(:,1) <= 2046 & HPCmonthlytotprecip(:,2)==m); 
-presentday=HPCmonthlytotprecip(indicestoget,:);
+indicestoget=find(HPCMonthlyPtot2090(:,1) >= 2016 & HPCMonthlyPtot2090(:,1) <= 2046 & HPCMonthlyPtot2090(:,2)==m); 
+presentday=HPCMonthlyPtot2090(indicestoget,:);
 dimens=size(presentday(:,3:end)); 
 dataout=reshape(presentday(:,3:end),dimens(1,1)*dimens(1,2),1);
 Precip20162046(:,m)=dataout; % store in new variable
@@ -303,8 +303,8 @@ end
 % for 2070-2100
 clear Precip20662096
 for m=1:12
-indicestoget=find(HPCmonthlytotprecip(:,1) >= 2066 & HPCmonthlytotprecip(:,1) <= 2096 & HPCmonthlytotprecip(:,2)==m);
-presentday=HPCmonthlytotprecip(indicestoget,:);
+indicestoget=find(HPCMonthlyPtot2090(:,1) >= 2066 & HPCMonthlyPtot2090(:,1) <= 2096 & HPCMonthlyPtot2090(:,2)==m);
+presentday=HPCMonthlyPtot2090(indicestoget,:);
 dimens=size(presentday(:,3:end));
 dataout=reshape(presentday(:,3:end),dimens(1,1)*dimens(1,2),1);
 Precip20662096(:,m)=dataout;
