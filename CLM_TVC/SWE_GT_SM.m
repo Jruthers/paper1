@@ -385,7 +385,7 @@ filepath=strcat(CaseList(i).name,internalfilestruct);
 ncname=dir(strcat(filepath,"*h1.2016-0*.nc"));
 variable=ncread(strcat(filepath,ncname.name),'SOILLIQ');
 variable=squeeze(variable);
-variable=variable(2,:);
+variable=variable(3,:);
 SOILLIQ(:,i)=variable;
 end
 variabletime=ncread(strcat(filepath,ncname.name),'time');
@@ -436,7 +436,7 @@ ylabel("Kg/m^2")
 title('Soil Moisture', "FontWeight","normal")
 %legend([GT10_plot_2046 GT10_plot_2096], {'median 2016-2046', 'median 2066-2096'}, Location="northeast", FontSize=8) xticklabels([])
 xlim([1 366])
-% ylim([0 140])
+ylim([0 40])
 %% SOIl moisture rcp85
 clear all
 CaseList=dir('CORDEX_Default*rcp85*');
@@ -447,7 +447,7 @@ filepath=strcat(CaseList(i).name,internalfilestruct);
 ncname=dir(strcat(filepath,"*h1.2016-0*.nc"));
 variable=ncread(strcat(filepath,ncname.name),'SOILLIQ');
 variable=squeeze(variable);
-variable=variable(2,:);
+variable=variable(3,:);
 SOILLIQ(:,i)=variable;
 end
 variabletime=ncread(strcat(filepath,ncname.name),'time');
@@ -497,7 +497,7 @@ hold on
 title('Soil Moisture', "FontWeight","normal")
 %legend([GT10_plot_2046 GT10_plot_2096], {'median 2016-2046', 'median 2066-2096'}, Location="northeast", FontSize=8) xticklabels([])
 xlim([1 366])
-% ylim([0 140])
+ylim([0 40])
 yticklabels([])
 %% Set fontsizes
 fontsize(12, "points")
