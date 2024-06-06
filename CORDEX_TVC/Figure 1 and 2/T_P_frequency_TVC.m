@@ -187,7 +187,7 @@ filterpall=[reshape(filterp1,height(filterp1)*width(filterp1),1); reshape(filter
 
 hold on
 
-sub2 = subplot('Position', [0.2 0.5 0.2 0.26 - gap])
+sub2 = subplot('Position', [0.2 0.5 0.2 0.26 - gap]);
 h1=raincloud_plot(reshape(filtert1,height(filtert1)*width(filtert1),1),Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1),'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
 h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1),'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6, 'box_col_match', 1);
 
@@ -289,7 +289,7 @@ filtertall=[reshape(filtert1,height(filtert1)*width(filtert1),1); reshape(filter
 filterpall=[reshape(filterp1,height(filterp1)*width(filterp1),1); reshape(filterp2,height(filterp2)*width(filterp2),1)];
 
 
-sub3 = subplot('Position', [0.2 0.3 0.2 0.26 - gap])
+sub3 = subplot('Position', [0.2 0.3 0.2 0.26 - gap]);
 h1=raincloud_plot(reshape(filtert1,height(filtert1)*width(filtert1),1),Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1),'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
 h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1),'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6,'box_col_match', 1);
 hold on
@@ -387,7 +387,7 @@ filterp2=HPCmonthlyPtot(HPCmonthlyTime(:,1)>=2066 & HPCmonthlyTime(:,1)<2096 & H
 filtertall=[reshape(filtert1,height(filtert1)*width(filtert1),1); reshape(filtert2,height(filtert2)*width(filtert2),1)];
 filterpall=[reshape(filterp1,height(filterp1)*width(filterp1),1); reshape(filterp2,height(filterp2)*width(filterp2),1)];
 
-sub4 = subplot('Position', [0.2 0.1 0.2 0.26 - gap])
+sub4 = subplot('Position', [0.2 0.1 0.2 0.26 - gap]);
 h1=raincloud_plot(reshape(filtert1,height(filtert1)*width(filtert1),1),Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1),'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
 h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1),'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6,'box_col_match', 1);
 
@@ -475,7 +475,7 @@ end
 end
 hold off
 grid
-%% Load data for RC 8.5
+%% Load data for RCP 8.5
 load("T_P_85.mat")
 %% Raincloud April
 hold on
@@ -484,7 +484,7 @@ standardP=50;
 clear h1
 clear h2
 gap = 0.09;
-sub5 = subplot('Position', [0.44 0.7 0.2 0.26 - gap])
+sub5 = subplot('Position', [0.44 0.7 0.2 0.26 - gap]);
 filtert1=HPCmonthlyTmean(HPCmonthlyTime(:,1)>=2016 & HPCmonthlyTime(:,1)<2046 & HPCmonthlyTime(:,2)==4,:);
 filterp1=HPCmonthlyPtot(HPCmonthlyTime(:,1)>=2016 & HPCmonthlyTime(:,1)<2046 & HPCmonthlyTime(:,2)==4,:);
  
@@ -619,7 +619,7 @@ filterpall=[reshape(filterp1,height(filterp1)*width(filterp1),1); reshape(filter
 
 Precip_scalefactor=0.5;
 gap = 0.09;
-sub6 = subplot('Position', [0.44 0.5 0.2 0.26 - gap])
+sub6 = subplot('Position', [0.44 0.5 0.2 0.26 - gap]);
 h1=raincloud_plot(reshape(filtert1,height(filtert1)*width(filtert1),1),Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1),'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
 h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1),'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6, 'box_col_match', 1);
 
@@ -728,7 +728,7 @@ filterp2=HPCmonthlyPtot(HPCmonthlyTime(:,1)>=2066 & HPCmonthlyTime(:,1)<2096 & H
 filtertall=[reshape(filtert1,height(filtert1)*width(filtert1),1); reshape(filtert2,height(filtert2)*width(filtert2),1)];
 filterpall=[reshape(filterp1,height(filterp1)*width(filterp1),1); reshape(filterp2,height(filterp2)*width(filterp2),1)];
 
-sub7 = subplot('Position', [0.44 0.3 0.2 0.26 - gap])
+sub7 = subplot('Position', [0.44 0.3 0.2 0.26 - gap]);
 h1=raincloud_plot(reshape(filtert1,height(filtert1)*width(filtert1),1),Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1),'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
 h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1),'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6,'box_col_match', 1);
 hold on
@@ -828,7 +828,7 @@ filterpall=[reshape(filterp1,height(filterp1)*width(filterp1),1); reshape(filter
 
 Precip_scalefactor=0.5;
 gap = 0.09;
-sub8 = subplot('Position', [0.44 0.1 0.2 0.26 - gap])
+sub8 = subplot('Position', [0.44 0.1 0.2 0.26 - gap]);
 h1=raincloud_plot(reshape(filtert1,height(filtert1)*width(filtert1),1),Precip_scalefactor*reshape(filterp1,height(filterp1)*width(filterp1),1),'color',[1 1 1],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .15, 'dot_dodge_amount', .6, 'box_col_match', 0);       
 h2=raincloud_plot(reshape(filtert2,height(filtert2)*width(filtert2),1),Precip_scalefactor*reshape(filterp2,height(filterp2)*width(filterp2),1),'color',[1 0 0],'alpha',0.5,'box_dodge', 1, 'box_dodge_amount', .55, 'dot_dodge_amount', 1.6,'box_col_match', 1);
 
@@ -928,8 +928,8 @@ end
 end
 hold off
 grid
-subs = [sub8 sub7 sub6 sub5 sub4 sub3 sub2 sub1]
-insets = [insetAxis1 insetAxis2 insetAxis3 insetAxis4 insetAxis5 insetAxis6 insetAxis7 insetAxis8]
+subs = [sub8 sub7 sub6 sub5 sub4 sub3 sub2 sub1];
+insets = [insetAxis1 insetAxis2 insetAxis3 insetAxis4 insetAxis5 insetAxis6 insetAxis7 insetAxis8];
 set(insets, 'ylim', [0 120])
 % set(insets, 'FontSize', 11)
 all_text_objects = findall(gcf, 'Type', 'text');
