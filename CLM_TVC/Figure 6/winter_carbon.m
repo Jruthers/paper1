@@ -33,7 +33,7 @@ legend([default, sturm],"CORDEX-Jordan", "CORDEX-Sturm", Location="northwest", F
 xticks(1:10:85)
 xticklabels([])
 xlim([1 84])
-ylim([0 1])
+ylim([0 0.8])
 title('RCP 4.5')
 fontsize(15,'points')
 %% SR JORDAN RCP 8.5
@@ -63,7 +63,7 @@ x1=[1:84];
 xticks(1:10:85)
 xticklabels([])
 xlim([1 84])
-ylim([0 1])
+ylim([0 0.8])
 title('RCP 8.5')
 fontsize(15,'points')
 %% FCH4 JORDAN RCP 8.5
@@ -78,7 +78,7 @@ default = plot(medianSWE,'blue');
 box on
 xticks(1:10:85)
 xlim([0 84])
-ylim([0 0.02])
+ylim([0 0.015])
 ylabeltext = ({'CH_4 flux', 'to atmosphere (gC/m^2/day)'});
 ylabel(ylabeltext)
 fontsize(15,'points')
@@ -124,7 +124,7 @@ box on
 xticks(1:10:85);
 xticklabels(UNIQUE_YR(1:10:85,1));
 xlim([1 84])
-ylim([0 0.02])
+ylim([0 0.015])
 fontsize(15,'points')
 %% letters
 annotation('textbox', [0.450392115656364 0.862744983161598 0.0329015544041452 0.0536062378167641], 'String', '(a)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
@@ -133,3 +133,6 @@ annotation('textbox', [0.450392115656364 0.418963882523489 0.0329015544041451 0.
 annotation('textbox', [0.88095322294286 0.418963882523489 0.0334196891191711 0.053606237816764], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
 %% save plot
 set(gcf, 'Position', [271 310 1375 608]);
+%% optional figure export
+cd C:\Users\jadru\'OneDrive - Northumbria University - Production Azure AD'\Documents\Figures\'CLM STURM' 
+exportgraphics(gcf, "jordan_vs_sturm.jpg", "Resolution",300)
