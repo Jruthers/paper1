@@ -946,7 +946,5 @@ annotation('textbox', [0.622479166666667 0.77381231451366 0.1 0.1], 'String', '(
 annotation('textbox', [0.622479166666667 0.57081231451366, 0.1, 0.1], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
 annotation('textbox', [0.622479166666667, 0.37, 0.1, 0.1], 'String', '(f)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
 annotation('textbox', [0.622479166666667, 0.174, 0.1, 0.1], 'String', '(h)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-%% Save figure
-% cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'Alex and bo forcing data'/TVC/
-cd C:\Users\w22026593\'OneDrive - Northumbria University - Production Azure AD'\Documents\Figures\'Alex and bo forcing data'\TVC
-exportgraphics(gcf, "frequency_tiled.jpg", "Resolution",300)
+%% Optional figure export
+% exportgraphics(gcf, "temp_precip_freq.jpg", "Resolution",300)

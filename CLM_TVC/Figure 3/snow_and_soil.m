@@ -444,7 +444,5 @@ annotation('textbox', [0.44, 0.235, 0.1, 0.1], 'String', '(e)', 'EdgeColor', 'no
 annotation('textbox',  [0.866979166666667 0.821244008502731 0.1 0.1], 'String', '(b)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
 annotation('textbox', [0.866979166666667 0.527681231451366, 0.1, 0.1], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
 annotation('textbox', [0.866979166666667, 0.235, 0.1, 0.1], 'String', '(f)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-%% Save figure
-% cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
-cd C:/Users/w22026593/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/CLMdefaultTVC/
-exportgraphics(gcf, "SWE_GT_SL.jpg", "Resolution",300)
+%% Optional figure export
+% exportgraphics(gcf, "SWE_GT_SL.jpg", "Resolution",300)

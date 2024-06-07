@@ -359,7 +359,5 @@ annotation('textbox', [0.44, 0.82, 0.1, 0.1], 'String', '(a)', 'EdgeColor', 'non
 annotation('textbox', [0.86, 0.82, 0.1, 0.1], 'String', '(b)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
 annotation('textbox', [0.44, 0.38, 0.1, 0.1], 'String', '(c)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
 annotation('textbox', [0.86, 0.38, 0.1, 0.1], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-%% Save figure
-% cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'Alex and bo forcing data'/TVC/
-cd C:/Users/w22026593/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'Alex and bo forcing data'/TVC/
-exportgraphics(gcf, "rcps_tiled.jpg", "Resolution",300)
+%% Optional figure export
+% exportgraphics(gcf, "T_and_P_TVC.jpg", "Resolution",300)

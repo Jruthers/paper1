@@ -199,6 +199,5 @@ annotation('textbox', [0.318429943868739 0.101208576998051 0.0292746113989638 0.
 annotation('textbox', [0.528756476683937 0.101208576998051 0.0292746113989638 0.0536062378167641], 'String', '(g)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
 annotation('textbox', [0.741227871329879 0.101208576998051 0.0292746113989638 0.0536062378167641], 'String', '(h)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
 
-%% export
-cd /Users/johnnyrutherford/'OneDrive - Northumbria University - Production Azure AD'/Documents/Figures/'CLM STURM'/
-exportgraphics(gcf, "heat_map.jpg", "Resolution",300)
+%% Optional figure export
+% exportgraphics(gcf, "heat_map.jpg", "Resolution",300)
