@@ -165,7 +165,7 @@ sgtitle('Jordan', 'FontWeight', 'bold');
 %% further plot options
 c = colorbar('Position', [0.93 0.1 0.02 0.8]);
 ylabel(c, 'Soil Temperature ({^o}C)', 'FontSize',10 , 'Rotation', 90)
-set(gcf, 'Position', [118,102,965,513])
+set(gcf, 'Position', [118,102,1250,620])
 figure1=gcf;
 annotation(figure1,'textbox',...
     [0.478248334566986 0.465148983570039 0.100785714285715 0.0428571428571441],...
