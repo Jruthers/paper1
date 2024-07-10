@@ -77,12 +77,13 @@ SWE_plot_2096 = plot(m12, SWEi_2096, 'red', "LineWidth", 1.5);
 % f = fill(SWE_X_fill_2096, SWE_Y_fill_2096, 'red', "FaceAlpha", 0.2, "LineStyle", "none");
 
 % Plot options and customization
-legend([SWE_plot_2046 SWE_plot_2096], {'2016-2046', '2066-2096'}, Location = "southwest", FontSize = 7)
+% legend([SWE_plot_2046 SWE_plot_2096], {'2016-2046', '2066-2096'}, Location = "southwest", FontSize = 7)
 set(gca, 'XTickLabel', []); % Remove x-axis tick labels
-set(gca, 'xtick', [1,32,60,91,121,152,182,213,244,274,305,335], 'xticklabel', {'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'});
+set(gca, 'xtick', [1,32,60,91,121,152,182,213,244,274,305,335])
+    % 'xticklabel', {'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'});
 xtickangle(45); % Rotate x-axis labels
 xlim([1 366]); % Set x-axis limits
-ylim([1 250]); % Set y-axis limits
+ylim([1 350]); % Set y-axis limits
 ylabel("mm w.e."); % Label y-axis
 title('RCP 4.5', 'Snow Water Equivalent (SWE)'); % Set plot title
 
@@ -140,12 +141,12 @@ SWE_plot_2096 = plot(m12, SWEi_2096, 'red', "LineWidth", 1.5);
 
 set(gca, 'XTickLabel', []);
 set(gca, 'YTickLabel', []);
-set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
+set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335])% 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
 xtickangle(45);
 title('RCP 8.5', 'Snow Water Equivalent (SWE)');
 fontsize(13, "points")
 xlim([1 366])
-ylim([1 250])
+ylim([1 350])
 
 %% Load 10cm soil temp for RCP 4.5
 % The above sections are then repeated for 10cm soil temperature
@@ -185,19 +186,19 @@ GTi_2046 = GTmedian1;
 GTi_2096 = GTmedian2;
 m12 = 1:366;
 
-GT_plot_2046 = plot(m12, GTi_2046, 'black', "LineWidth", 1.5);
+GT_plot_2046_J = plot(m12, GTi_2046, 'black', "LineWidth", 1.5);
 hold on
-GT_plot_2096 = plot(m12, GTi_2096, 'red', "LineWidth", 1.5);
+GT_plot_2096_J = plot(m12, GTi_2096, 'red', "LineWidth", 1.5);
 
 yline(0, "--")
-set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
+set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335])% 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
 ylabel("^{o}C")
 title('10cm Soil Temperature', "FontWeight", "normal")
 xlim([1 366])
 ylim([-20 15])
-
+set(gca, 'XTickLabel', []);
 %% Load Sturm 10cm soil temp for RCP 4.5
-clearvars -except GT10_plot_20461 GT10_plot_20961
+clearvars -except GT_plot_2046_J GT_plot_2096_J
 load("GT_sturm_45.mat")
 
 juliandays = [];
@@ -233,14 +234,15 @@ GTi_2046 = GTmedian1;
 GTi_2096 = GTmedian2;
 m12 = 1:366;
 
-GT_plot_2046 = plot(m12, GTi_2046, 'k--', "LineWidth", 1.5);
+GT_plot_2046_S = plot(m12, GTi_2046, 'k--', "LineWidth", 1.5);
 hold on
-GT_plot_2096 = plot(m12, GTi_2096, 'r--', "LineWidth", 1.5);
+GT_plot_2096_S = plot(m12, GTi_2096, 'r--', "LineWidth", 1.5);
 
 % Plot options
 yline(0, "--")
-set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
+set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335])%, 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
 title('10cm Soil Temperature', "FontWeight", "normal")
+legend([GT_plot_2046_J GT_plot_2096_J GT_plot_2046_S GT_plot_2096_S], {'CORDEX-Jordan 2016-2046', 'CORDEX-Jordan 2066-2096', 'CORDEX-Sturm 2016-2046', 'CORDEX-Sturm 2066-2096'}, Location = "southwest", FontSize = 7)
 
 %% Load 10cm Soil temp for rcp85
 clearvars
@@ -286,7 +288,7 @@ GT_plot_2096 = plot(m12, GTi_2096, 'red', "LineWidth", 1.5);
 
 % Plot options
 yline(0, "--")
-set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
+set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335])%, 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
 title('10cm Soil Temperature', "FontWeight", "normal")
 xlim([1 366])
 
@@ -333,10 +335,12 @@ GT_plot_2096 = plot(m12, GTi_2096, 'r--', "LineWidth", 1.5);
 
 % Plot options
 yline(0, "--")
-set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
+set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335])%, 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
 title('10cm Soil Temperature', "FontWeight", "normal")
 ylim([-20 15])
 yticklabels([])
+set(gca, 'XTickLabel', []);
+
 %% Load SOIl moisture RCP 45
 clearvars
 load("SM_45.mat")
@@ -379,10 +383,10 @@ hold on
 SL_plot_2096 = plot(m12, SLi_2096, 'r', "LineWidth", 1.5);
 
 set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
-ylabel("Kg/m^2")
+ylabel("Kg m^{-2}")
 title('Soil Moisture', "FontWeight", "normal")
 xlim([1 366])
-ylim([0 40])
+ylim([0 50])
 hold off
 %% Load SOIl moisture for RCP 85
 clearvars
@@ -428,7 +432,7 @@ SL_plot_2096 = plot(m12, SLi_2096, 'r', "LineWidth", 1.5);
 set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
 title('Soil Moisture', "FontWeight", "normal")
 xlim([1 366])
-ylim([0 40])
+ylim([0 50])
 yticklabels([])
 hold off
 %% Set fontsizes
@@ -445,4 +449,4 @@ annotation('textbox',  [0.866979166666667 0.821244008502731 0.1 0.1], 'String', 
 annotation('textbox', [0.866979166666667 0.527681231451366, 0.1, 0.1], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
 annotation('textbox', [0.866979166666667, 0.235, 0.1, 0.1], 'String', '(f)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
 %% Optional figure export
-% exportgraphics(gcf, "SWE_GT_SL.jpg", "Resolution",300)
+exportgraphics(gcf, "SWE_GT_SL.pdf", "Resolution",300)

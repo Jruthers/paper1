@@ -355,9 +355,9 @@ end
 disp(tempresults85);
 %% Annotations
 set(gcf, 'Position', [271 310 800 608]);
-annotation('textbox', [0.44, 0.82, 0.1, 0.1], 'String', '(a)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.86, 0.82, 0.1, 0.1], 'String', '(b)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.44, 0.38, 0.1, 0.1], 'String', '(c)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.86, 0.38, 0.1, 0.1], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.44, 0.82, 0.1, 0.1], 'String', '(a)', 'EdgeColor', 'none', 'FontSize', 11, 'FontWeight', 'normal')
+annotation('textbox', [0.86, 0.82, 0.1, 0.1], 'String', '(b)', 'EdgeColor', 'none', 'FontSize', 11, 'FontWeight', 'normal')
+annotation('textbox', [0.44, 0.38, 0.1, 0.1], 'String', '(c)', 'EdgeColor', 'none', 'FontSize', 11, 'FontWeight', 'normal')
+annotation('textbox', [0.86, 0.38, 0.1, 0.1], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 11, 'FontWeight', 'normal')
 %% Optional figure export
-% exportgraphics(gcf, "T_and_P_TVC.jpg", "Resolution",300)
+exportgraphics(gcf, "T_and_P_TVC.pdf", "Resolution",300)

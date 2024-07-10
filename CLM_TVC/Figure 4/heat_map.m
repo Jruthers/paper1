@@ -3,6 +3,7 @@ close all
 clearvars
 load("TSOI_45_P.mat")
 %plot layout
+figure('Renderer', 'Painters')
 tiledlayout(2,4)
 nexttile(1)
 
@@ -19,12 +20,12 @@ hold on
 c2 = contour([1:366],(y(1:21)),(GTmedian1depth_P1(1:21,:)),[-0.75 -0.75], '--k', 'LineWidth', 2);
 
 %other plot options
-xlim([0 366])
+xlim([1 365])
 ylim([-11 0])
 title('2016-2046', 'FontWeight','bold');
 ytext = {'Soil Depth (m)'};
 ylabel(ytext);
-
+xticklabels([])
 %% default rcp45 future
 clearvars -except GTmedian1depth_P1
 load("TSOI_45_F.mat")
@@ -39,7 +40,7 @@ hold on
 c1 = contour([1:366],(y(1:21)),(GTmedian1depth_F(1:21,:)),[0.75 0.75], '-k', 'LineWidth', 2);
 hold on
 c2 = contour([1:366],(y(1:21)),(GTmedian1depth_F(1:21,:)),[-0.75 -0.75], '--k', 'LineWidth', 2);
-xlim([0 366])
+xlim([1 365])
 ylim([-11 0])
 % x_low = c1(1, 2:end);
 % y_low = c1(2, 2:end);
@@ -50,7 +51,7 @@ ylim([-11 0])
 % contour([1:366],(y(1:20)),(GTmedian1depth_F(1:20,:)),[0 0],'k-','LineWidth',2)
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
 title('2066-2096', 'FontWeight','bold')
-
+xticklabels([])
 %% sturm rcp45 present 
 load("TSOI_Sturm_45_P.mat")
 % subplot(2,2,3)
@@ -64,13 +65,11 @@ hold on
 c1 = contour([1:366],(y(1:21)),(GTmedian1depth_P(1:21,:)),[0.75 0.75], '-k', 'LineWidth', 2);
 hold on
 c2 = contour([1:366],(y(1:21)),(GTmedian1depth_P(1:21,:)),[-0.75 -0.75], '--k', 'LineWidth', 2);
-xlim([0 366])
+xlim([1 365])
 ylim([-11 0])
 
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
 ylabel({'Soil Depth (m)'})
-xlabel('Julian Day')
-
 %% sturm rcp45 future
 load("TSOI_Sturm_45_F.mat")
 % subplot(2,2,4)
@@ -84,12 +83,10 @@ hold on
 c1 = contour([1:366],(y(1:21)),(GTmedian1depth_F(1:21,:)),[0.75 0.75], '-k', 'LineWidth', 2);
 hold on
 c2 = contour([1:366],(y(1:21)),(GTmedian1depth_F(1:21,:)),[-0.75 -0.75], '--k', 'LineWidth', 2);
-xlim([0 366])
+xlim([1 365])
 ylim([-11 0])
 
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
-xlabel('Julian Day')
-
 %% default rcp85 present 
 load("TSOI_85_P.mat")
 nexttile(3)
@@ -102,11 +99,12 @@ hold on
 c1 = contour([1:366],(y(1:21)),(GTmedian1depth_P2(1:21,:)),[0.75 0.75], '-k', 'LineWidth', 2);
 hold on
 c2 = contour([1:366],(y(1:21)),(GTmedian1depth_P2(1:21,:)),[-0.75 -0.75], '--k', 'LineWidth', 2);
-xlim([0 366])
+xlim([1 365])
 ylim([-11 0])
 
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
 title('2016-2046', 'FontWeight','bold');
+xticklabels([])
 % ylabel('Soil Depth (m)')
 %% default rcp85 future
 load("TSOI_85_F.mat")
@@ -121,11 +119,12 @@ hold on
 c1 = contour([1:366],(y(1:21)),(GTmedian1depth_F(1:21,:)),[0.75 0.75], '-k', 'LineWidth', 2);
 hold on
 c2 = contour([1:366],(y(1:21)),(GTmedian1depth_F(1:21,:)),[-0.75 -0.75], '--k', 'LineWidth', 2);
-xlim([0 366])
+xlim([1 365])
 ylim([-11 0])
 
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
 title('2066-2096', 'FontWeight','bold')
+xticklabels([])
 %% sturm rcp85 present 
 load("TSOI_Sturm_85_P.mat")
 nexttile(7)
@@ -138,11 +137,10 @@ hold on
 c1 = contour([1:366],(y(1:21)),(GTmedian1depth_P(1:21,:)),[0.75 0.75], '-k', 'LineWidth', 2);
 hold on
 c2 = contour([1:366],(y(1:21)),(GTmedian1depth_P(1:21,:)),[-0.75 -0.75], '--k', 'LineWidth', 2);
-xlim([0 366])
+xlim([1 365])
 ylim([-11 0])
 
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
-xlabel('Julian Day')
 
 %% Sturm rcp85 future
 load("TSOI_Sturm_85_F.mat")
@@ -156,11 +154,10 @@ hold on
 c1 = contour([1:366],(y(1:21)),(GTmedian1depth_F(1:21,:)),[0.75 0.75], '-k', 'LineWidth', 2);
 hold on
 c2 = contour([1:366],(y(1:21)),(GTmedian1depth_F(1:21,:)),[-0.75 -0.75], '--k', 'LineWidth', 2);
-xlim([0 366])
+xlim([1 365])
 ylim([-11 0])
 
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
-xlabel('Julian Day')
 sgtitle('Jordan', 'FontWeight', 'bold');
 %% further plot options
 c = colorbar('Position', [0.93 0.1 0.02 0.8]);
@@ -188,16 +185,27 @@ annotation(figure1,'textbox',...
     'EdgeColor','none');
 % annotation('textbox', [0.25, 0.95, 0.5, 0.05], 'String', 'Jordan', 'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', 14);
 % annotation('textbox', [0.25, 0.45, 0.5, 0.05], 'String', 'Sturm', 'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', 14);
+%% xticks and labels
+% Define the xticks and labels
+xticks = [1,32,60,91,121,152,182,213,244,274,305,335];
+xticklabels = {'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'};
 
+% Find all axes in the current figure
+all_axes = findall(gcf, 'Type', 'axes');
+target_axis = all_axes([1,2,5,6]);
+% Loop through each axis and set the xticks and xticklabels
+for k = 1:length(target_axis)
+    set(target_axis(k), 'XTick', xticks, 'XTickLabel', xticklabels);
+end
 %% letters
-annotation('textbox', [0.105958549222797 0.577189427606042 0.0329015544041451 0.0536062378167641], 'String', '(a)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.318393782383419 0.574074993634601 0.033419689119171 0.0536062378167641], 'String', '(b)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.528756476683937 0.5740749936346 0.0329015544041451 0.0536062378167641], 'String', '(c)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.741227871329879 0.574074993634601 0.0334196891191709 0.0536062378167641], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.105958549222798 0.103157894736842 0.0329015544041451 0.0536062378167641], 'String', '(e)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.318429943868739 0.101208576998051 0.0292746113989638 0.0536062378167641], 'String', '(f)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.528756476683937 0.101208576998051 0.0292746113989638 0.0536062378167641], 'String', '(g)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.741227871329879 0.101208576998051 0.0292746113989638 0.0536062378167641], 'String', '(h)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.103958549222797 0.577189427606042 0.0329015544041451 0.0536062378167641], 'String', '(a)', 'EdgeColor', 'none', 'FontSize', 13, 'FontWeight', 'normal')
+annotation('textbox', [0.316393782383419 0.574074993634601 0.033419689119171 0.0536062378167641], 'String', '(b)', 'EdgeColor', 'none', 'FontSize', 13, 'FontWeight', 'normal')
+annotation('textbox', [0.526756476683937 0.5740749936346 0.0329015544041451 0.0536062378167641], 'String', '(c)', 'EdgeColor', 'none', 'FontSize', 13, 'FontWeight', 'normal')
+annotation('textbox', [0.739227871329879 0.574074993634601 0.0334196891191709 0.0536062378167641], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 13, 'FontWeight', 'normal')
+annotation('textbox', [0.103958549222798 0.103157894736842 0.0329015544041451 0.0536062378167641], 'String', '(e)', 'EdgeColor', 'none', 'FontSize', 13, 'FontWeight', 'normal')
+annotation('textbox', [0.316429943868739 0.101208576998051 0.0292746113989638 0.0536062378167641], 'String', '(f)', 'EdgeColor', 'none', 'FontSize', 13, 'FontWeight', 'normal')
+annotation('textbox', [0.526756476683937 0.101208576998051 0.0292746113989638 0.0536062378167641], 'String', '(g)', 'EdgeColor', 'none', 'FontSize', 13, 'FontWeight', 'normal')
+annotation('textbox', [0.739227871329879 0.101208576998051 0.0292746113989638 0.0536062378167641], 'String', '(h)', 'EdgeColor', 'none', 'FontSize', 13, 'FontWeight', 'normal')
 
 %% Optional figure export
-% exportgraphics(gcf, "heat_map.jpg", "Resolution",300)
+exportgraphics(gcf, "heat_map.pdf", "Resolution",300)
