@@ -19,4 +19,4 @@ legend([P1 P2 P3 P4], {'Jordan 2016-2046', 'Jordan 2066-2096', 'Sturm 2016-2046'
 set(gca, 'YDir', 'reverse');
 ylim([0 15])
 %% Optional export
-% exportgraphics(gcf, "GT_depth.jpg", "Resolution",300)
+% exportgraphics(gcf, "Appendix_B.png", "Resolution",300)

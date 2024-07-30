@@ -66,6 +66,8 @@ end
 
 leg = legend(legendLabels,'FontSize',6, 'Location', 'northwest');
 set(leg, 'box', 'off')
+set(leg,'Position',[0.1325 0.769678896489345 0.12 0.0989880716829669],...
+    'FontSize',5);
 sgtitle("RCP 4.5", 'FontSize', 25)
 %% RCP 8.5
 clear all
@@ -137,5 +139,16 @@ end
 
 leg = legend(legendLabels,'FontSize',6, 'Location', 'northwest');
 set(leg, 'box', 'off')
-% sgtitle("RCP 8.5", 'FontSize', 25)
-% exportgraphics(gcf, "members_precip.pdf", "Resolution",300)
+set(leg,...
+    'Position',[-0.107704223632813 0.269122807805845 0.700704223632812 0.152631578947368],...
+    'NumColumns',2,...
+    'FontSize',5);
+%% plot options
+set(gcf, 'Position', [100 200 1000 850]);
+annotation('textbox', [0.441448784376245 0.824517767235269 0.0329015544041451 0.0536062378167641], 'String', '(a)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.879316859306497 0.821510248438277 0.0334196891191709 0.0536062378167641], 'String', '(b)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.440448784376245 0.37374082487938 0.0329015544041451 0.053606237816764], 'String', '(c)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.878316859306497 0.372237065480883 0.0334196891191711 0.0536062378167642], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+%% save plot
+title("RCP 8.5", 'FontSize', 25, "FontWeight","normal")
+exportgraphics(gcf, "members_precip.pdf", "Resolution",300)

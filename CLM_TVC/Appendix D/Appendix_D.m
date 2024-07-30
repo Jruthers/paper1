@@ -237,4 +237,12 @@ load("FCH4_IR_STURM_85.mat")
 p5 = plot(FCH4i_2046sum, 'Color', [0.4660    0.6740    0.1880], 'LineStyle', '--');
 p6 = plot(FCH4i_2096sum, 'Color', [0.3010    0.7450    0.9330], 'LineStyle', '--');
 ylim([0 15])
+%% plot options
+set(gcf, 'Position', [100 200 1000 850]);
 
+annotation('textbox', [0.433448784376245 0.869630549190156 0.0329015544041451 0.0536062378167641], 'String', '(a)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.874316859306496 0.869630549190156 0.0334196891191709 0.0536062378167641], 'String', '(b)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.433448784376245 0.396297215856823 0.0329015544041451 0.053606237816764], 'String', '(c)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+annotation('textbox', [0.874316859306496 0.396297215856823 0.0334196891191711 0.0536062378167641], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+
+exportgraphics(gcf, "Appendix_D.pdf", "Resolution",300)
