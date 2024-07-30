@@ -19,30 +19,50 @@ This folder contains matlab scripts for figures 1 & 2
 
 **Figure 1: Air temperature and precipitation**
 
-<img src="Images/rcps_tiled.jpg" alt="Figure 1" width="500"/>
+<img src="Images/f01.png" alt="Figure 1" width="500"/>
 
 **Figure 2: Precipitation frequency vs air temperature**
 
-<img src="Images/frequency_plot_final.png" alt="Figure 2" width="500"/>
+<img src="Images/f02.png" alt="Figure 2" width="500"/>
 
 ## CLM_TVC
 This folder contains matlab scripts for figures 3-6
 
 **Figure 3: Snow water equivalent, soil temperature and soil moisture**
 
-<img src="Images/SWE_GT_SL.jpg" alt="Figure 3" width="500"/>
+<img src="Images/f03.png" alt="Figure 3" width="500"/>
 
 **Figure 4: Soil temperature and zero-curtain duration**
 
-<img src="Images/heat_map.jpg" alt="Figure 4" width="500"/>
+<img src="Images/f04.png" alt="Figure 4" width="500"/>
 
 **Figure 5: Cumulative CO<sub>2</sub> and CH<sub>4</sub> flux**
 
-<img src="Images/cumu.jpg" alt="Figure 5" width="500"/>
+<img src="Images/f05.png" alt="Figure 5" width="500"/>
 
 **Figure 6: Future winter CO<sub>2</sub> and CH<sub>4</sub> flux**
 
-<img src="Images/param_combined.jpg" alt="Figure 6" width="500"/>
+<img src="Images/f06.png" alt="Figure 6" width="500"/>
+
+**Appendix A: Air temperature and precipitation by ensemble member**
+
+<img src="Images/Appendix_A.png" alt="Appendix A" width="500"/>
+
+**Appendix B: Aug-Dec zero curtain duration**
+
+<img src="Images/Appendix_B.png" alt="Appendix B" width="500"/>
+
+**Appendix C: CLM5.0 parameter combinations**
+
+<img src="Images/Appendix_C.png" alt="Appendix C" width="500"/>
+
+**Appendix D: Cumulative soil carbon outputs constrained by the snow-down period and irrespective of snow**
+
+<img src="Images/Appendix_D.png" alt="Appendix D" width="500"/>
+
+**Appendix E: Winter soil carbon as a function of the full range of chosen parameter space**
+
+<img src="Images/Appendix_E.png" alt="Appendix E" width="500"/>
 
 ## Images
 This folder contains image files for paper figures.
