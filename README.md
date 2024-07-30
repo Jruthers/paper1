@@ -46,23 +46,23 @@ This folder contains matlab scripts for figures 3-6
 
 **Appendix A: Air temperature and precipitation by ensemble member**
 
-<img src="Images/Appendix_A" alt="Appendix A" width="500"/>
+<img src="Images/Appendix_A.png" alt="Appendix A" width="500"/>
 
 **Appendix B: Aug-Dec zero curtain duration**
 
-<img src="Images/Appendix_B" alt="Appendix B" width="500"/>
+<img src="Images/Appendix_B.png" alt="Appendix B" width="500"/>
 
 **Appendix C: CLM5.0 parameter combinations**
 
-<img src="Images/Appendix_C" alt="Appendix C" width="500"/>
+<img src="Images/Appendix_C.png" alt="Appendix C" width="500"/>
 
 **Appendix D: Cumulative soil carbon outputs constrained by the snow-down period and irrespective of snow**
 
-<img src="Images/Appendix_D" alt="Appendix D" width="500"/>
+<img src="Images/Appendix_D.png" alt="Appendix D" width="500"/>
 
 **Appendix E: Winter soil carbon as a function of the full range of chosen parameter space**
 
-<img src="Images/Appendix_E" alt="Appendix E" width="500"/>
+<img src="Images/Appendix_E.png" alt="Appendix E" width="500"/>
 
 ## Images
 This folder contains image files for paper figures.
