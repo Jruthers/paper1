@@ -1,32 +1,40 @@
 %% Default Snowdown SR RCP 4.5
-close all
-clearvars
-load("SR_45.mat")
+% Clear existing data and load new data
+close all  % Close all open figures
+clearvars  % Clear all variables from the workspace
+load("SR_45.mat")  % Load the dataset from a .mat file
 
+% Create copies of the data for specific years
 SRi_J_2046sum = SRi_2046sum;
 SRi_J_2096sum = SRi_2096sum;
 
-figure('Position', [100, 100, 650, 450]);
-subplot(2,2,1)
+% Plot setup
+figure('Position', [100, 100, 650, 450]);  % Create a new figure with specified size
+subplot(2, 2, 1)  % Create a subplot (2x2 grid, first plot)
 
-% this script finds the date when accumulation stops and stops the plotting
-% there
-ix=find(diff(SRi_J_2046sum)==0); % find rows where the difference between consectiuve vals =0
-ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
-ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
-p1 = plot([1:ix3], (SRi_J_2046sum(1:ix3,1)), 'black', LineWidth=2);
+% Plot snow accumulation data for 2046
+% Find the date when accumulation stops
+ix = find(diff(SRi_J_2046sum) == 0);  % Find rows where the difference between consecutive values is 0
+ix2 = find(ix > 200);  % Exclude rows pertaining to the start of snow season
+ix3 = min(ix(ix2));  % Find the earliest date where snow accumulation stops
+p1 = plot([1:ix3], (SRi_J_2046sum(1:ix3, 1)), 'black', 'LineWidth', 2);  % Plot the data up to the earliest stop date
 hold on
-ix=find(diff(SRi_J_2096sum)==0); % find rows where the difference between consectiuve vals =0
-ix2=find(ix > 200); % cuts off rows pertaining to start of snow season
-ix3=min(ix(ix2)); % this finds the rows pertaining to end of season (i.e. >200) and then gets the minimum row (ie earliest snow off)
-p2 = plot([1:ix3], (SRi_J_2096sum(1:ix3,1)), 'red', LineWidth=2);
 
-%further plot options
-set(gca, 'xtick' ,[0:20:304]);
+% Plot snow accumulation data for 2096
+% Find the date when accumulation stops
+ix = find(diff(SRi_J_2096sum) == 0);  % Find rows where the difference between consecutive values is 0
+ix2 = find(ix > 200);  % Exclude rows pertaining to the start of snow season
+ix3 = min(ix(ix2));  % Find the earliest date where snow accumulation stops
+p2 = plot([1:ix3], (SRi_J_2096sum(1:ix3, 1)), 'red', 'LineWidth', 2);  % Plot the data up to the earliest stop date
+
+% Additional plot settings
+set(gca, 'xtick', [0:20:304]);  % Set x-axis ticks at intervals of 20
 hold on
-xlim([0 300])
-xtickangle(45)
+xlim([0 300])  % Set x-axis limits
+xtickangle(45)  % Rotate x-axis tick labels by 45 degrees
+
 %% Sturm Snowdown SR RCP 4.5
+%the above section is repeated for the sturm data
 load("SR_Sturm_45.mat")
 
 SRi_S_2046sum = SRi_2046sum;
@@ -53,6 +61,7 @@ ylabel(ylabeltext)
 title('RCP 4.5')
 legend([p1 p2 p3 p4], {'CORDEX-Jordan 2016-2046', 'CORDEX-Jordan 2066-2096', 'CORDEX-Sturm 2016-2046', 'CORDEX-Sturm 2066-2096'}, "Location", "southeast", 'FontSize', 7);
 %% Default Snowdown SR RCP 8.5
+%the above sections are repeated for each subplot
 clearvars
 load("SR_85.mat")
 

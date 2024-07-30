@@ -1,32 +1,45 @@
-%% Change directory
-close all
-clearvars
-load("TSOI_45_P.mat")
-%plot layout
-figure('Renderer', 'Painters')
-tiledlayout(2,4)
-nexttile(1)
+%%  Default rcp45 present
+% Clear existing data and load new data
+close all  % Close all open figures
+clearvars  % Clear all variables from the workspace
+load("TSOI_45_P.mat")  % Load the dataset from a .mat file
 
-% set the soil layers according to their depth 
-y=-1*[0.020 0.060 0.120 0.200 0.320... 	
+% Plot layout setup
+figure('Renderer', 'Painters')  % Create a new figure with high-quality rendering
+tiledlayout(2, 4)  % Create a tiled layout with 2 rows and 4 columns for subplots
+nexttile(1)  % Select the first tile for plotting
+
+% Define soil layer depths and plot heatmap
+% Set the soil layers according to their depth (in meters, negative for depth below surface)
+y = -1 * [0.020 0.060 0.120 0.200 0.320... 	
 0.480 0.680 0.920 1.200 1.520... 	
 1.880 2.280 2.720 3.260 3.900 4.640 5.480 6.420 7.460... 	
 8.600 10.990 15.666 23.301 34.441 49.556]';
-pcolor([1:366],(y(1:21)),(GTmedian1depth_P1(1:21,:))); shading interp; colormap parula %create a colour heatmap from daily data
-hold on
-clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]); %set the colour threshold to this figure
-c1 = contour([1:366],(y(1:21)),(GTmedian1depth_P1(1:21,:)),[0.75 0.75], '-k', 'LineWidth', 2); %add contour lines for the zero-curtain
-hold on
-c2 = contour([1:366],(y(1:21)),(GTmedian1depth_P1(1:21,:)),[-0.75 -0.75], '--k', 'LineWidth', 2);
 
-%other plot options
-xlim([1 365])
-ylim([-11 0])
-title('2016-2046', 'FontWeight','bold');
-ytext = {'Soil Depth (m)'};
-ylabel(ytext);
-xticklabels([])
-%% default rcp45 future
+% Create a color heatmap of daily data for the first 21 depths
+pcolor([1:366], y(1:21), GTmedian1depth_P1(1:21, :)); 
+shading interp;  % Interpolate shading colors
+colormap parula  % Apply parula colormap
+hold on
+
+% Set color limits based on data range
+clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]); 
+
+% Add contour lines for specific values
+c1 = contour([1:366], y(1:21), GTmedian1depth_P1(1:21, :), [0.75 0.75], '-k', 'LineWidth', 2);  % Solid line for 0.75
+hold on
+c2 = contour([1:366], y(1:21), GTmedian1depth_P1(1:21, :), [-0.75 -0.75], '--k', 'LineWidth', 2);  % Dashed line for -0.75
+
+% Additional plot settings
+xlim([1 365])  % Set x-axis limits
+ylim([-11 0])  % Set y-axis limits
+title('2016-2046', 'FontWeight', 'bold');  % Add title to the plot
+ylabel('Soil Depth (m)');  % Label y-axis
+xticklabels([])  % Remove x-axis tick labels
+
+%% Default rcp45 future
+% the above section is then repeated for each subplot/tile
+
 clearvars -except GTmedian1depth_P1
 load("TSOI_45_F.mat")
 % subplot(2,2,2)
@@ -52,7 +65,7 @@ ylim([-11 0])
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
 title('2066-2096', 'FontWeight','bold')
 xticklabels([])
-%% sturm rcp45 present 
+%% Sturm rcp45 present 
 load("TSOI_Sturm_45_P.mat")
 % subplot(2,2,3)
 nexttile(5)
@@ -70,7 +83,7 @@ ylim([-11 0])
 
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
 ylabel({'Soil Depth (m)'})
-%% sturm rcp45 future
+%% Sturm rcp45 future
 load("TSOI_Sturm_45_F.mat")
 % subplot(2,2,4)
 nexttile(6)
@@ -87,7 +100,7 @@ xlim([1 365])
 ylim([-11 0])
 
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
-%% default rcp85 present 
+%% Default rcp85 present 
 load("TSOI_85_P.mat")
 nexttile(3)
 y=-1*[0.020 0.060 0.120 0.200 0.320... 	
@@ -106,7 +119,7 @@ clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
 title('2016-2046', 'FontWeight','bold');
 xticklabels([])
 % ylabel('Soil Depth (m)')
-%% default rcp85 future
+%% Default rcp85 future
 load("TSOI_85_F.mat")
 % subplot(2,2,2)
 nexttile(4)
@@ -125,7 +138,7 @@ ylim([-11 0])
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
 title('2066-2096', 'FontWeight','bold')
 xticklabels([])
-%% sturm rcp85 present 
+%% Sturm rcp85 present 
 load("TSOI_Sturm_85_P.mat")
 nexttile(7)
 y=-1*[0.020 0.060 0.120 0.200 0.320... 	
@@ -159,7 +172,7 @@ ylim([-11 0])
 
 clim([min(GTmedian1depth_P1(:)) max(GTmedian1depth_P1(:))]);
 sgtitle('Jordan', 'FontWeight', 'bold');
-%% further plot options
+%% Further plot options and colour bar additions
 c = colorbar('Position', [0.93 0.1 0.02 0.8]);
 ylabel(c, 'Soil Temperature ({^o}C)', 'FontSize',10 , 'Rotation', 90)
 set(gcf, 'Position', [118,102,1250,620])
@@ -185,7 +198,7 @@ annotation(figure1,'textbox',...
     'EdgeColor','none');
 % annotation('textbox', [0.25, 0.95, 0.5, 0.05], 'String', 'Jordan', 'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', 14);
 % annotation('textbox', [0.25, 0.45, 0.5, 0.05], 'String', 'Sturm', 'EdgeColor', 'none', 'HorizontalAlignment', 'center', 'FontSize', 14);
-%% xticks and labels
+%% Xticks and labels
 % Define the xticks and labels
 xticks = [1,32,60,91,121,152,182,213,244,274,305,335];
 xticklabels = {'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'};
@@ -197,7 +210,7 @@ target_axis = all_axes([1,2,5,6]);
 for k = 1:length(target_axis)
     set(target_axis(k), 'XTick', xticks, 'XTickLabel', xticklabels);
 end
-%% letters
+%% Subplot labels
 annotation('textbox', [0.103958549222797 0.577189427606042 0.0329015544041451 0.0536062378167641], 'String', '(a)', 'EdgeColor', 'none', 'FontSize', 13, 'FontWeight', 'normal')
 annotation('textbox', [0.316393782383419 0.574074993634601 0.033419689119171 0.0536062378167641], 'String', '(b)', 'EdgeColor', 'none', 'FontSize', 13, 'FontWeight', 'normal')
 annotation('textbox', [0.526756476683937 0.5740749936346 0.0329015544041451 0.0536062378167641], 'String', '(c)', 'EdgeColor', 'none', 'FontSize', 13, 'FontWeight', 'normal')
@@ -208,4 +221,4 @@ annotation('textbox', [0.526756476683937 0.101208576998051 0.0292746113989638 0.
 annotation('textbox', [0.739227871329879 0.101208576998051 0.0292746113989638 0.0536062378167641], 'String', '(h)', 'EdgeColor', 'none', 'FontSize', 13, 'FontWeight', 'normal')
 
 %% Optional figure export
-exportgraphics(gcf, "heat_map.pdf", "Resolution",300)
+% exportgraphics(gcf, "heat_map.pdf", "Resolution",300)

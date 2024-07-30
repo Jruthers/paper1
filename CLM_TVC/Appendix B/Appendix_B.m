@@ -18,5 +18,6 @@ xlabel('Zero-Curtain Duration (days)')
 legend([P1 P2 P3 P4], {'Jordan 2016-2046', 'Jordan 2066-2096', 'Sturm 2016-2046', 'Sturm 2066-2096' }, Location="southeast", FontSize=8)
 set(gca, 'YDir', 'reverse');
 ylim([0 15])
+box on
 %% Optional export
-% exportgraphics(gcf, "Appendix_B.png", "Resolution",300)
+exportgraphics(gcf, "Appendix_B.pdf", "Resolution",300)
