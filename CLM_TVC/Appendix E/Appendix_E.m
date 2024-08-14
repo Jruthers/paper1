@@ -20,7 +20,7 @@ SWEX = [1:length(SWEperc25'), length(SWEperc75'):-1:1];
 SWEY = [SWEperc25', fliplr(SWEperc75')];
 f = fill(SWEX, SWEY, 'blue', "FaceAlpha", 0.2, "LineStyle", "none");
 xlim([0 84])
-ylim([0 1.5])
+ylim([0 1])
 xticks([1:10:85])
 xticklabels([])
 ylabeltext = ({'CO_2 flux to', 'atmosphere (gC m^{-2} day^{-1})'});
@@ -58,7 +58,7 @@ box on
 xticks([1:10:85])
 xticklabels([])
 xlim([0 84])
-ylim([0 1.5])
+ylim([0 1])
 %% RCP8.5 q10 7.5 psimin -2
 load("SR_85_7.5_-2.mat")
 nexttile(2)
@@ -81,7 +81,7 @@ f = fill(SWEX, SWEY, 'blue', "FaceAlpha", 0.2, "LineStyle", "none");
 % SWEY = [medianSWE1', fliplr(medianSWE')];
 % f = fill(SWEX, SWEY, 'blue', "FaceAlpha", 0.2, "LineStyle", "none");
 xlim([0 84])
-ylim([0 1.5])
+ylim([0 1])
 xticklabels([])
 title('RCP 8.5')
 %% STURM RCP8.5 q10 7.5 psimin -2
@@ -111,7 +111,7 @@ box on
 xticks([1:10:85])
 xticklabels([])
 xlim([0 84])
-ylim([0 1.5])
+ylim([0 1])
 %% CH4
 %% RCP4.5 q10 7.5 psimin -2 CH4Q10 4
 clearvars
@@ -136,7 +136,7 @@ f = fill(SWEX, SWEY, 'blue', "FaceAlpha", 0.2, "LineStyle", "none");
 % SWEY = [medianSWE1', fliplr(medianSWE')];
 % f = fill(SWEX, SWEY, 'blue', "FaceAlpha", 0.2, "LineStyle", "none");
 xlim([0 84])
-ylim([0 0.015])
+ylim([0 0.02])
 xticks([1:10:85])
 xticklabels([])
 ylabeltext = ({'CH_4 flux to', 'atmosphere (gC m^{-2} day^{-1})'});
@@ -173,7 +173,7 @@ box on
 xticks([1:10:85])
 xticklabels(UNIQUE_YR([1:10:85],1))
 xlim([0 84])
-ylim([0 0.015])
+ylim([0 0.02])
 leg4 = legend([low, up], {'CORDEX-Sturm 7.5 -2 4', 'CORDEX-Sturm 1.5 -20 1.3'}, 'Location', 'northwest', 'FontSize', 10);
 %% RCP8.5 q10 7.5 psimin -2 CH4Q10 4
 clearvars
@@ -189,7 +189,7 @@ hold on
 xticks([1:10:85])
 xticklabels([])
 xlim([0 84])
-ylim([0 0.015])
+ylim([0 0.02])
 %% RCP8.5 q10 1.5 psimin -20
 clearvars
 load("CH4_85_1.5_-20.mat")
@@ -229,7 +229,7 @@ box on
 xticks([1:10:85])
 xticklabels(UNIQUE_YR([1:10:85],1))
 xlim([0 84])
-ylim([0 0.015])
+ylim([0 0.02])
 
 %% letters
 annotation('textbox', [0.445149616220316 0.867852078208452 0.0329015544041451 0.0536062378167641], 'String', '(a)', 'EdgeColor', 'none', 'FontSize', 13, 'FontWeight', 'normal')
