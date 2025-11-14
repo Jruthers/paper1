@@ -19,8 +19,8 @@ SWE2100 = [SWE2100, juliandays];
 
 % 2. SWE 45 plot: Plot SWE data for two periods with a subplot layout
 SWEplot = figure(); % Create a new figure
-SWEplot.Position = [120 20 900 1500]; % Set figure position and size
-T = tiledlayout(3,2, "TileSpacing", "compact"); % Create a tiled layout with 3x2 grid
+SWEplot.Position = [120     1   800   976]; % Set figure position and size
+t = tiledlayout(4,2, "TileSpacing", "compact"); % Create a tiled layout with 3x2 grid
 nexttile
 % Process SWE data for the period 2016-2046
 SWE20162046_Daily = nan(30 * (width(SWE2100) - 4), 366); % Initialize matrix for daily SWE data
@@ -83,13 +83,13 @@ set(gca, 'xtick', [1,32,60,91,121,152,182,213,244,274,305,335])
     % 'xticklabel', {'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'});
 xtickangle(45); % Rotate x-axis labels
 xlim([1 366]); % Set x-axis limits
-ylim([1 350]); % Set y-axis limits
-ylabel("mm w.e."); % Label y-axis
-title('RCP 4.5', 'Snow Water Equivalent (SWE)'); % Set plot title
+ylim([0 250]); % Set y-axis limits
+ylabel({'Snow Water Equivalent','(mm w.e.)'}); % Label y-axis
+title('RCP 4.5'); % Set plot title
 
 %% Load SWE for RCP 8.5
 % The above section is repeated for RCP 8.5
-clearvars
+clearvars -except t
 load("SWE_85.mat")
 
 juliandays = [];
@@ -141,13 +141,137 @@ SWE_plot_2096 = plot(m12, SWEi_2096, 'red', "LineWidth", 1.5);
 
 set(gca, 'XTickLabel', []);
 set(gca, 'YTickLabel', []);
-set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335])% 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
+set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 'xticklabel', {});
 xtickangle(45);
-title('RCP 8.5', 'Snow Water Equivalent (SWE)');
+title('RCP 8.5');
 fontsize(13, "points")
 xlim([1 366])
-ylim([1 350])
+ylim([0 250])
+%% Load SOIl moisture RCP 45
+clearvars -except t
+load("SM_45.mat")
 
+juliandays = [];
+for i = 1:length(SL2100)
+    d = datetime(SL2100(i, 1), SL2100(i, 2), SL2100(i, 3));
+    doy = day(d, 'dayofyear');
+    juliandays = vertcat(juliandays, doy);
+end
+SL2100 = [SL2100, juliandays];
+
+SL20162046_Daily = nan(30 * (width(SL2100) - 4), 366);
+for d = 1:366
+    indicestoget = find(SL2100(:, 1) >= 2016 & SL2100(:, 1) <= 2045 & SL2100(:, end) == d);
+    presentday = SL2100(indicestoget, 4:end-1);
+    dimens = size(presentday(:, 1:end));
+    dataout = reshape(presentday(:, 1:end), dimens(1) * dimens(2), 1);
+    SL20162046_Daily(1:length(dataout), d) = dataout;
+end
+
+SL20662096_Daily = nan(30 * (width(SL2100) - 4), 366);
+for d = 1:366
+    indicestoget = find(SL2100(:, 1) >= 2066 & SL2100(:, 1) <= 2095 & SL2100(:, end) == d);
+    presentday = SL2100(indicestoget, 4:end-1);
+    dimens = size(presentday(:, 1:end));
+    dataout = reshape(presentday(:, 1:end), dimens(1) * dimens(2), 1);
+    SL20662096_Daily(1:length(dataout), d) = dataout;
+end
+
+nexttile
+SLmedian1 = median(SL20162046_Daily);
+SLmedian2 = median(SL20662096_Daily);
+SLi_2046 = SLmedian1;
+SLi_2096 = SLmedian2;
+m12 = 1:366;
+
+SL_plot_2046 = plot(m12, SLi_2046, 'k', "LineWidth", 1.5);
+hold on
+SL_plot_2096 = plot(m12, SLi_2096, 'r', "LineWidth", 1.5);
+
+set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 'xticklabel', {});
+ylabel('Soil Moisture (kg m^{-2})')
+% title('Soil Moisture', "FontWeight", "normal")
+xlim([1 366])
+ylim([0 50])
+hold off
+%% Load SOIl moisture for RCP 85
+clearvars -except t
+load("SM_85.mat")
+
+juliandays = [];
+for i = 1:length(SL2100)
+    d = datetime(SL2100(i, 1), SL2100(i, 2), SL2100(i, 3));
+    doy = day(d, 'dayofyear');
+    juliandays = vertcat(juliandays, doy);
+end
+SL2100 = [SL2100, juliandays];
+
+SL20162046_Daily = nan(30 * (width(SL2100) - 4), 366);
+for d = 1:366
+    indicestoget = find(SL2100(:, 1) >= 2016 & SL2100(:, 1) <= 2045 & SL2100(:, end) == d);
+    presentday = SL2100(indicestoget, 4:end-1);
+    dimens = size(presentday(:, 1:end));
+    dataout = reshape(presentday(:, 1:end), dimens(1) * dimens(2), 1);
+    SL20162046_Daily(1:length(dataout), d) = dataout;
+end
+
+SL20662096_Daily = nan(30 * (width(SL2100) - 4), 366);
+for d = 1:366
+    indicestoget = find(SL2100(:, 1) >= 2066 & SL2100(:, 1) <= 2095 & SL2100(:, end) == d);
+    presentday = SL2100(indicestoget, 4:end-1);
+    dimens = size(presentday(:, 1:end));
+    dataout = reshape(presentday(:, 1:end), dimens(1) * dimens(2), 1);
+    SL20662096_Daily(1:length(dataout), d) = dataout;
+end
+
+nexttile
+SLmedian1 = median(SL20162046_Daily);
+SLmedian2 = median(SL20662096_Daily);
+SLi_2046 = SLmedian1;
+SLi_2096 = SLmedian2;
+m12 = 1:366;
+
+SL_plot_2046 = plot(m12, SLi_2046, 'k', "LineWidth", 1.5);
+hold on
+SL_plot_2096 = plot(m12, SLi_2096, 'r', "LineWidth", 1.5);
+
+set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 'xticklabel', {});
+% title('Soil Moisture', "FontWeight", "normal")
+xlim([1 366])
+ylim([0 50])
+yticklabels([])
+hold off
+%% Keff
+clearvars -except t
+nexttile
+hold on
+load("JKeff_45_1.mat")
+plot(jordan1,'k', LineWidth = 1.5)
+load("JKeff_45_2.mat")
+plot(jordan1,'r', LineWidth = 1.5)
+load("SKeff_45_1.mat")
+plot(sturm1,'k--', LineWidth = 1.5)
+load("SKeff_45_2.mat")
+plot(sturm1,'r--', LineWidth = 1.5)
+set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 'xticklabel', {});
+xlim([0 366])
+ylabel({'Snow Thermal Conductivity','(W m^{-2} K^{-1})'})
+box on
+
+nexttile
+hold on
+load("JKeff_85_1.mat")
+plot(jordan1,'k', LineWidth = 1.5)
+load("JKeff_85_2.mat")
+plot(jordan1,'r', LineWidth = 1.5)
+load("SKeff_85_1.mat")
+plot(sturm1,'k--', LineWidth = 1.5)
+load("SKeff_85_2.mat")
+plot(sturm1,'r--', LineWidth = 1.5)
+set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 'xticklabel', {});
+xlim([0 366])
+yticklabels([])
+box on
 %% Load 10cm soil temp for RCP 4.5
 % The above sections are then repeated for 10cm soil temperature
 load("GT_45.mat")
@@ -191,14 +315,14 @@ hold on
 GT_plot_2096_J = plot(m12, GTi_2096, 'red', "LineWidth", 1.5);
 
 yline(0, "--")
-set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335])% 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
-ylabel("^{o}C")
-title('10cm Soil Temperature', "FontWeight", "normal")
+set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
+ylabel({'10cm Soil Temperature','(^{o}C)'})
+% title('10cm Soil Temperature', "FontWeight", "normal")
 xlim([1 366])
 ylim([-20 15])
 set(gca, 'XTickLabel', []);
 %% Load Sturm 10cm soil temp for RCP 4.5
-clearvars -except GT_plot_2046_J GT_plot_2096_J
+clearvars -except GT_plot_2046_J GT_plot_2096_J t
 load("GT_sturm_45.mat")
 
 juliandays = [];
@@ -240,12 +364,12 @@ GT_plot_2096_S = plot(m12, GTi_2096, 'r--', "LineWidth", 1.5);
 
 % Plot options
 yline(0, "--")
-set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335])%, 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
-title('10cm Soil Temperature', "FontWeight", "normal")
-legend([GT_plot_2046_J GT_plot_2096_J GT_plot_2046_S GT_plot_2096_S], {'CORDEX-Jordan 2016-2046', 'CORDEX-Jordan 2066-2096', 'CORDEX-Sturm 2016-2046', 'CORDEX-Sturm 2066-2096'}, Location = "southwest", FontSize = 7)
+set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
+% title('10cm Soil Temperature', "FontWeight", "normal")
+legend([GT_plot_2046_J GT_plot_2096_J GT_plot_2046_S GT_plot_2096_S], {'Jordan 2016-2046', 'Jordan 2066-2096', 'Sturm 2016-2046', 'Sturm 2066-2096'}, Location = [0.265185185185185 0.120677344010677 0.153333333333333 0.0535535535535535], FontSize = 7)
 
 %% Load 10cm Soil temp for rcp85
-clearvars
+clearvars -except t
 load("GT_85.mat")
 % Assign each month/day a julian day
 juliandays = [];
@@ -288,12 +412,12 @@ GT_plot_2096 = plot(m12, GTi_2096, 'red', "LineWidth", 1.5);
 
 % Plot options
 yline(0, "--")
-set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335])%, 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
-title('10cm Soil Temperature', "FontWeight", "normal")
+% title('10cm Soil Temperature', "FontWeight", "normal")
 xlim([1 366])
+set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
 
 %% Load Sturm 10cm soil temp for RCP 8.5
-clearvars -except GT10_plot_20461 GT10_plot_20961
+clearvars -except GT10_plot_20461 GT10_plot_20961 t
 load("GT_sturm_85.mat")
 
 juliandays = [];
@@ -335,118 +459,40 @@ GT_plot_2096 = plot(m12, GTi_2096, 'r--', "LineWidth", 1.5);
 
 % Plot options
 yline(0, "--")
-set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335])%, 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
-title('10cm Soil Temperature', "FontWeight", "normal")
+% title('10cm Soil Temperature', "FontWeight", "normal")
 ylim([-20 15])
 yticklabels([])
 set(gca, 'XTickLabel', []);
-
-%% Load SOIl moisture RCP 45
-clearvars
-load("SM_45.mat")
-
-juliandays = [];
-for i = 1:length(SL2100)
-    d = datetime(SL2100(i, 1), SL2100(i, 2), SL2100(i, 3));
-    doy = day(d, 'dayofyear');
-    juliandays = vertcat(juliandays, doy);
-end
-SL2100 = [SL2100, juliandays];
-
-SL20162046_Daily = nan(30 * (width(SL2100) - 4), 366);
-for d = 1:366
-    indicestoget = find(SL2100(:, 1) >= 2016 & SL2100(:, 1) <= 2045 & SL2100(:, end) == d);
-    presentday = SL2100(indicestoget, 4:end-1);
-    dimens = size(presentday(:, 1:end));
-    dataout = reshape(presentday(:, 1:end), dimens(1) * dimens(2), 1);
-    SL20162046_Daily(1:length(dataout), d) = dataout;
-end
-
-SL20662096_Daily = nan(30 * (width(SL2100) - 4), 366);
-for d = 1:366
-    indicestoget = find(SL2100(:, 1) >= 2066 & SL2100(:, 1) <= 2095 & SL2100(:, end) == d);
-    presentday = SL2100(indicestoget, 4:end-1);
-    dimens = size(presentday(:, 1:end));
-    dataout = reshape(presentday(:, 1:end), dimens(1) * dimens(2), 1);
-    SL20662096_Daily(1:length(dataout), d) = dataout;
-end
-
-nexttile
-SLmedian1 = median(SL20162046_Daily);
-SLmedian2 = median(SL20662096_Daily);
-SLi_2046 = SLmedian1;
-SLi_2096 = SLmedian2;
-m12 = 1:366;
-
-SL_plot_2046 = plot(m12, SLi_2046, 'k', "LineWidth", 1.5);
-hold on
-SL_plot_2096 = plot(m12, SLi_2096, 'r', "LineWidth", 1.5);
-
 set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
-ylabel("Kg m^{-2}")
-title('Soil Moisture', "FontWeight", "normal")
-xlim([1 366])
-ylim([0 50])
-hold off
-%% Load SOIl moisture for RCP 85
-clearvars
-load("SM_85.mat")
 
-juliandays = [];
-for i = 1:length(SL2100)
-    d = datetime(SL2100(i, 1), SL2100(i, 2), SL2100(i, 3));
-    doy = day(d, 'dayofyear');
-    juliandays = vertcat(juliandays, doy);
-end
-SL2100 = [SL2100, juliandays];
 
-SL20162046_Daily = nan(30 * (width(SL2100) - 4), 366);
-for d = 1:366
-    indicestoget = find(SL2100(:, 1) >= 2016 & SL2100(:, 1) <= 2045 & SL2100(:, end) == d);
-    presentday = SL2100(indicestoget, 4:end-1);
-    dimens = size(presentday(:, 1:end));
-    dataout = reshape(presentday(:, 1:end), dimens(1) * dimens(2), 1);
-    SL20162046_Daily(1:length(dataout), d) = dataout;
-end
-
-SL20662096_Daily = nan(30 * (width(SL2100) - 4), 366);
-for d = 1:366
-    indicestoget = find(SL2100(:, 1) >= 2066 & SL2100(:, 1) <= 2095 & SL2100(:, end) == d);
-    presentday = SL2100(indicestoget, 4:end-1);
-    dimens = size(presentday(:, 1:end));
-    dataout = reshape(presentday(:, 1:end), dimens(1) * dimens(2), 1);
-    SL20662096_Daily(1:length(dataout), d) = dataout;
-end
-
-nexttile
-SLmedian1 = median(SL20162046_Daily);
-SLmedian2 = median(SL20662096_Daily);
-SLi_2046 = SLmedian1;
-SLi_2096 = SLmedian2;
-m12 = 1:366;
-
-SL_plot_2046 = plot(m12, SLi_2046, 'k', "LineWidth", 1.5);
-hold on
-SL_plot_2096 = plot(m12, SLi_2096, 'r', "LineWidth", 1.5);
-
-set(gca, 'xtick', [1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 'xticklabel', {'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'});
-title('Soil Moisture', "FontWeight", "normal")
-xlim([1 366])
-ylim([0 50])
-yticklabels([])
-hold off
 %% Set fontsizes
 fontsize(12, "points")
 fig = gcf;
 leg = findobj(fig,'Type', 'legend');
 set(leg, "FontSize",8);
 %% letters
-annotation('textbox', [0.44 0.821244008502731 0.1 0.1], 'String', '(a)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.44 0.527681231451366, 0.1, 0.1], 'String', '(c)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.44, 0.235, 0.1, 0.1], 'String', '(e)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+numTiles = t.GridSize(1) * t.GridSize(2);
+labels = 'abcdefghijklmnopqrstuvwxyz';
 
-annotation('textbox',  [0.866979166666667 0.821244008502731 0.1 0.1], 'String', '(b)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.866979166666667 0.527681231451366, 0.1, 0.1], 'String', '(d)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
-annotation('textbox', [0.866979166666667, 0.235, 0.1, 0.1], 'String', '(f)', 'EdgeColor', 'none', 'FontSize', 14, 'FontWeight', 'normal')
+for i = 1:numTiles
+    ax = nexttile(i);
+
+    % Get axis limits
+    xlim_vals = xlim(ax);
+    ylim_vals = ylim(ax);
+
+    % Compute position for top-right label
+    x_pos = xlim_vals(2) - 0.01 * range(xlim_vals);
+    y_pos = ylim_vals(2) - 0.01 * range(ylim_vals);
+
+    % Add label (e.g., (a), (b), ...)
+    text(ax, x_pos, y_pos, ['(' labels(i) ')'], ...
+        'FontWeight', 'bold', ...
+        'HorizontalAlignment', 'right', ...
+        'VerticalAlignment', 'top', ...
+        'FontSize', 12)
+end
 %% Optional figure export
-exportgraphics(gcf, "SWE_GT_SL.pdf", "Resolution",300)
+% exportgraphics(gcf, "f03.png", "Resolution",300)
+print(gcf, 'f03.png', '-dpng', '-r300')
