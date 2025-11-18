@@ -66,7 +66,7 @@ This folder contains matlab scripts for figures 3-6
 
 **Appendix F: Frequency distribution of precipitation events in March, June, August, and September 2016–2100**
 
-<img src="Images/Appendix_F.png" alt="Appendix F" width="500"/>
+<img src="Images/Appendix_F.png" alt="Appendix F" width="600"/>
 
 ## Images
 This folder contains image files for paper figures.
